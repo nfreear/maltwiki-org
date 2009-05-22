@@ -1,18 +1,17 @@
 <?php
 /**
- Copyright 2009-02-03 N.D.Freear, Open University.
- 
+  Multimedia accessibility - evaluation homepage.
+  @copyright 2009 The Open University.
+  @author N.D.Freear@open.ac.uk, 5 Feb-16 May 2009.
+  @package Maltwiki
 */
 ini_set('display_errors', 1);
 error_reporting(E_ALL|E_STRICT);
 
+require_once 'lib/utils.php';
 require_once 'lib/data.php';
 require_once 'lib/players.php';
 
-
-function _get($name, $default) {
-  return isset($_GET[$name]) ? $_GET[$name] : $default;
-}
 
 $mid  = _get('m', 'xmoodle');# car | corrie | podcast-t206 (oupod) | yt-susan | xmoodle...
 $lang = _get('cl','en-GB');  # en | es | de.
@@ -24,11 +23,7 @@ switch ($pn) {
   case 'jw': $player = new jwPlayer(); break;
   default: die('404 Not Found, player!'); break;
 }
-
-# Portability: should handle PORTS and Drupal routing.
-$p = parse_url($_SERVER['REQUEST_URI']);
-$localhost = 'http://'.$_SERVER['HTTP_HOST'].$p['path'];
-
+$localhost = localhost();
 
 if (! isset($metas[$mid])) {
   die('404 Not Found, Woops!');
@@ -59,8 +54,12 @@ $title = isset($meta['title']) ? $meta['title'] : '';
   body { font-family: Verdana,Tahoma,Arial,sans-serif; }
   #page { margin: 0 auto; width: 446px; }
   h1 { font-size: 1.25em; margin: .3em 0; }
+  a img { border: 0; }
+  .other { border: 1px solid silver; padding: .6em 1em; }
   .plink { font-size: smaller; }
   #__video-1, #__ply { border: 2px solid red; display: block; width: 900px; }
+  #controls { margin: 0; padding: 0; }
+  #controls li { list-style: none; display: inline; margin: 0; }
   .caption { position: absolute; top: 60px; left: 20px; padding: 4px; background: black; color: yellow; font-weight: bold; z-index: 10; }
 </style>
 
@@ -135,11 +134,22 @@ function mytrace(text) {
   <option value="<?php echo $id ?>"><?php echo $meta['title'] ?></option>
 <?php } ?>
 </select>
+  <br />
 <label for="p">Player </label><select id="p" name="p">
   <option value="cc">NCAM ccPlayer</option><option value="jw">jwPlayer</option></select>
 <input type="submit" value="Load" />
 </p>
 </form>
+
+
+<ul class="other">
+<li><a href="./media_accessibility.user.js">YouTube accessibility User Script</a>
+ <a href="http://greasespot.net/" title="Greasemonkey required"><img src="http://youngpup.net/z_dropbox/greasespot_favicon.ico" alt="Greasemonkey" /></a></li>
+<li><a href="./oembed/?url=http://youtube.com/watch?v=VesKht_8HCo" title="JSON">oEmbed-accessible API</a>
+ - <a href="http://oembed.com/">oEmbed</a>.</li>
+<!--li><a href=""></a></li-->
+</ul>
+<p><small>N.D.Freear, February 2009.</small></p>
 
 </div>
 

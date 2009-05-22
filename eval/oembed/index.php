@@ -1,30 +1,23 @@
 <?php
 /**
-  oEmbed Accessible Player API.
-  http://oembed.com
+  Multimedia accessibility - oEmbed API.
+  @copyright 2009 The Open University.
+  @author N.D.Freear@open.ac.uk, 16 May 2009.
+  @package Maltwiki
 
-  Copyright 2009-02-03, 05-16 N.D.Freear, Open University
+  @uses http://oembed.com
 */
 ini_set('display_errors', 1);
 error_reporting(E_ALL|E_STRICT);
 
+require_once '../lib/utils.php';
 require_once '../lib/data.php';
 require_once '../lib/players.php';
 
-function _get($name, $default=null) {
-  return isset($_GET[$name]) ? $_GET[$name] : $default;
-}
 
-  #header('Content-Type: text/html; charset=UTF-8');
-  header('Content-Type: text/javascript; charset=UTF-8');
-  @header('Content-Language: '. $lang);
-  @header('X-Powered-By:');
-
-
-# http://oembed.com/
-$res = (object)array(); #StdClass();
-$res->version = '1.0';
-$res->type = 'video';
+$res = new StdClass();
+$res->version= '1.0';
+$res->type   = 'video';
 $res->http_status = 200;
 
 $res->lang = _get('cl','en');  # en-GB | es | de.
@@ -34,7 +27,7 @@ $agent= _get('a');  #Greasemonkey.
 $std_attrs = 'lang="en" id="malt-0" style="font-size:medium"';
 
 $player = new ccPlayerAS3(); #cc (jw, dot).
-$localhost = 'http://localhost:8888/tt/'; #.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/';
+$localhost = localhost('/oembed');
 
 $media  = $count = $others = null;
 foreach ($metas as $key => $meta) {
@@ -133,6 +126,9 @@ EOH;
 
 EOT;
 
+  header('Content-Type: text/javascript; charset=UTF-8');
+  @header('Content-Language: '. $res->lang);
+  @header('X-Powered-By:');
 
   if ($do_captions) {
     @header('X-Replace-Player: 1');
@@ -140,70 +136,7 @@ EOT;
   }
 
 echo json_encode((object) $res);
-
-
-/* array(3) {
- ["u"]=>  string(42) "http://www.youtube.com/watch?v=VesKht_8HCo"
- ["t"]=>  string(33) "Brian Mcallister, Roadtrip Nation
- ["style"]=>  string(7) "Graphic"
-} array(30) {
- ["HTTP_HOST"]=>  string(14) "localhost:8888"
- ["HTTP_USER_AGENT"]=>  string(99) "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-GB; rv:1.9.0.10) Gecko/2009042315 Firefox/3.0.10"
- ["HTTP_ACCEPT"]=>  string(63) "text/html,application/xhtml+xml,application/xml;q=0.9,*-/*;q=0.8"
- ["HTTP_ACCEPT_LANGUAGE"]=>  string(14) "en-gb,en;q=0.5"
- ["HTTP_ACCEPT_ENCODING"]=>  string(12) "gzip,deflate"
- ["HTTP_ACCEPT_CHARSET"]=>  string(30) "ISO-8859-1,utf-8;q=0.7,*;q=0.7"
- ["HTTP_KEEP_ALIVE"]=>  string(3) "300"
- ["HTTP_CONNECTION"]=>  string(10) "keep-alive"
- ["HTTP_COOKIE"]=>  string(13) "style=Graphic"
- ["PATH"]=>  string(29) "/usr/bin:/bin:/usr/sbin:/sbin"
- ["SERVER_SIGNATURE"]=>  string(86) "
-Apache/2.0.59 (Unix) PHP/5.2.5 DAV/2 Server at localhost Port 8888
-"
- ["SERVER_SOFTWARE"]=> string(36) "Apache/2.0.59 (Unix) PHP/5.2.5 DAV/2"
- ["SERVER_NAME"]=> string(9) "localhost"
- ["SERVER_ADDR"]=> string(3) "::1"
- ["SERVER_PORT"]=> string(4) "8888"
- ["REMOTE_ADDR"]=> string(3) "::1"
- ["DOCUMENT_ROOT"]=> string(20) "/Users/nfreear/Sites"
- ["SERVER_ADMIN"]=> string(15) "you@example.com"
- ["SCRIPT_FILENAME"]=> string(36) "/Users/nfreear/Sites/tt/em/index.php"
- ["REMOTE_PORT"]=> string(5) "62345"
- ["GATEWAY_INTERFACE"]=> string(7) "CGI/1.1"
- ["SERVER_PROTOCOL"]=> string(8) "HTTP/1.1"
- ["REQUEST_METHOD"]=> string(3) "GET"
- ["QUERY_STRING"]=> string(100) "u=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DVesKht_8HCo&t=Brian%20Mcallister%2C%20Roadtrip%20Nation"
- ["REQUEST_URI"]=> string(108) "/tt/em/?u=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DVesKht_8HCo&t=Brian%20Mcallister%2C%20Roadtrip%20Nation"
- ["SCRIPT_NAME"]=> string(16) "/tt/em/index.php"
- ["PHP_SELF"]=> string(16) "/tt/em/index.php"
- ["REQUEST_TIME"]=> int(1242502929)
- ["argv"]=> array(1) { [0]=> string(100) "u=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DVesKht_8HCo&t=Brian%20Mcallister%2C%20Roadtrip%20Nation" }
- ["argc"]=> int(1)
-} */
-
-
-/*<script type="text/javascript" src="http://localhost:8888/tt/embed/swfobject.js"></script>
-<script type="text/javascript">
-/* <![CDATA[ *-/
-var flashvars = {
-<?php echo $flash_v ?>
-};
-var params = {};
-  params.play = "false";
-  params.menu = "true";
-  params.seamlesstabbing = "true";
-  params.allowfullscreen = "true";
-  params.allowscriptaccess = "always"; //"sameDomain";
-  params.wmode = "opaque";
-
-var attributes = {};
-  attributes.id = "malt-media-0";
-
-  swfobject.embedSWF("../<?php echo $player->player() ?>", "malt-media-0", "445", "420", "9.0.0", "expressInstall.swf", flashvars, params, attributes); //600x450.
-  //swfobject.createCSS("#ply", "border: 2px solid red");
-/* ]]> *-/
-</script>
-<div id="malt-media-0"> </div>*/ 
+exit;
 
 
 /*
@@ -221,4 +154,3 @@ var attributes = {};
 &amp;mediaDuration=100000&amp;lang=eng" name="flashvars">
 </object>
 */
-?>

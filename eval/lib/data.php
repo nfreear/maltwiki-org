@@ -1,22 +1,30 @@
 <?php
 /**
- Copyright 2009-02-05 N.D.Freear, Open University.
+  Multimedia accessibility - data.
+  @copyright 2009 The Open University.
+  @author N.D.Freear@open.ac.uk, 5 February 2009.
+  @package Maltwiki
 */
 
 $metas['xmoodle'] = array(
 #height=350&width=500&searchbar=false&autostart=false
-  'url'  =>'http://xtranormal.com/watch?e=20090124001058490',
-  'file' =>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7.flv', #video.
+  'url'  =>'http://youtube.com/watch?v=grqt3HoLOIA',
+  'url_alt'  =>'http://dotsub.com/view/e475f673-9ba7-4013-b896-2e3884694445',
+  'url_ALT_2'=>'http://xtranormal.com/watch?e=20090124001058490',
+  'file' =>'http://dotsub.com/media/e475f673-9ba7-4013-b896-2e3884694445/em/flv/en',
+  'file_ALT' =>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7.flv', #video.
   'image'=>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7_0.jpg',
   'captions'=>'http://localhost/upload/xmoodle.dfxp.xml',
-  #'audio'   =>null,
+  'captions_ALT'=>'http://dotsub.com/media/e475f673-9ba7-4013-b896-2e3884694445/c/eng/tt',
   'lang' =>'en',
-  'title'=>'Learn about Moodle, Xtranormal',
+  'title'=>'Learn about Moodle',
   'description'  =>'An elevator pitch for the online learning environment, Moodle.',
-  'duration'     =>'00:51',
-  'provider_name'=>'Xtranormal',
-  'provider_url' =>'http://xtranormal.com/',
+  'duration'     =>'01:40',  #'00:51',
+  'provider_name'=>'dotSUB', #'Xtranormal',
+  'provider_url' =>'http://dotsub.com/', #'http://xtranormal.com/',
   'author_name'  =>'nickfreear',
+  'height'=> '347',
+  'width' => '420',
 );
 $metas['corrie'] = array(
   'url'   =>'http://localhost/corrie',
@@ -49,7 +57,7 @@ $metas['podcast-t206'] = array( #'oupod'
   'rss'   =>'http://podcast.open.ac.uk/feeds/t206-energy/rss2.xml',
   'rss_transcript'=>'http://podcast.open.ac.uk/feeds/t206-energy/transcript/rss2.xml',  
   'lang'  =>'en',
-  'title' =>'Hospitals: major contributors to traffic, OU pod',
+  'title' =>'Hospitals: major contributors to traffic, OU',
   'description'  =>'First podcast in the series, Energy for a sustainable future. Speaker: Carey Newson',
   'duration'     =>'00:00',
   'provider_name'=>'The Open University/iTunesU',
@@ -78,7 +86,7 @@ $metas['yt-ou-AA100'] = array(
   'url'   => 'http://youtube.com/watch?v=eIupVqDWoFM',
   #<!--Views: 1931-->
   'lang'  => 'en',
-  'title' => 'The Arts Past &amp; Present (AA100) - A brief introduction',
+  'title' => 'The Arts Past &amp; Present (AA100)', #- A brief introduction',
   'duration'   => '05:58',
   'author_name'=>'TheOpenUniversity',
  /* <contributor>Dr Clare Spencer, Course Tutor</contributor>

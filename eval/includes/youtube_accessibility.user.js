@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name           YouTube Accessibility
 // @namespace      http://freear.org.uk
-// @description    Accessibility experiment, 16 May 2009 (1-3 October 2008).
+// @author         N.D.Freear[AT]open.ac.uk
+// @copyright      2008-10-03 N.D.Freear, The Open University.
+// @version        0.1
+// @description    Multimedia accessibility evaluation, 16 May 2009.
+//                 Requires Firefox 3.x and Greasemonkey http://greasespot.net/
 // @include        http://*.youtube.com/watch?*
 // ==/UserScript==
-/*
-  Copyright 2008-10-01 N.D.Freear.
 
-@include        http://*.youtube.com/user/TheOpenUniversity
-*/
 
 (function ytAccess() {
   ytFixes();
@@ -22,7 +22,7 @@
 
   //Miss off the 'hash';
   var loc = d.location.protocol+'//'+d.location.host+d.location.pathname+d.location.search;
-  var u = 'http://localhost:8888/tt/em/?url='  //'http://localhost:8888/transcript/?u='
+  var u = '<?php echo $oembed_url ?>'  //'http://localhost:8888/tt/oembed/?url='
     +encodeURIComponent(loc) //.search;
     +'&a=greasemonkey';
     //+'&t='+encodeURIComponent(title);

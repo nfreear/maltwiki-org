@@ -1,16 +1,19 @@
 <?php
 /**
- Copyright 2009-02-05 N.D.Freear, Open University.
+  Multimedia accessibility - Flash media player classes.
+  @copyright 2009 The Open University.
+  @author N.D.Freear@open.ac.uk, 5 February 2009.
+  @package Maltwiki
 */
 
-class basePlayer {
+abstract class basePlayer {
 
   public function alternate($meta) {
     #URL, hierarchy: alt_media, alt_transcript, url.
     $url = $label = $image = null;
     if (isset($meta['alt_media'])) {
       $url  = $meta['alt_media'];
-      $label= 'Download the alternative video (MP4)'; #MP4?
+      $label= 'Download the video (MP4)'; #MP4?
     }
     elseif (isset($meta['alt_transcript'])) {
       $url  = $meta['alt_transcript'];
@@ -30,10 +33,10 @@ class basePlayer {
     </a>*/
   }
 
-  public function link()   { return ''; }
-  public function player() { return ''; }
-  public function flashvars($meta, $lang='en') { return ''; }
-  public function jsControls($id='ply') { return ''; }
+  abstract public function link();
+  abstract public function player();
+  abstract public function flashvars($meta, $lang='en');
+  abstract public function jsControls($id='ply');
 
   public function size($meta) { #Added, 16 May.
     $attrs = '';
@@ -84,11 +87,11 @@ class jwPlayer extends basePlayer {  #v4.3.
     $events = array(
       'PLAY'=>'Play/pause', 'MUTE'=>'Mute/unmute', 'STOP'=>'Rewind &amp; stop',
     );
-    $controls = '<ol id="controls">'.PHP_EOL;
+    $controls = '<ul id="controls">'.PHP_EOL;
     foreach ($events as $ev => $text) {
-      $controls .= "<li><input type='button' onclick='document.getElementById(\"$id\").sendEvent(\"$ev\");' value='$text' /></li>".PHP_EOL;
+      $controls .= "<li><button onclick='document.getElementById(\"$id\").sendEvent(\"$ev\");'>$text</button></li>".PHP_EOL;
     }
-    $controls .= '</ol>'.PHP_EOL;
+    $controls .= '</ul>'.PHP_EOL;
     return $controls;
   }
 }
@@ -137,7 +140,7 @@ EOT;
 
 class ccPlayerAS3 extends ccPlayer { #v3.0.1. ccPlayerAS3, 3 May 2009.
   public function link() {
-    return "<a href='http://ncam.wgbh.org/webaccess/ccforflash/ccPlayerAS3Help.html'>NCAM ccPlayer AS3 help</a>"; #@todo.
+    return "<a href='http://ncam.wgbh.org/webaccess/ccforflash/ccPlayerAS3Help.html'>NCAM ccPlayer AS3 help</a>";
   }
 
   public function player() { return "includes/ccPlayerAS3.swf"; }
