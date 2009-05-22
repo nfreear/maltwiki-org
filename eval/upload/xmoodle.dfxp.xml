@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xml:lang="en"
+ xmlns="http://www.w3.org/2006/10/ttaf1"
+ xmlns:ttm="http://www.w3.org/2006/10/ttaf1#metadata">
+<head>
+  <metadata>
+    <ttm:title>Learn about Moodle</ttm:title>
+    <ttm:copyright>2009-02-05 N.D.Freear</ttm:copyright>
+  </metadata>
+</head>
+<body>
+
+  <div xml:id="captions">
+    <p begin="00:00:00" end="00:00:01.5">So what is Moodle?</p>
+    <p begin="00:00:01.5" end="00:00:08">
+It's a free software tool to enable teachers and lecturers to create online learning resources and activities for students.</p>
+    <p begin="00:00:08" end="00:00:13">
+Oh, right. Sounds like one of those virtual learning environment things.</p>
+    <p begin="00:00:13" end="00:00:24">
+Yes, that's it. Online courses can contain quizzes, assignments, group activities like wikis, forums and so on. Learners can also keep a blog and use synchronous chat.</p>
+    <p begin="00:00:24" end="00:00:26.5">Sounds like it has lots of features.</p>
+    <p begin="00:00:26.5" end="00:00:33">
+Yes, it's great for collaboration and social activity, and it can be adapted to many teaching styles.</p>
+    <p begin="00:00:33" end="00:00:35.5">Cool. Who's doing it?</p>
+    <p begin="00:00:35.5" end="00:00:45">
+It was created by Martin Dougiamas in Australia, and is developed by him and a group of developers from around the world. Moodle is open source so anyone can contribute.</p>
+    <p begin="00:00:45" end="00:00:47.5">Interesting. Where can I try it?</p>
+    <p begin="00:00:47.5" end="00:00:52">Online at www.moodle.org</p>
+  </div>
+
+</body>
+</tt>

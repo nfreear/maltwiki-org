@@ -1,11 +1,20 @@
-<tt xml:lang="en" xmlns="http://www.w3.org/2006/10/ttaf1" xmlns:tts="http://www.w3.org/2006/10/ttaf1#style">
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xml:lang="en"
+ xmlns="http://www.w3.org/2006/10/ttaf1"
+ xmlns:tts="http://www.w3.org/2006/10/ttaf1#style">
   <head>
-    <layout />
+  <styling>
+    <style id="b1" tts:color="#cccc00" tts:textAlign="left"/>
+    <style id="b2" tts:color="#ff5555" tts:textAlign="right" tts:fontWeight="__bold"/>
+    <style id="b3" tts:color="#ff5555" tts:textAlign="center"/>
+  </styling>
   </head>
   <body>
-    <div xml:id="captions">
+    <div style="b1">
+      <!--p begin="00:00:01" end="00:00:05">  CAPTION TEST</p-->
+      
       <p begin="00:00:08" end="00:00:10">- Nothing is going on.</p>
-      <p begin="00:00:10.5" end="00:00:12.5">You liar!</p>
+      <p begin="00:00:10.5" end="00:00:12.5" style="b2">You liar!</p>
       <p begin="00:00:13.5" end="00:00:15">Are you?</p>
       <p begin="00:00:17" end="00:00:20">Violet, please!<br/>- I am not your babe!</p>
       <p begin="00:00:24" end="00:00:29">You stupid cow,<br/>look what you gone and done now, ay.</p>

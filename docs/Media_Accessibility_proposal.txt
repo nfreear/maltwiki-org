@@ -1,0 +1,50 @@
+CONFIDENTIAL
+
+A proposal for the development of software services and components to improve 
+the accessibility of online video and multimedia (for learning)
+
+N.D.Freear, The Open University, 10 January-11 February 2009.
+
+Summary
+
+Video and other multimedia are often key components of primary course materials, 
+and can also be used informally as supplementary material on Open University 
+courses [ref?]. Furthermore, the Open University and other educators have a 
+quasi-marketing presence on various Web 2.0 sites, with for example introductory 
+and "about learning with the OU" videos on YouTube 
+[http://youtube.com/user/TheOpenUniversity] and iTunesU [http://podcast.open.ac.uk]. 
+Certainly in the former case and probably in the latter (primary and 
+supplementary/marketing material) the University has a legal obligation to 
+provide alternative formats, like captions for the hard of hearing and 
+audio description for visually impaired people. The Open University has some 
+success in these areas (ref, 95% of OU iTunesU podcasts have transcripts, 
+http://projects.kmi.open.ac.uk/itunesu/impact/ ), but coverage elsewhere is 
+patchy. Services like YouTube allow the author to upload captions with their video, 
+however the results are not fully accessible, and very few authors across the 
+world use this feature. There are also significant barriers to the use of 
+media players like the YouTube player in terms of control, particularly for 
+speech recognition and screen reader users.
+
+This project, provisionally termed Media Accessibility (MA), aims to provide a 
+web site for the social and community co-creation, editing, storage and delivery 
+of alternative formats, and software services and components to improve 
+media players, where possible in-situ. In-situ may for example mean producing 
+a Web browser plug-in that operates on the YouTube web site to deliver a player 
+with improved controls and the display of alternative formats. It is proposed 
+that the alternative formats (captions, audio description etc.) are created by 
+a combination of automation and crowd-sourcing. Community participation would 
+be encouraged by providing usable editing tools, strategic partnerships, 
+individual recognition, feedback, and "social-karma" features. The proposed 
+scope would initially be materials directly relevant to the Open University, 
+partner organisations, and their students and staff. It would widen to 
+educational multi-media generally, and eventually beyond education. Free and 
+open access to alternative content and software tools is proposed as a 
+key element of the project.
+
+
+--
+http://kn.open.ac.uk/workspace.cfm?wpid=9078
+http://docs.google.com/Doc?docid=dc53chjk_5p9sqw8f2&hl=en_GB
+
+
+[End.]
