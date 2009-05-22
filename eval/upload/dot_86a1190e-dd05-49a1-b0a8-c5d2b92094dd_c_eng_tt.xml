@@ -1,0 +1,34 @@
+<tt xml:lang="" xmlns="http://www.w3.org/2006/04/ttaf1"  
+xmlns:tts="http://www.w3.org/2006/04/ttaf1#styling">
+  <head>
+   <styling>
+      <style id="1" tts:textAlign="right"/>
+      <style id="2" tts:color="transparent"/>
+      <style id="3" tts:backgroundColor="transparent" tts:color="#FFCC00"/>
+      <style id="4" style="3" tts:fontSize="+2" tts:fontFamily="Arial"  tts:textAlign="center"/>
+   </styling>
+  </head>
+      <body> 
+        <div  xml:lang="en">
+        
+         <p begin='0:00:01.000' end='0:00:07.000' style="4">OK so ah my name's Brian McAllister and I'm a co-founder of a group called Roadtrip Nation</p>                              
+        
+         <p begin='0:00:07.000' end='0:00:10.000' style="4">and basically Roadtrip Nation started out over some frustration. </p>                              
+        
+         <p begin='0:00:10.000' end='0:00:15.000' style="4">We graduated from university and we didn't know exactly what we wanted to do with our lives, </p>                              
+        
+         <p begin='0:00:15.000' end='0:00:19.000' style="4">But we didn't identify with becoming lawyers, doctors or accountants and so we decided to take </p>                              
+        
+         <p begin='0:00:19.000' end='0:00:23.000' style="4">a road trip across the United States and talk to different people from all walks of life </p>                              
+        
+         <p begin='0:00:23.000' end='0:00:26.000' style="4">and simply ask them how did you get to where you are today?</p>                              
+        
+         <p begin='0:00:26.000' end='0:00:33.000' style="4">And hopes of this entire journey was to get a better understanding of what we want to do with our own lives.</p>                              
+        
+         <p begin='0:00:33.000' end='0:00:37.000' style="4">Erm, to date we've been putting hundreds of other students on road trips.</p>                              
+        
+        </div>
+     </body>
+</tt>
+        
+        

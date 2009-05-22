@@ -34,6 +34,16 @@ class basePlayer {
   public function player() { return ''; }
   public function flashvars($meta, $lang='en') { return ''; }
   public function jsControls($id='ply') { return ''; }
+
+  public function size($meta) { #Added, 16 May.
+    $attrs = '';
+    $width = 600; #$meta['width'] + 20;
+    $height= $meta['height']+ 1;
+    if ($meta['width']) {
+      $attrs = " width='$width' height='$height'";
+    }
+    return $attrs;
+  }
 }
 
 
@@ -42,7 +52,16 @@ class jwPlayer extends basePlayer {  #v4.3.
     return "<a href='http://longtailvideo.com/players/jw-flv-player/'>JW player</a>";
   }
 
-  public function player() { return "includes/player.swf"; }
+  public function player() { return "includes/jwPlayer.swf"; }
+
+  public function flashvars_static($meta, $lang='en') { #Added, 16 May 2009.
+    return htmlspecialchars( urldecode( http_build_query( array(
+      'file'    => $meta['file'],
+      'image'   => isset($meta['image']) ? $meta['image'] :'',
+      'captions'=> $meta['captions'],
+      'plugins' => 'accessibility',
+    ))));
+  }
 
   public function flashvars($meta, $lang='en') {
 	$flash = '';
@@ -82,32 +101,17 @@ class ccPlayer extends basePlayer { #v3.0.1.
 
   public function player() { return "includes/ccPlayer.swf"; }
 
-  public function flashvars($meta, $lang='en') {
-    $flash = '';
-	$flash.= isset($meta['file']) ? 'ccVideoName :   "'.$meta['file'] .'",'.PHP_EOL :'';
-	$flash.= isset($meta['captions']) ? 'ccCaptionSource:"'.$meta['captions'].'",'.PHP_EOL :'';
-    $flash.= <<<EOT
-ccVideoAutoStart : false,
-ccVideoBufferTime: 2,
-ccCaptSourceType : "external",
-ccCaptionLanguage: "$lang",
-ccCaptionAutoHide: false,
-ccOverrideFileStyle:false,
-ccDisplayRollup  : false
-
-EOT;
-    return $flash;
+  public function flashvars_static($meta, $lang='en') { #Added, 16 May 2009.
+    return htmlspecialchars( urldecode( http_build_query( array(
+      'ccVideoName'     => $meta['file'],
+      'ccPosterImage'   => isset($meta['image']) ? $meta['image'] :'',
+      'ccCaptionSource' => $meta['captions'],
+      'ccCaptionLanguage'=>$lang,
+      'ccOverrideFileStyle'=> true, #false.
+      'ccVideoAutoStart' =>false,
+      'ccVideoBufferTime'=>2, #5,
+    ))));
   }
-
-  public function jsControls($id='ply') { return ''; }
-}
-
-class ccPlayerAS3 extends basePlayer { #v3.0.1. ccPlayerAS3, 3 May 2009.
-  public function link() {
-    return "<a href='http://ncam.wgbh.org/webaccess/ccforflash/ccPlayerAS3Help.html'>NCAM ccPlayer AS3 help</a>"; #@todo.
-  }
-
-  public function player() { return "includes/ccPlayerAS3.swf"; }
 
   public function flashvars($meta, $lang='en') {
     $flash = '';
@@ -129,4 +133,12 @@ EOT;
   }
 
   public function jsControls($id='ply') { return ''; }
+}
+
+class ccPlayerAS3 extends ccPlayer { #v3.0.1. ccPlayerAS3, 3 May 2009.
+  public function link() {
+    return "<a href='http://ncam.wgbh.org/webaccess/ccforflash/ccPlayerAS3Help.html'>NCAM ccPlayer AS3 help</a>"; #@todo.
+  }
+
+  public function player() { return "includes/ccPlayerAS3.swf"; }
 }

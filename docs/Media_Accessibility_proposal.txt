@@ -1,11 +1,11 @@
-CONFIDENTIAL
 
-A proposal for the development of software services and practices to improve 
-the accessibility of online video and multimedia, for learning
+Computers and Learning Research Group (CALRG) Annual Conference, 19 – 20 May 2009
 
-N.D.Freear, The Open University, 10 January-11 February 2009.
+A Proposal for Software Services to Improve the Accessibility of Online Multimedia for Learning
 
-Summary
+Nicholas Freear, The Open University (10 January-14 March 2009).
+
+Abstract
 
 Video and other multimedia are often key components of primary course materials, 
 and can also be used informally as supplementary material on Open University 
@@ -55,7 +55,6 @@ social production, co-creation, wiki, web service, free software.
 RNIB Techshare 2009 - 18 May 2009
 
 Title:  Multimedia accessibility - are we nearly there yet?
-
 Main presenter:  Dr Nicholas Freear.
 
 Abstract:

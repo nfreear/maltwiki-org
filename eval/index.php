@@ -84,8 +84,7 @@ var params = {};
 var attributes = {};
   //attributes.id = "video-1";
 
-  swfobject.embedSWF("<?php echo $player->player() ?>", "ply", "600", "450", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
-  //swfobject.createCSS("#ply", "border: 2px solid red");
+  swfobject.embedSWF("<?php echo $player->player() ?>", "ply", "445", "420", "9.0.0", "expressInstall.swf", flashvars, params, attributes); //600x450.
 
 var fn = function() {
     var ply = document.getElementById('ply');

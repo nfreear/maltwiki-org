@@ -1,131 +1,143 @@
 // ==UserScript==
-// @name           Youtube transcripts
+// @name           YouTube Accessibility
 // @namespace      http://freear.org.uk
-// @description    Accessibility experiment, 1 October 2008.
+// @description    Accessibility experiment, 16 May 2009 (1-3 October 2008).
 // @include        http://*.youtube.com/watch?*
 // ==/UserScript==
 /*
+  Copyright 2008-10-01 N.D.Freear.
+
 @include        http://*.youtube.com/user/TheOpenUniversity
-
-http://youtube.com/rss/tag/open2.net.rss
-http://youtube.com/rss/tag/Open+University.rss
-http://youtube.com/rss/user/TheOpenUniversity/videos.rss
-http://uk.youtube.com/results?search_query=open+university
 */
 
-var ous = [
-/*
- se:Title search/keywords, vi:Video ID, no:Notes, du:Duration ([H:]m:s), ad:Added date (d MMM Y), fr:From user, tr:Transcipt text.
+(function ytAccess() {
+  ytFixes();
+
+  var d = document;
+  var header_replace = 'X-Replace-Player: 1';
+  var player_div = d.getElementById('watch-player-div');
+  var player_orig= d.getElementById('movie_player');
+  var title      = d.getElementsByTagName('title')[0].innerHTML;
+  title = title.replace(/YouTube - /, '').substr(0, 35);
+
+  //Miss off the 'hash';
+  var loc = d.location.protocol+'//'+d.location.host+d.location.pathname+d.location.search;
+  var u = 'http://localhost:8888/tt/em/?url='  //'http://localhost:8888/transcript/?u='
+    +encodeURIComponent(loc) //.search;
+    +'&a=greasemonkey';
+    //+'&t='+encodeURIComponent(title);
+  GM_log(loc);
+  GM_log(u);
+  GM_xmlhttpRequest({
+    method: 'GET',
+    url: u,
+    /*headers: {
+        'User-agent': 'Mozilla/4.0 (compatible) Greasemonkey',
+        'Accept': 'text/html', //'text/javascript,application/xml',
+    },*/
+    onload: function(resp) {
+      var replace_player = (200 == resp.status && resp.responseHeaders.indexOf(header_replace) > 0); //.match(/X-Replace-Player: 1/)
+    
+      var pop = document.createElement('div');
+      /*pop.setAttribute('style',
+    'position:absolute; background:#fafafa; padding:.4em; border:2px solid #d33; font-size:1.2em; overflow-y:scroll; height:10em;'); //#bbb
+    */
+
+      var json = resp.responseText.parseJSON();
+      pop.innerHTML = json.html;
+//pop.innerHTML += resp.responseHeaders +' ~~ '+ resp.responseHeaders.indexOf(header_command);
+
+      if (player_div) {
+        //pop.style.top = '-99em';
+        var btn = document.createElement('button');
+        btn.innerHTML = 'Hide transcript';
+        btn.addEventListener('click', function(event) {
+          if (event.target.innerHTML=='Show transcript') {
+            event.target.innerHTML = 'Hide transcript';
+            pop.style.top = 'inherit';
+          } else {
+            event.target.innerHTML = 'Show transcript';
+            pop.style.top = '-99em';
+          }
+          event.stopPropagation();
+          event.preventDefault();
+        }, true);
+
+        btn.id = 'yta-transcript';
+
+        var skip = document.createElement('a');
+        skip_id = 'movie_player';
+        if (replace_player) skip_id = 'ma-player';
+        skip.setAttribute('href', '#'+ skip_id); //btn.id);
+        skip.id = 'ma-skip';
+        skip.innerHTML = 'Skip to video'; //transcript';
+        var body = document.getElementsByTagName('body')[0];
+        body.insertBefore(skip, body.firstChild);
+
+        //player_div.appendChild(btn);
+        player_div.appendChild(pop);
+
+        if (replace_player) {
+          var obj = player_orig; //document.getElementById('movie_player'); //player.getElementsByTagName('embed')[0];
+          GM_log('Hiding original YT player - '+obj+' '+obj.getAttribute('type'));
+          obj.style.display = 'none';
+        }
+      } else {
+        alert(pop);
+      }
+    },
+    onerror: function(r) { alert('Error'); }
+  });
+
+})();
+
+
+function ytFixes() {
+  attachLabelById('masthead-search-term', 'Search ');
+  attachLabelById('footer-search-term', 'Search ');
+  removeTabindex('masthead-search-term');
+  imageAltByClass('logo', 'You Tube home');
+
+	function attachLabelById(id, text) {
+	  var field = document.getElementById(id);
+	  if (!field) return false;
+	  var label = document.createElement('label');
+	  label.setAttribute('for', id);
+	  label.innerHTML = text;
+	  field.parentNode.insertBefore(label, field);
+	}
+	function imageAltByClass(cls, altText) {
+	  var els = document.getElementsByTagName('img');
+	  if (!els) return false;
+	  for (var j=0; j<els.length; j++) {
+		var img = els[j];
+		if (//!img.hasAttribute('alt') || img.getAttribute('alt')=='' &&
+		  img.className==cls || img.parentNode.className==cls) {
+		  img.setAttribute('alt', altText);
+		  img.title = altText;
+		}
+	  }
+	}
+	function removeTabindex(id) {
+	  var el = document.getElementById(id);
+	  if (!el) return false;
+	  var tab = el.getAttribute('tabindex');
+	  if (tab > 0) {
+		el.removeAttribute('tabindex');
+	  }
+	}
+}
+
+
+/*@TODO: secure?
+  http://misc.slowchop.com/misc/browser/human-readable-json/human-readable-json.user.js?
 */
-{ se:'Arts Past & Present (AA100)', vi:'eIupVqDWoFM', du:'5:58', ad:'9 Sep 2008', fr:'TheOpenUniversity',
-  no:'0:16/5:58; Dr Richard Danson Brown, Course Team Chair', tr:
- "The Arts Past and Present - AA100 - is a broad ranging course which is designed to appeal to anyone"
-+" who's interested in the Arts, especially people who haven't studied at the university level before."
-+" It covers the full range of subjects we teach in the Arts Faculty"
-  },
-
-{ se:"James May's Big Ideas", vi:'EPLQPe66r7o', du:'0:23', ad:'26 Sep 2008', fr:'TheOpenUniversity', 
-  no:'More at, http://open2.net/jamesmay/', ca:'Education', ta:'ou_AA100 art history open2.net', tr:
-"Hi I'm James May. I've just finished filming my big ideas program about the future of transport" }, 
-
-{ se:'Susan Baxter, Open Uni', vi:'HsXo4-dE9pA', du:'2:52', ad:'28 Nov 2007',
-  no:'...point of view as a student with a disability', ca:'Education', ta:'Susan  Baxter  student  OU ... disability', tr:
- "My name is Susan Baxter, and I've done 2 open university courses."
-+" first one is studying mammals and the second is The human genome, and they're both for 10 point courses."
-+" I suffer with 2 conditions, one is dyslexia, and one is dystonia (sp?)"
+String.prototype.parseJSON = function () {
+  try {
+    return !(/[^,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]/.test(
+      this.replace(/"(\\.|[^"\\])*"/g, ''))) &&
+      eval('(' + this + ')');
+  } catch (e) {
+    return false;
   }
-];
-
-function getX(e) {
-  var x = 0;
-  if (e.nodeType != Node.ELEMENT_NODE) {
-    e = e.parentNode;
-  }
-  while(e) {
-    x += e.offsetLeft;
-    e = e.offsetParent;
-  }
-  return x;
-}
-function getY(e) {
-  var y = 0;
-  if (e.nodeType != Node.ELEMENT_NODE) {
-    e = e.parentNode;
-  }
-  while(e) {
-    y += e.offsetTop;
-    e = e.offsetParent;
-  }
-  //for(e=element.parentNode; e && e != document.body; e = e.parentNode)
-  //  if (e.scrollTop) y -= e.scrollTop;
-  // Y coordinate with document-internal scrolling accounted for.
-  return y;
-}
-
-
-( function ytAccess() {
-  var title = document.getElementsByTagName('title')[0].innerHTML;
-  title = title.replace(/YouTube - /, '').substr(0, 22);
-
-  var link = document.createElement('button');
-  link.addEventListener('click', function(event) {
-    var pop = document.createElement('div');
-    /*pop.addEventListener('click', function(ev2) {
-      pop.
-    }, true);*/
-    pop.setAttribute('style',
-    'position:absolute; background:#fafafa; padding:.4em; border:2px solid #d33; font-size:1.1em;'); //#bbb
-
-    //var p   = url.indexOf('v=');
-    //var vid = url.substr(p+2, url.indexOf('&', p)-(p+2));
-    var url = document.location.search;
-
-    var result = url.match( /.*?v\=([^&]+)/ );
-    var vid = result[1];
-
-    var trans = null;
-    for (var i=0; i< ous.length; i++) {
-      if (ous[i].vi == vid) {
-        trans = ous[i];
-        break;
-      }
-    }
-    if (trans) {
-      pop.innerHTML = '<h2>Transcript for '+trans.se+'</h2><p>'+trans.tr+' ...</p> [Greasemonkey user-Javascript]';
-    } else {
-      pop.innerHTML = "<h2>Transcript for ...</h2>"+
-      "<p>[This is a placeholder created by a &ldquo;Greasemonkey&rdquo; user-Javascript.]</p>"+vid;
-    }
-    /*var sel = window.getSelection();
-    pop.style.left= getX(sel.focusNode) +'px';
-    pop.style.top = getY(sel.focusNode) +'px'; //(y+pop.style.fontSize)?
-    pop.innerHTML += sel.getRangeAt(0);*/
-
-    var desc=null;
-    var metas = document.getElementsByTagName('meta');
-    for (var j=0; j< metas.length; j++) {
-      if (metas[j].getAttribute('name')=='description') {
-        desc = metas[j].getAttribute('content');
-        break;
-      }
-    }
-    desc.replace(/(http:\/\/.+?)/, '<a href="$1">$1</a>');
-    pop.innerHTML += '<p>'+desc+'</p>';
-
-    event.target.parentNode.appendChild(pop);
-    //event.target.disabled = true;
-    event.stopPropagation();
-    event.preventDefault();
-  }, true);
-
-  //link.setAttribute('href', '#');
-  link.style.cursor = 'pointer';
-  link.style.margin = '.5em 0';
-  link.innerHTML = "Transcript for &ldquo;"+title+"&rdquo;";
-
-  var player = document.getElementById('watch-player-div');
-  //if (!player) player = document.getElementById('profile-player-div');
-  player.appendChild(link);
-
-  GM_log(title);
-} )();
+};
