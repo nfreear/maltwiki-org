@@ -20,16 +20,15 @@ $pn   = _get('p', 'cc');      # cc | jw.
 
 $player= null;
 switch ($pn) {
-  case 'cc': $player = new ccPlayer(); break;
+  case 'cc': $player = new ccPlayerAS3(); break;
   case 'jw': $player = new jwPlayer(); break;
   default: die('404 Not Found, player!'); break;
 }
 
-$localhost = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'/'; #$_SERVER['REQUEST_URI'];
+# Portability: should handle PORTS and Drupal routing.
+$p = parse_url($_SERVER['REQUEST_URI']);
+$localhost = 'http://'.$_SERVER['HTTP_HOST'].$p['path'];
 
-#phpinfo(INFO_VARIABLES);
-#<!--base href="http://zander.open.ac.uk/ndf42/tt/" /-->
-#<!--base href="http://stickleback.open.ac.uk/sociallearn/tt/" /-->
 
 if (! isset($metas[$mid])) {
   die('404 Not Found, Woops!');
@@ -42,8 +41,8 @@ if (! isset($meta['file'])) {
 $flash  = $player->flashvars($meta, $lang);
 $flash = str_replace('http://localhost/', $localhost, $flash);
 
+
 $title = isset($meta['title']) ? $meta['title'] : '';
-#echo $flash;
 
   header('Content-Type: text/html; charset=UTF-8');
   @header('Content-Language: en');
@@ -58,13 +57,14 @@ $title = isset($meta['title']) ? $meta['title'] : '';
 
 <style type="text/css">
   body { font-family: Verdana,Tahoma,Arial,sans-serif; }
-  h1 { font-size: 1.4em; margin: .3em 0; }
+  #page { margin: 0 auto; width: 446px; }
+  h1 { font-size: 1.25em; margin: .3em 0; }
   .plink { font-size: smaller; }
   #__video-1, #__ply { border: 2px solid red; display: block; width: 900px; }
   .caption { position: absolute; top: 60px; left: 20px; padding: 4px; background: black; color: yellow; font-weight: bold; z-index: 10; }
 </style>
 
-<script type="text/javascript" src="embed/swfobject.js"></script>
+<script type="text/javascript" src="includes/swfobject.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */ 
 
@@ -106,10 +106,12 @@ function mytrace(text) {
 </head>
 <body>
 
+<div id="page">
+
 <h1><?php echo $title ?></h1>
 
 <div id="player-container">
-  <div id="caption-1" class="caption">Caption test</div>
+  <!--div id="caption-1" class="caption">Caption test</div-->
 
   <div id="ply">
     <a href="upload/corrie.mp4" title="download the MP4 excerpt">
@@ -137,27 +139,10 @@ function mytrace(text) {
 <label for="p">Player </label><select id="p" name="p">
   <option value="cc">NCAM ccPlayer</option><option value="jw">jwPlayer</option></select>
 <input type="submit" value="Load" />
-<!--input type="hidden" name="mode" value="<?php echo $mode ?>" /-->
 </p>
 </form>
 
-<!--pre>
-http://www.w3.org/TR/2006/CR-ttaf1-dfxp-20061116/
-http://www.longtailvideo.com/support/tutorials/Making-Video-Accessible
-http://code.google.com/p/swfobject/wiki/api
-http://www.bobbyvandersluis.com/swfobject/generator/
-https://wiki.mozilla.org/Accessibility/Caption_Formats
-</pre-->
+</div>
 
 </body>
 </html>
-
-<?php /*
-{   "version": "1.0",
-    "type": "video",
-    "provider_name": "YouTube",
-    "width": 425,
-    "height": 355,
-    "html": "<embed src='http://www.youtube.com/v/vk1HvP7NO5w' type='application/x-shockwave-flash' wmode='transparent' width='425' height='355'></embed>"
-}
-*/ ?>

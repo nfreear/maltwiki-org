@@ -42,7 +42,7 @@ class jwPlayer extends basePlayer {  #v4.3.
     return "<a href='http://longtailvideo.com/players/jw-flv-player/'>JW player</a>";
   }
 
-  public function player() { return "embed/player.swf"; }
+  public function player() { return "includes/player.swf"; }
 
   public function flashvars($meta, $lang='en') {
 	$flash = '';
@@ -67,7 +67,6 @@ class jwPlayer extends basePlayer {  #v4.3.
     );
     $controls = '<ol id="controls">'.PHP_EOL;
     foreach ($events as $ev => $text) {
-      #$controls .= "<li><a href='javascript:document.getElementById(\"$id\").sendEvent(\"$ev\");'>$text</a></li>".PHP_EOL;
       $controls .= "<li><input type='button' onclick='document.getElementById(\"$id\").sendEvent(\"$ev\");' value='$text' /></li>".PHP_EOL;
     }
     $controls .= '</ol>'.PHP_EOL;
@@ -81,17 +80,15 @@ class ccPlayer extends basePlayer { #v3.0.1.
     return "<a href='http://ncam.wgbh.org/webaccess/ccforflash/ccPlayerHelp.html'>NCAM ccPlayer help</a>";
   }
 
-  public function player() { return "embed/ccPlayer.swf"; }
+  public function player() { return "includes/ccPlayer.swf"; }
 
   public function flashvars($meta, $lang='en') {
     $flash = '';
 	$flash.= isset($meta['file']) ? 'ccVideoName :   "'.$meta['file'] .'",'.PHP_EOL :'';
-	#$flash.= isset($meta['image']) ? 'image:"'.$meta['image'].'",'.PHP_EOL :'';
 	$flash.= isset($meta['captions']) ? 'ccCaptionSource:"'.$meta['captions'].'",'.PHP_EOL :'';
-	#$flash.= isset($meta['title']) ? 'title:"'.$meta['title'].'",'.PHP_EOL :'';
     $flash.= <<<EOT
 ccVideoAutoStart : false,
-ccVideoBufferTime: 5,
+ccVideoBufferTime: 2,
 ccCaptSourceType : "external",
 ccCaptionLanguage: "$lang",
 ccCaptionAutoHide: false,
@@ -99,6 +96,35 @@ ccOverrideFileStyle:false,
 ccDisplayRollup  : false
 
 EOT;
+    return $flash;
+  }
+
+  public function jsControls($id='ply') { return ''; }
+}
+
+class ccPlayerAS3 extends basePlayer { #v3.0.1. ccPlayerAS3, 3 May 2009.
+  public function link() {
+    return "<a href='http://ncam.wgbh.org/webaccess/ccforflash/ccPlayerAS3Help.html'>NCAM ccPlayer AS3 help</a>"; #@todo.
+  }
+
+  public function player() { return "includes/ccPlayerAS3.swf"; }
+
+  public function flashvars($meta, $lang='en') {
+    $flash = '';
+    $flash.= isset($meta['file']) ? 'ccVideoName :   "'.$meta['file'] .'",'.PHP_EOL :'';
+    $flash.= isset($meta['captions']) ? 'ccCaptionSource:"'.$meta['captions'].'",'.PHP_EOL :'';
+    $flash.= isset($meta['image']) ? 'ccPosterImage:"'.$meta['image'].'",'.PHP_EOL :'';
+    $flash.= <<<EOT
+ccVideoAutoStart : false,
+ccVideoBufferTime: 2,
+ccCaptSourceType : "external",
+ccCaptionLanguage: "$lang",
+ccCaptionAutoHide: false,
+ccOverrideFileStyle:true, //false.
+ccDisplayRollup  : false
+
+EOT;
+#ccVideoAutoStart=false&ccVideoBufferTime=.5
     return $flash;
   }
 

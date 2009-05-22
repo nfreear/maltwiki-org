@@ -1,7 +1,7 @@
 CONFIDENTIAL
 
-A proposal for the development of software services and components to improve 
-the accessibility of online video and multimedia (for learning)
+A proposal for the development of software services and practices to improve 
+the accessibility of online video and multimedia, for learning
 
 N.D.Freear, The Open University, 10 January-11 February 2009.
 
@@ -9,7 +9,7 @@ Summary
 
 Video and other multimedia are often key components of primary course materials, 
 and can also be used informally as supplementary material on Open University 
-courses [ref?]. Furthermore, the Open University and other educators have a 
+courses. Furthermore, the Open University and other educators have a 
 quasi-marketing presence on various Web 2.0 sites, with for example introductory 
 and "about learning with the OU" videos on YouTube 
 [http://youtube.com/user/TheOpenUniversity] and iTunesU [http://podcast.open.ac.uk]. 
@@ -17,7 +17,7 @@ Certainly in the former case and probably in the latter (primary and
 supplementary/marketing material) the University has a legal obligation to 
 provide alternative formats, like captions for the hard of hearing and 
 audio description for visually impaired people. The Open University has some 
-success in these areas (ref, 95% of OU iTunesU podcasts have transcripts, 
+success in these areas (95% of OU iTunesU podcasts have transcripts, 
 http://projects.kmi.open.ac.uk/itunesu/impact/ ), but coverage elsewhere is 
 patchy. Services like YouTube allow the author to upload captions with their video, 
 however the results are not fully accessible, and very few authors across the 
@@ -41,10 +41,52 @@ educational multi-media generally, and eventually beyond education. Free and
 open access to alternative content and software tools is proposed as a 
 key element of the project.
 
+(Words: 322.)
+
+
+Keywords
+
+accessibility, usability, caption, subtitle, audio description, described video, 
+annotate, transcribe, multimedia, data portability, integration, open content, 
+social production, co-creation, wiki, web service, free software.
+
 
 --
-http://kn.open.ac.uk/workspace.cfm?wpid=9078
-http://docs.google.com/Doc?docid=dc53chjk_5p9sqw8f2&hl=en_GB
+RNIB Techshare 2009 - 18 May 2009
+
+Title:  Multimedia accessibility - are we nearly there yet?
+
+Main presenter:  Dr Nicholas Freear.
+
+Abstract:
+
+The generally low incidence of captioning for the deaf and audio description for 
+those with sight impairments on the Web is in stark contrast to the progress 
+made in basic Web accessibility. The captioning function offered by YouTube is 
+a step in the right direction, though it is beset with problems. 
+Audio description is in a worse state. 
+
+As video and multimedia are often key components of distance courses, and can 
+be valuable for informal learning this is a real concern for all educators, 
+including the Open University. Furthermore, the University has a quasi-marketing 
+presence on Web 2.0 sites, with introductory videos on YouTube and iTunes U.
+
+The project aims to provide a web site for the social and community co-creation, 
+editing, storage and delivery of alternative content, and software services and 
+components to deliver this content, fix media players and improve the user 
+experience. The presentation will detail the challenges and progress so far, 
+and invite participation and discussion. Free and open content and software tools, 
+and content portability are proposed as key elements of the project.
+
+(Words: 180.)
+
+
+--
+KN workspace: Media accessibility project
+  http://kn.open.ac.uk/workspace.cfm?wpid=9078
+
+Media accessibility project - long proposal
+  http://docs.google.com/Doc?docid=dc53chjk_5p9sqw8f2&hl=en_GB
 
 
 [End.]

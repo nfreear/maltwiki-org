@@ -23,7 +23,7 @@ $metas['corrie'] = array(
   'file'  =>'http://localhost/upload/corrie.flv',
   'alt_media'=>'http://localhost/upload/corrie.mp4',
   'image' =>'http://localhost/upload/corrie.jpg',
-  'captions'=>'http://localhost/upload/corrie.xml', #corrie_2.xml
+  'captions'=>'http://localhost/upload/corrie.xml',
   'audio' =>'http://localhost/upload/corrie.mp3',
   'lang'  =>'en',
   'title' =>'Coronation Street, audio description',
@@ -35,7 +35,7 @@ $metas['car'] = array(
   'url'   =>'http://localhost/car',
   'file'  =>'http://localhost/upload/car.flv',
   #'captions'=>'http://localhost/upload/car-dfxp-xml.php',
-  'captions'=>'http://localhost/upload/car.dfxp.xml', #car_2.dfxp.xml
+  'captions'=>'http://localhost/upload/car.dfxp.xml',
   'lang'  =>'en | es | de',
   'title' =>'Accelerating car',
   'description'=>'Someone watching a car accelerate toward light speed...',
@@ -54,4 +54,69 @@ $metas['podcast-t206'] = array( #'oupod'
   'duration'     =>'00:00',
   'provider_name'=>'The Open University/iTunesU',
   'provider_url' =>'http://podcast.open.ac.uk/',
+);
+$metas['yt-susan'] = array( #http://kej.tw/flvretriever/
+  'url'   =>'http://youtube.com/watch?v=HsXo4-dE9pA',
+  'file'  =>'http://youtube.com/get_video?video_id=HsXo4-dE9pA&t=OEgsToPDskInduWgbWT6uO2yZyeEmnY5',
+  #'image' =>null,
+  'lang'  =>'en',
+  'title' =>'Susan Baxter, Open University, YouTube',
+  'description'=>'Susan Baxter, Open University student tells her story',
+  'duration'=>'02:52',
+  'provider_name'=>'YouTube',
+  'provider_url' =>'http://www.youtube.com/',
+  'author_name'  =>'The Open University',
+);
+$metas['yt-dream'] = array(
+  'url'   =>'http://youtube.com/watch?v=PbUtL_0vAJk',
+  'file'  =>'http://youtube.com/get_video?video_id=PbUtL_0vAJk&t=  ',
+  'alt_transcript'=>'http://www.americanrhetoric.com/speeches/mlkihaveadream.htm',
+  'lang'  =>'en-US',
+  'title' =>'Martin Luther King "I have a dream"',
+  'description'=>'delivered 28 August 1963, at the Lincoln Memorial, Washington D.C.',
+  'duration'=>'17:28',
+  'provider_name'=>'YouTube',
+  'provider_url' =>'http://www.youtube.com/',
+);
+
+$metas['dot-blogs'] = array(
+  'url'   =>'http://dotsub.com/view/dc75c2e2-ef81-4851-8353-a877aac9fe3c#videoTranscription',
+  'file'  =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/em/flv/en',
+  'image' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/p',
+  'captions_ALT' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/c/eng/tt',
+  'captions' =>'http://localhost/upload/dot_dc75c2e2-ef81-4851-8353-a877aac9fe3c_c_eng_tt.xml',
+  'alt_url'=>'http://youtube.com/watch?v=NN2I1pWXjXI',
+  'license'=>'http://creativecommons.org/licenses/by-nc/2.5/',
+  'lang'  =>'en-US',
+  'title' =>'Blogs in Plain English: Commoncraft',
+  'description'=>
+'Commoncraft *Posted by: leelefever *17 months ago *Views 46,102 *Translations 22 | A video for people who wonder why blogs are such a big deal. ... (More) | English, United States, Instructional',
+  'duration'=>'2:59',
+  'provider_name'=>'dotSUB',
+  'provider_url' =>'http://dotsub.com/',
+  'height'=> '347',
+  'width' => '420',
+);
+$metas['yt-crotchet'] = array(
+  'url'   =>'http://www.youtube.com/watch?v=FIH0ntfwzCk',
+  'title' =>'How-to Crochet a Hat, Threadbanger', #Annotations ?
+  'desc'=>'This week, Rob and Corinne give the viewers what they want and ...',
+  'height'=>425,
+  'width' =>344,
+);
+
+/*<embed src="http://www.sign-tube.com/player.swf" width="360" height="270" 
+allowscriptaccess="always" allowfullscreen="true" 
+flashvars="width=360&height=270&file=http://www.sign-tube.com/flvideo/851.flvℑ=http://www.sign-tube.com/thumb/1_851.jpg&displayheight=270&link=http://www.sign-tube.com/video/851/SignTube-going-to-Deaflympics-2009&searchbar=false&linkfromdisplay=true&recommendations=http://www.sign-tube.com/feed_embed.php?v=8261f10d052e6e2c1123" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" />
+*/
+$metas['st-deaflympics'] = array(
+  'url'   =>'http://www.sign-tube.com/video/851/SignTube-going-to-Deaflympics-2009',
+  'file'  =>'http://www.sign-tube.com/flvideo/851.flv',
+  'title' =>'SignTube going to Deaflympics 2009!',
+  'desc'  =>'It\'s official Signtube team will visit Taipei to cover Deaflympics 2009 both sports and community events! So if you see the team, ask them to film you and be sign-tubed!',
+  'lang'  =>'en, sgn',
+  'duration'=>'0:23',
+  'provider_name'=>'Sign-tube',
+  'height'=>270,
+  'width' =>360,
 );
