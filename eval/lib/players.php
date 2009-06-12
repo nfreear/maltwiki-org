@@ -62,6 +62,7 @@ class jwPlayer extends basePlayer {  #v4.3.
       'file'    => $meta['file'],
       'image'   => isset($meta['image']) ? $meta['image'] :'',
       'captions'=> $meta['captions'],
+      'type'    => 'flv',
       'plugins' => 'accessibility',
     ))));
   }
@@ -73,7 +74,8 @@ class jwPlayer extends basePlayer {  #v4.3.
 	$flash.= isset($meta['audio']) ? 'audio:"'.$meta['audio'].'",'.PHP_EOL :'';
 	$flash.= isset($meta['captions']) ? 'captions:"'.$meta['captions'].'",'.PHP_EOL :'';
 	$flash.= isset($meta['title']) ? 'title:"'.$meta['title'].'",'.PHP_EOL :'';
-    $flash.= 'plugins : "accessibility"'.PHP_EOL;
+    $flash.= 'type   :"flv",'.PHP_EOL;
+    $flash.= 'plugins:"accessibility"'.PHP_EOL;
 	//accessibility.fontsize: 14,
 	//accessibility.volume	: 90,
 	//controlbar : "false";

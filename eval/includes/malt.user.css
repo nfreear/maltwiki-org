@@ -1,0 +1,8 @@
+#malt-0, #ma-skip { font-size:medium; }
+#malt-0 p { margin:.8em 0; } /*p:1.12em 0*/
+#malt-0 h2{ font-size:1.1em; }
+#malt-0 button { border:1px solid gray }
+#malt-0 cite { color:#444; font-size:medium }
+#ma-player { display: block; }
+#ma-transcript{display:none; /*position:absolute;*/ font-size:1.1em; height:8em;
+  background:#fafafa; padding:5px; border:1px solid #d33; overflow-y:scroll; }

@@ -17,6 +17,11 @@ $mid  = _get('m', 'xmoodle');# car | corrie | podcast-t206 (oupod) | yt-susan | 
 $lang = _get('cl','en-GB');  # en | es | de.
 $pn   = _get('p', 'cc');      # cc | jw.
 
+$mode = _get('x', null);
+/*if ($mode) {
+  require_once 'lib/data_x.php';
+}*/
+
 $player= null;
 switch ($pn) {
   case 'cc': $player = new ccPlayerAS3(); break;
@@ -138,6 +143,9 @@ function mytrace(text) {
 <label for="p">Player </label><select id="p" name="p">
   <option value="cc">NCAM ccPlayer</option><option value="jw">jwPlayer</option></select>
 <input type="submit" value="Load" />
+
+<input type="hidden" name="x" value="<?php echo $mode ?>" />
+
 </p>
 </form>
 

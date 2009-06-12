@@ -7,6 +7,7 @@
 // @description    Multimedia accessibility evaluation, 16 May 2009.
 //                 Requires Firefox 3.x and Greasemonkey http://greasespot.net/
 // @include        http://*.youtube.com/watch?*
+// @resource style <?php echo $style_url ?>
 // ==/UserScript==
 
 
@@ -37,15 +38,14 @@
     },*/
     onload: function(resp) {
       var replace_player = (200 == resp.status && resp.responseHeaders.indexOf(header_replace) > 0); //.match(/X-Replace-Player: 1/)
-    
-      var pop = document.createElement('div');
-      /*pop.setAttribute('style',
-    'position:absolute; background:#fafafa; padding:.4em; border:2px solid #d33; font-size:1.2em; overflow-y:scroll; height:10em;'); //#bbb
-    */
 
+      var myStyle = GM_getResourceText("style");
+      GM_addStyle(myStyle);
+      GM_log('Adding styles.');
+
+      var pop = document.createElement('div');
       var json = resp.responseText.parseJSON();
       pop.innerHTML = json.html;
-//pop.innerHTML += resp.responseHeaders +' ~~ '+ resp.responseHeaders.indexOf(header_command);
 
       if (player_div) {
         //pop.style.top = '-99em';
@@ -78,7 +78,7 @@
         player_div.appendChild(pop);
 
         if (replace_player) {
-          var obj = player_orig; //document.getElementById('movie_player'); //player.getElementsByTagName('embed')[0];
+          var obj = player_orig;
           GM_log('Hiding original YT player - '+obj+' '+obj.getAttribute('type'));
           obj.style.display = 'none';
         }

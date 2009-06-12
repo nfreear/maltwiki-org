@@ -43,10 +43,7 @@ $try_link = $metas['yt-olnet-brian']['url'];
 if (! $agent) $try_link = '?url='.urlencode($try_link);
 
 if (! $media) {
-  header('HTTP/1.1 404 Not Found');  #Error.
-  $res->http_status = 404;
-  $res->html = "<p $std_attrs class='warn'>We don't have captions/a transcript for this - <a href='$try_link'>try me</a>.</p>";
-  die(json_encode($res));
+  http_error(404, 'We don\'t have captions/a transcript for this');
 }
 
 
@@ -55,19 +52,17 @@ if (isset($media['captions']) && isset($meta['file'])) {
   $do_captions = true;
 }
 elseif (!isset($media['transcript'])) {
-  header('HTTP/1.1 500 Internal Server Error'); #Error.
-  $res->http_status = 500;
-  $res->html = "<p $str_attrs class='error'>Woops, there's been a problem - <a href='$try_link'>try me</a>.</p>";
-  die(json_encode($res));
+  http_error();
 }
 
   $res->title= isset($media['title']) ? htmlentities($media['title']) : '';
+  #$res->style= URL;  @todo.
   $res->html = <<<EOH
 
 <div
  xmlns="http://www.w3.org/1999/xhtml" lang="{$res->lang}"
  id="malt-0" title="{$res->title}">
-<style type="text/css">
+<!--style type="text/css">
 #malt-0, #ma-skip { font-size:medium }
 #malt-0 p { margin:.8em 0; } /*p:1.12em 0*/
 #malt-0 h2{ font-size:1.1em; }
@@ -75,7 +70,7 @@ elseif (!isset($media['transcript'])) {
 #malt-0 cite { color:#444; font-size:medium }
 #ma-player { display: block; }
 #ma-transcript{display:none; /*position:absolute;*/ font-size:1.1em; background:#fafafa; padding:5px; border:1px solid #d33; overflow-y:scroll; height:8em; }
-</style>
+</style-->
 <script type="text/javascript">function maToggle(id){
 var d=document.getElementById(id).style;if('none'==d.display){d.display='block'}else{d.display='none'}
 }</script>
