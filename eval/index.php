@@ -16,10 +16,11 @@ require_once 'lib/players.php';
 $mid  = _get('m', 'xmoodle');# car | corrie | podcast-t206 (oupod) | yt-susan | xmoodle...
 $lang = _get('cl','en-GB');  # en | es | de.
 $pn   = _get('p', 'cc');      # cc | jw.
+$swfo = _get('s', '2.1');
 
-$mode = _get('x', null);
-/*if ($mode) {
-  require_once 'lib/data_x.php';
+$swf_script = 'http://ajax.googleapis.com/ajax/libs/swfobject/2.1/swfobject.js';  #$swf_script='includes/swfobject.js';
+/*if ('2.2b1'==$swfo) {
+  $swf_script = 'includes/swfobject-2.2b1.js';
 }*/
 
 $player= null;
@@ -53,7 +54,7 @@ $title = isset($meta['title']) ? $meta['title'] : '';
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><?php echo $title ?> - Media accessibility</title>
+  <title><?php echo $title ?> - Media accessibility - experimental</title>
 
 <style type="text/css">
   body { font-family: Verdana,Tahoma,Arial,sans-serif; }
@@ -68,7 +69,7 @@ $title = isset($meta['title']) ? $meta['title'] : '';
   .caption { position: absolute; top: 60px; left: 20px; padding: 4px; background: black; color: yellow; font-weight: bold; z-index: 10; }
 </style>
 
-<script type="text/javascript" src="includes/swfobject.js"></script>
+<script type="text/javascript" src="<?php echo $swf_script ?>"></script>
 <script type="text/javascript">
 /* <![CDATA[ */ 
 
@@ -78,12 +79,15 @@ var flashvars = {
 
 var params = {};
   params.play = "false";
+  //params.loop = "false";
   params.menu = "true";
   params.seamlesstabbing = "true";
   params.allowfullscreen = "true";
   params.allowscriptaccess = "sameDomain";
 
-  params.wmode = "opaque";
+  params.wmode = "window"; //"opaque", "transparent";
+  params.scale = "exactfit";
+  //params.swliveconnect = "false";
 
 var attributes = {};
   //attributes.id = "video-1";
@@ -92,13 +96,18 @@ var attributes = {};
 
 var fn = function() {
     var ply = document.getElementById('ply');
+    ply.title = 'Media paused, to start press play *'; //'Media player';
+    /*ply.tabindex = -1;
+    ply.setAttribute('role', 'application');
+    ply.focus();*/
+
     //var acc = ply.getPluginConfig('accessibility');
     var cap = document.getElementById('caption-1');
 
     //cap.innerHTML = ply.getPlaylist()[0].title;
 };
-setTimeout("fn()", 1000);
-//swfobject.addLoadEvent(fn);
+//setTimeout("fn()", 1000);
+swfobject.addLoadEvent(fn);
 
 function mytrace(text) {
   var trace = document.getElementById('trace');
@@ -114,13 +123,18 @@ function mytrace(text) {
 <h1><?php echo $title ?></h1>
 
 <div id="player-container">
+<?php /*title="Player"
+  role="application"
+  aria-channel="notify" aria-relevant="all" aria-atomic="false" aria-live="assertive"-->
+  <!--aria-relevant="aditions removals" aria-atomic="true" aria-live="polite"-->
   <!--div id="caption-1" class="caption">Caption test</div-->
+*/ ?>
 
   <div id="ply">
-    <a href="upload/corrie.mp4" title="download the MP4 excerpt">
+    <?php /*<a href="upload/corrie.mp4" title="download the MP4 excerpt">
       <img src="upload/corrie.jpg" width="470" height="300" 
         alt="a small excerpt from ITV's Coronation Street" />
-    </a>
+    </a>*/ ?> Alternative content.
   </div>
 
   <div class="plink"><?php echo $player->alternate($meta) ?> | <?php echo $player->link() ?></div>
@@ -130,6 +144,8 @@ function mytrace(text) {
   <div id="trace"></div>
 
 </div>
+
+<p style="display:none">SWFObject version: <?php echo "$swf_script / $swfo" ?>.</p>
 
 
 <form action="">
@@ -143,8 +159,6 @@ function mytrace(text) {
 <label for="p">Player </label><select id="p" name="p">
   <option value="cc">NCAM ccPlayer</option><option value="jw">jwPlayer</option></select>
 <input type="submit" value="Load" />
-
-<input type="hidden" name="x" value="<?php echo $mode ?>" />
 
 </p>
 </form>

@@ -55,13 +55,12 @@ elseif (!isset($media['transcript'])) {
   http_error();
 }
 
-  $res->title= isset($media['title']) ? htmlentities($media['title']) : '';
+  $res->title= isset($media['title']) ? htmlentities($media['title']) : ''; #<!--title="{$res->title}"-->
   #$res->style= URL;  @todo.
   $res->html = <<<EOH
-
 <div
  xmlns="http://www.w3.org/1999/xhtml" lang="{$res->lang}"
- id="malt-0" title="{$res->title}">
+ id="malt-0" >
 <!--style type="text/css">
 #malt-0, #ma-skip { font-size:medium }
 #malt-0 p { margin:.8em 0; } /*p:1.12em 0*/
@@ -85,18 +84,22 @@ if ($do_captions) {
   $res->width = $media['width'];
   $res->height= $media['height'];
   $res->html .= <<<EOH
-<object id="ma-player" data="$data_url" type="application/x-shockwave-flash" $size_attrs>
-  <param value="true" name="swliveconnect" /><!--TODO ??-->
+<object id="ma-player" data="$data_url" type="application/x-shockwave-flash" $size_attrs title="Media player">
+  <param value="false" name="swliveconnect" />
   <param value="false" name="play" />
   <param value="true" name="menu" />
   <param value="true" name="seamlesstabbing" />
   <param value="true" name="allowfullscreen" />
   <param value="always" name="allowscriptaccess" /><!--sameDomain -->
-  <param value="opaque" name="wmode" /><!--wmode: opaque -->
+  <param name="wmode" value="window" /><!--wmode: opaque -->
+  <param name="scale" value="exactfit" />
   <param name="flashvars" value=
 "$flash_vars"
-/> </object>
+/> Player </object>
 EOH;
+/*<script type="text/javascript">
+var p=document.getElementById('ma-player');p.tabindex=-1;p.focus();
+</script>*/
 } else {
   $transcript = $media['transcript'];
   $trans_title= 'Transcript for '.substr($title, 0, 35).'...';
@@ -118,7 +121,6 @@ EOH;
 <button onclick="maToggle('ma-transcript');return false">Show information</button>
 <pre id="ma-debug" style="display:none"> TEST </pre>
 </div>
-
 EOT;
 
   header('Content-Type: text/javascript; charset=UTF-8');

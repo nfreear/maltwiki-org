@@ -119,7 +119,7 @@ EOT;
 
 $metas['yt-mlk-dream'] = array(
   'url'   =>'http://youtube.com/watch?v=PbUtL_0vAJk',
-  'file'  =>'http://youtube.com/get_video?video_id=PbUtL_0vAJk&t=  ',
+  'file'  =>'http://youtube.com/get_video?video_id=PbUtL_0vAJk',
   'transcript_ALT'   =>'http://www.americanrhetoric.com/speeches/mlkihaveadream.htm',
   'transcript_rights'=>'Copyright status: Text, Audio = Restricted, seek permission. Images & Video = Uncertain. &#169; Estate of Dr. Martin Luther King, Jr; Intellectual Properties Management; One Freedom Plaza; 449 Auburn Avenue NE; Atlanta, GA 30312',
   'audio_url' =>'http://174.132.193.190/~eiden/mp3clips/politicalspeeches/mlkingihaveadream1234xx.mp3',
@@ -203,6 +203,7 @@ $metas['yt-olnet-brian'] = array(
   'captions_ALT'=>'http://dotsub.com/media/86a1190e-dd05-49a1-b0a8-c5d2b92094dd/c/eng/tt',
   'captions'=>'http://localhost/upload/dot_86a1190e-dd05-49a1-b0a8-c5d2b92094dd_c_eng_tt.xml',
   'provider_name'=>'dotSUB',
+  'author_url'=>'http://dotsub.com/view/user/olnetchannel',
   'height'=> 347,
   'width' => 420,
 );
