@@ -29,19 +29,54 @@ function dotsub_init($meta, $size='l') {
   return $meta;
 }
 
+function youtube_tt_check($url, $lang='en') {
+  $p = parse_url($url);
+  if (false===strpos($p['host'], 'youtube.com')) {
+    return false;
+  }
+  #$q = parse_url($url, PHP_URL_QUERY);
+  #$q = explode('&', $q);
+  $tt_uri = "http://video.google.com/timedtext?lang=$lang&".$p['query'];
+
+  $hCurl = curl_init($tt_uri);
+  #curl_setopt($hCurl, CURLOPT_USERAGENT, $userAgent);
+  curl_setopt($hCurl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($hCurl, CURLOPT_VERBOSE, TRUE);
+  #curl_setopt($hCurl, CURLOPT_HEADER, TRUE);
+  #curl_setopt($hCurl, CURLOPT_TIMEOUT, $timeout);
+  #curl_setopt($hCurl, CURLOPT_CONNECTTIMEOUT, $timeout);
+  curl_setopt($hCurl, CURLOPT_PROXY, 'wwwcache.open.ac.uk:80');
+  $resp = curl_exec($hCurl);
+  $code = curl_getinfo($hCurl, CURLINFO_HTTP_CODE);
+  return 200!=$code || strlen($resp)<2 ? false : true;
+}
+
 function http_error($code=500, $message='Woops, there\'s been a problem') {
   global $metas;
   
   $std_attrs = 'lang="en" id="malt-0" style="font-size:medium"';
   $try_link  = $metas['yt-olnet-brian']['url'];
+  $about_link= localhost('oembed/');
   $errors = array(
     404 => 'Not Found', 500 => 'Internal Server Error', );
   $http_text = $errors[$code];
-  header("HTTP/1.1 $code $http_text"); #Error.
+  header('Content-Type: text/javascript; charset=UTF-8');
+  @header("HTTP/1.1 $code $http_text"); #Error.
   $res = new StdClass;
   $res->http_status = $code;
-  $res->html = "<p $std_attrs class='ma-error'>$message - <a href='$try_link'>try me</a>.</p>";
-  die(json_encode($res));
+  $res->html = "<p $std_attrs class='ma-error'>$message - <a href='$try_link'>try me</a>. <a href='$about_link'>About</a>.</p>";
+  _json_encode($res);
+}
+
+function _json_encode($data) {
+  $json = json_encode((object)$data);
+  $json = str_replace(',"', "\r\n,\"", $json);
+
+  header('Content-Type: text/javascript; charset=UTF-8'); #application/json.
+  @header('Content-Language: '. $res->lang);
+  @header('X-Powered-By:');
+  echo $json;
+exit;
 }
 
 function _get($name, $default=null) {

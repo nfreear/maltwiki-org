@@ -42,8 +42,12 @@ foreach ($metas as $key => $meta) {
 $try_link = $metas['yt-olnet-brian']['url'];
 if (! $agent) $try_link = '?url='.urlencode($try_link);
 
+/*if (!$media && youtube_tt_check($url)) {
+  http_error(404, 'We don\'t have captions or a transcript for this, but YouTube does!');
+}*/
+
 if (! $media) {
-  http_error(404, 'We don\'t have captions/a transcript for this');
+  http_error(404, 'We don\'t have captions or a transcript for this');
 }
 
 
@@ -61,15 +65,6 @@ elseif (!isset($media['transcript'])) {
 <div
  xmlns="http://www.w3.org/1999/xhtml" lang="{$res->lang}"
  id="malt-0" >
-<!--style type="text/css">
-#malt-0, #ma-skip { font-size:medium }
-#malt-0 p { margin:.8em 0; } /*p:1.12em 0*/
-#malt-0 h2{ font-size:1.1em; }
-#malt-0 button { border:1px solid gray }
-#malt-0 cite { color:#444; font-size:medium }
-#ma-player { display: block; }
-#ma-transcript{display:none; /*position:absolute;*/ font-size:1.1em; background:#fafafa; padding:5px; border:1px solid #d33; overflow-y:scroll; height:8em; }
-</style-->
 <script type="text/javascript">function maToggle(id){
 var d=document.getElementById(id).style;if('none'==d.display){d.display='block'}else{d.display='none'}
 }</script>
@@ -123,17 +118,12 @@ EOH;
 </div>
 EOT;
 
-  header('Content-Type: text/javascript; charset=UTF-8');
-  @header('Content-Language: '. $res->lang);
-  @header('X-Powered-By:');
-
   if ($do_captions) {
     @header('X-Replace-Player: 1');
     $res->replace_player = true;
   }
 
-echo json_encode((object) $res);
-exit;
+_json_encode($res);
 
 
 /*
