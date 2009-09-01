@@ -68,7 +68,7 @@
 
         var skip = document.createElement('a');
         skip_id = 'movie_player';
-        if (replace_player) skip_id = 'ma-player';
+        if (replace_player && json.html_id) skip_id = json.html_id;
         skip.setAttribute('href', '#'+ skip_id); //btn.id);
         skip.id = 'ma-skip';
         skip.innerHTML = 'Skip to video'; //transcript';
