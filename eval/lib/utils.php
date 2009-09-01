@@ -73,7 +73,7 @@ function _json_encode($data) {
   $json = str_replace(',"', "\r\n,\"", $json);
 
   header('Content-Type: text/javascript; charset=UTF-8'); #application/json.
-  @header('Content-Language: '. $res->lang);
+  @header('Content-Language: '. $data->lang);
   @header('X-Powered-By:');
   echo $json;
 exit;
@@ -91,8 +91,14 @@ function localhost($replace = null) {
 
 function user_javascript() {
   header('Content-Type: text/javascript; charset=UTF-8');
+  #header('Content-Disposition: attachment; filename=maltwiki.user.js');
+  $host = 'maltwiki.org'==$_SERVER['HTTP_HOST'] ? '' : '['.str_replace(':8080', '', $_SERVER['HTTP_HOST']).']';
   $oembed_url = localhost('/media_accessibility.user.js').'oembed/?url=';
   $style_url  = localhost('/media_accessibility.user.js').'includes/malt.user.css';
+/* Line-break is important!
+// @resource style <?php echo $style_url ?>
 
+// ==/UserScript==
+*/
   require_once '../includes/youtube_accessibility.user.js';
 }

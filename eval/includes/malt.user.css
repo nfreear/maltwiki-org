@@ -1,4 +1,6 @@
-#malt-0, #ma-skip { font-size:medium; }
+.malt, #malt-0, #ma-skip { font-size:medium; }
+.malt a, #ma-skip { border:2px solid transparent; padding:1px; }
+.malt a:focus, .malt a:hover, #ma-skip:focus, #ma-skip:hover { border:2px dotted #d33; }
 #malt-0 p { margin:.8em 0; } /*p:1.12em 0*/
 #malt-0 h2{ font-size:1.1em; }
 #malt-0 button { border:1px solid gray }

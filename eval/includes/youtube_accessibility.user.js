@@ -1,15 +1,16 @@
 // ==UserScript==
-// @name           YouTube Accessibility
+// @name           YouTube Accessibility <?php echo $host ?>
+
 // @namespace      http://freear.org.uk
 // @author         N.D.Freear[AT]open.ac.uk
 // @copyright      2008-10-03 N.D.Freear, The Open University.
 // @version        0.1
-// @description    Multimedia accessibility evaluation, 16 May 2009.
+// @description    Multimedia accessibility evaluation, May-August 2009.
 //                 Requires Firefox 3.x and Greasemonkey http://greasespot.net/
 // @include        http://*.youtube.com/watch?*
 // @resource style <?php echo $style_url ?>
-// ==/UserScript==
 
+// ==/UserScript==
 
 (function ytAccess() {
   ytFixes();
@@ -39,13 +40,13 @@
     onload: function(resp) {
       var replace_player = (200 == resp.status && resp.responseHeaders.indexOf(header_replace) > 0); //.match(/X-Replace-Player: 1/)
 
-      var myStyle = GM_getResourceText("style");
-      GM_addStyle(myStyle);
-      GM_log('Adding styles.');
-
       var pop = document.createElement('div');
       var json = resp.responseText.parseJSON();
       pop.innerHTML = json.html;
+
+      /*var myStyle = json.stylesheet ? @TODO : GM_getResourceText("style");
+      GM_addStyle(myStyle);
+      GM_log('Adding styles.');*/
 
       if (player_div) {
         //pop.style.top = '-99em';

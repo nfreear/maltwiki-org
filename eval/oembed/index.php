@@ -60,11 +60,11 @@ elseif (!isset($media['transcript'])) {
 }
 
   $res->title= isset($media['title']) ? htmlentities($media['title']) : ''; #<!--title="{$res->title}"-->
-  #$res->style= URL;  @todo.
+  #$res->stylesheet= "{$localhost}includes/malt.user.css";  #@todo.
+  #xmlns="http://www.w3.org/1999/xhtml"
   $res->html = <<<EOH
-<div
- xmlns="http://www.w3.org/1999/xhtml" lang="{$res->lang}"
- id="malt-0" >
+<div lang="{$res->lang}" class="malt" id="malt-0" >
+<link rel="stylesheet" href="{$localhost}includes/malt.user.css" />
 <script type="text/javascript">function maToggle(id){
 var d=document.getElementById(id).style;if('none'==d.display){d.display='block'}else{d.display='none'}
 }</script>
