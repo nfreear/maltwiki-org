@@ -21,7 +21,7 @@ $res->type   = 'video';
 $res->http_status = 200;
 
 $res->lang = _get('cl','en');  # en-GB | es | de.
-$url  = str_replace('www.', '', _get('url'));
+$url  = clean_url(_get('url'));
 $title= _get('t', 'this');
 $agent= _get('a');  #Greasemonkey.
 $std_attrs = 'lang="en" id="malt-0" style="font-size:medium"';

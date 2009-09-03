@@ -29,6 +29,21 @@ function dotsub_init($meta, $size='l') {
   return $meta;
 }
 
+function clean_url($url) {
+  # Clean up URLs: http://www.youtube.com/watch?gl=GB&hl=en-GB&v=eIupVqDWoFM&feature=user
+  $url  = str_replace('www.', '', $url);
+  $p = parse_url($url);
+  $q = explode('&', $p['query']);
+  $url = $p['scheme'].'://'.$p['host'].$p['path'].'?';
+  foreach ($q as $part) {
+    if (preg_match('/^(v=.+)$/', $part, $matches)) {
+      $url .= $matches[1];
+      break;
+    }
+  }
+  return $url;
+}
+
 function youtube_tt_check($url, $lang='en') {
   $p = parse_url($url);
   if (false===strpos($p['host'], 'youtube.com')) {
