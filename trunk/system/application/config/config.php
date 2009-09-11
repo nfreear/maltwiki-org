@@ -11,7 +11,9 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://example.com/";
+#ou-specific
+$config['base_url']	= 'http://zander.open.ac.uk:8080/maltwiki/';
+##$config['base_url'] = 'http://maltwiki.org/';
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,7 @@ $config['base_url']	= "http://example.com/";
 | variable so that it is blank.
 |
 */
-$config['index_page'] = "index.php";
+$config['index_page'] = ''; #"index.php";
 
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +90,7 @@ $config['charset'] = "UTF-8";
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE; #FALSE;
 
 
 /*

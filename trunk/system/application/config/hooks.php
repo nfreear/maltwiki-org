@@ -11,6 +11,15 @@
 */
 
 
+#ou-specific
+  $hook['display_override'] = array(
+    'class'    => 'oembed',
+    'function' => 'filter',
+    'filename' => 'oembed_hook.php',
+    'filepath' => 'hooks',
+    'params'   => ($mode = 'link')  #OR 'braces'.
+  );
+#ou-specific ends.
 
 /* End of file hooks.php */
 /* Location: ./system/application/config/hooks.php */
