@@ -1,6 +1,15 @@
-<html>
+<?php
+#ou-specific
+if (defined('X_MAINTENANCE')) {
+  header("HTTP/1.1 503 Service Unavailable");
+} else {
+  header("HTTP/1.1 500 Internal Server Error");
+}
+@header('X-Powered-By:');
+@header('Content-Language: en');  ?>
+<!DOCTYPE html><html lang="en"><meta charset=utf-8>
 <head>
-<title>Error</title>
+<title><?php echo $heading; #'Error' ?></title>
 <style type="text/css">
 
 body {
@@ -28,7 +37,14 @@ margin: 			0 0 4px 0;
 <body>
 	<div id="content">
 		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<?php echo $message;
+
+#ou-specific
+if (!defined('X_MAINTENANCE')) {
+  $e=new Exception;
+  echo '<pre>'. $e->getTraceAsString() .'</pre>';
+}
+?>
 	</div>
 </body>
 </html>

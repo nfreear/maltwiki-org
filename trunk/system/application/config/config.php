@@ -12,8 +12,10 @@
 |
 */
 #ou-specific
-$config['base_url']	= 'http://zander.open.ac.uk:8080/maltwiki/';
-##$config['base_url'] = 'http://maltwiki.org/';
+#$config['base_url'] = 'http://maltwiki.org/';
+#$config['base_url'] = 'http://iet-acces.open.ac.uk/malt/';
+$config['base_url'] = 'http://zander.open.ac.uk:8080/maltwiki/';
+#$config['base_url'] = 'http://localhost:8888/ws/ci/';
 
 /*
 |--------------------------------------------------------------------------
@@ -175,7 +177,7 @@ $config['directory_trigger'] 	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;  #Was 0.
 
 /*
 |--------------------------------------------------------------------------

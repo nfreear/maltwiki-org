@@ -44,5 +44,15 @@ $route['default_controller'] = "welcome";
 $route['scaffolding_trigger'] = "";
 
 
+#ou-specific.
+$route['oembed']     = 'maltapi/oembed';
+$route['oembed.json']= 'maltapi/oembed';
+#$route['js']       = 'maltapi/javascript';
+#$route['js/:any']  = 'maltapi/javascript';
+$route['frame']     = 'maltapi/frame';
+$route['frame/:any']= 'maltapi/frame';
+$route['view']      = 'maltapi/view';
+
+
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+@namespace url(http://www.w3.org/1999/xhtml);
+/**
+ * @file MALT player stylesheet.
+ * @author N.D.Freear, 9 September 2009.
+ */
+body.malt-frame { margin:0; padding:0; }
+
+.malt-player { width:418px; height:300px; margin: 0 auto; }
+.malt-player object,embed { display:block; }
+.malt-c { width:442px; font-family:Arial,sans-serif; padding:4px; /*border:2px solid #bbb;*/ -moz-border-radius:5px; }
+.malt-c ul { margin:0; padding:0; list-style:none; }
+.malt-c li { list-style:none; display:inline; }
+.malt-c li input { border:1px solid #ddd; margin:5px 1px 0 0; }
+.malt-c input:hover, .malt-controls input:focus, .malt-controls input:active {
+    border:1px dotted red; }
+.malt-controlheading, .malt-volumecontrol, .track, ._time { position:absolute; top:-999em; }
+
+.malt-c.easy li input  { background:url(buttons-easy3.png) no-repeat top left; width:56px; height:56px; -moz-border-radius:9px; }
+.malt-c.easy li .play  { background-position:-1px 0; }
+.malt-c.easy li .repeat{ background-position:-1px -715px; }
+.malt-c.easy li .pause { background-position:-1px -120px; }
+.malt-c.easy li .stop  { background-position:-1px -239px; }
+.malt-c.easy li .louder{ background-position:-1px -358px; }
+.malt-c.easy li .quieter{background-position:-1px -477px; }
+.malt-c.easy li .mute  { background-position:-1px -596px; } /*55px/ 399px*/
+
+/* 'riz' audio-player-icons-rizwanashrafcom.jpg */
+.malt-c.riz input  { background:url(buttons-riz.jpg) no-repeat top left; width:39px; height:38px;
+    border:3px solid #aaa; -moz-border-radius:7px; -webkit-border-radius:7px; }
+.malt-c.riz .play  { background-position: -14px -203px; } /*-26px*/
+.malt-c.riz .repeat{ background-position:-209px -203px; }
+.malt-c.riz .pause { background-position: -64px -203px; }
+.malt-c.riz .stop  { background-position:-111px -203px; }
+.malt-c.riz .louder{ background-position:-354px -203px; }
+.malt-c.riz .quieter{background-position:-452px -202px; } /*@todo! */
+.malt-c.riz .mute  { background-position:-405px -203px; }
+
+.malt-c.riz .play:hover, .malt-c.riz .play:focus, .malt-c.riz .play:active { border-color: green; }
+.malt-c.riz .repeat:hover, .malt-c.riz .repeat:focus, .malt-c.riz .repeat:active{ border-color:blue;  }
+.malt-c.riz .pause:hover, .malt-c.riz .pause:focus, .malt-c.riz .pause:active   { border-color:yellow;}
+.malt-c.riz .stop:hover, .malt-c.riz .stop:focus, .malt-c.riz .stop:active { border-color: red;  }
+.malt-c.riz .louder:hover, .malt-c.riz .louder:focus, .malt-c.riz .louder:active,
+.malt-c.riz .quieter:hover, .malt-c.riz .quieter:focus, .malt-c.riz .quieter:active,
+.malt-c.riz .mute:hover, .malt-c.riz .mute:focus, .malt-c.riz .mute:active { border-color:#555; }
+
+/*.malt-controls li input  { background:url(swf/buttons.png) no-repeat top left; width:60px; border:none; }
+.malt-controls li .repeat{ background-position:0 -901px; }
+.malt-controls li .pause { background-position:0 -151px; }
+.malt-controls li .stop  { background-position:0 -301px; }
+.malt-controls li .louder{ background-position:0 -451px; }
+.malt-controls li .quieter{background-position:0 -601px; }
+.malt-controls li .mute  { background-position:0 -751px; }
+*/
