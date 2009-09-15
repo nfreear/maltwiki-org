@@ -23,8 +23,8 @@
   </metadata>
   <layout />
   <styling>
-    <style id="b1" tts:color="#dddd33" tts:textAlign="left"  tts:backgroundColor="#111111" tts:fontFamily="Arial"/><!-- tts:fontStyle="italic"/-->
-    <style id="b2" tts:color="#ff7777" tts:textAlign="right"/>
+    <style id="b1" tts:color="#eeee44" tts:textAlign="left" tts:backgroundColor="#111111" tts:fontFamily="Arial"/><!-- tts:fontStyle="italic"/-->
+    <style id="b2" tts:color="#ff8888" tts:textAlign="right"/>
   </styling>
 </head>
 <body>
@@ -33,18 +33,24 @@
 
   <div xml:id="captions" ttm:role="caption" style="b1">
     <p begin="00:00:00" end="00:00:01.5">So what is Moodle?</p>
-    <p begin="00:00:01.5" end="00:00:08" style="b2">
-It's a free software tool to enable teachers and lecturers to create online learning resources and activities for students.</p>
+    <p begin="00:00:01.5" end="00:00:05" style="b2">
+It's a free software tool to enable teachers and lecturers to create  </p>
+    <p begin="00:00:05" end="00:00:08" style="b2">
+  online learning resources and activities for students.</p>
     <p begin="00:00:08" end="00:00:13">
 Oh, right. Sounds like one of those virtual learning environment things.</p>
-    <p begin="00:00:13" end="00:00:24" style="b2">
-Yes, that's it. Online courses can contain quizzes, assignments, group activities like wikis, forums and so on. Learners can also keep a blog and use synchronous chat.</p>
+    <p begin="00:00:13" end="00:00:18" style="b2">
+Yes, that's it. Online courses can contain quizzes, assignments, group activities  </p>
+    <p begin="00:00:18" end="00:00:24" style="b2">
+  like wikis, forums and so on. Learners can also keep a blog and use synchronous chat.</p>
     <p begin="00:00:24" end="00:00:26.5">Sounds like it has lots of features.</p>
     <p begin="00:00:26.5" end="00:00:33" style="b2">
 Yes, it's great for collaboration and social activity, and it can be adapted to many teaching styles.</p>
     <p begin="00:00:33" end="00:00:35.5">Cool. Who's doing it?</p>
-    <p begin="00:00:35.5" end="00:00:45" style="b2">
-It was created by Martin Dougiamas in Australia, and is developed by him and a group of developers from around the world. Moodle is open source so anyone can contribute.</p>
+    <p begin="00:00:35.5" end="00:00:40" style="b2">
+It was created by Martin Dougiamas in Australia, and is developed by him and a group  </p>
+    <p begin="00:00:40" end="00:00:45" style="b2">
+  of developers from around the world. Moodle is open source so anyone can contribute.</p>
     <p begin="00:00:45" end="00:00:47.5">Interesting. Where can I try it?</p>
     <p begin="00:00:47.5" end="00:00:52" style="b2">Online at www.moodle.org</p>
   </div>
