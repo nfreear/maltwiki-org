@@ -1,4 +1,8 @@
-﻿(function($) {
+/**
+ oEmbed Javascript, with MALT Wiki integration.
+ @link http://code.google.com/p/jquery-oembed/
+*/
+(function($) {
     $.fn.oembed = function(url, options) {		
 	
 		options = $.extend({}, $.fn.oembed.defaults, options);
@@ -32,7 +36,7 @@
     $.fn.oembed.getPhotoCode = function(url, data) {
 //ou-specific
         var alt = data.title ? data.title : 'Photo';
-        alt += data.author_name ? ', by '+data.author_name :'';
+        alt += data.author_name ? ' by '+data.author_name :'';
         alt += data.provider_name ? ', on '+data.provider_name :'';
         var code= '<a class="photo" href="'+ url +'"><img src="'+ data.url +'" alt="'+ alt +'"/></a>';
 //ou-specific ends.
@@ -89,7 +93,9 @@
         new OEmbedProvider("vimeo", "vimeo.com", "http://vimeo.com/api/oembed.json"),
         new OEmbedProvider("wikipedia", "wikipedia.org"),
         new OEmbedProvider("wordpress", "wordpress.com"),
-        new OEmbedProvider("youtube", "youtube.com")
+//ou-specific, @todo Experimental.
+        new OEmbedProvider("youtube", "youtube.com", "http://iet-access.open.ac.uk/malt/oembed")
+        //new OEmbedProvider("youtube", "youtube.com")
     ];
 
     function OEmbedProvider(name, urlPattern, oEmbedUrl, callbackparameter) {

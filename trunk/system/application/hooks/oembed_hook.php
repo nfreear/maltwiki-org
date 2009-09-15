@@ -1,6 +1,5 @@
 <?php
-/**ou-specific.
-*
+/**
 * A multimedia embed filter for CodeIgniter, using oEmbed web services.
 *
 * @author N.D.Freear [AT] open.ac.uk, 2009-09-05.
@@ -10,7 +9,7 @@
 *
 * http://cvs.drupal.org/viewvc.py/drupal/contributions/modules/video_filter/video_filter.module?view=markup
 */
-/*
+/**
   Use:
     <a rel="embed" href="http://youtube.com/watch?v=grqt3HoLOIA">Learn about Moodle</a>
 
@@ -37,12 +36,20 @@
 */
 
 
-class oembed {
+class oembed { #extends CI_Base {
 
   function filter($mode = 'link') {
 
-    $this->CI =& get_instance();
-    $out = $this->CI->output->get_output();
+    foreach (headers_list() as $hdr) {
+      if (false!==stripos($hdr, 'Content-Type:') && false===stripos($hdr, 'text/html')) {
+        return; # Not HTML.
+      }
+    }
+
+    $CI =& get_instance();
+    if (!isset($CI->output)) return;
+
+    $out = $CI->output->get_output();
 
     $pattern = '#\[embed(\:(.+))?( .+)?\]#isU';
     if ('braces' !== $mode) {
@@ -58,8 +65,8 @@ class oembed {
         $embed ='';
         if ($ci < 1) {
           #$js_oembed = 'http://jquery-oembed.googlecode.com/files/jquery.oembed.min.js';
-          #$this->CI->load->helper('url'); base_url();
-          $js_oembed = $this->CI->config->system_url().'application/hooks/jquery.oembed.js';
+          $js_oembed = $CI->config->system_url().'application/hooks/jquery.oembed.js';
+          #$js_malt = $CI->config->site_url()."js?url=".urlencode($url);
 
           $embed = <<<EOF
 
@@ -76,6 +83,9 @@ EOF;
   <div id="$id" class="oembed"><a href="$url">$text</a></div>
 
 EOF;
+  /*<!-- MALT API hack. -->
+  <script type="text/javascript" src="$js_malt"></script>
+  */
         $out = str_replace($code, $embed, $out);
       }
     }
