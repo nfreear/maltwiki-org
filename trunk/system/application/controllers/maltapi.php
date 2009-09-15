@@ -64,6 +64,9 @@ class MaltApi extends Controller {
   <script type="text/javascript" src="$js_controls"></script>
   <script type="text/javascript">$script
   </script>
+  <!--[if IE]>
+    <style type="text/css">html, body {border:0;overflow:visible;}</style>
+  <![endif]-->
   </head><body class="malt-frame">
 
   $html
@@ -86,13 +89,15 @@ EOF;
     #$tt_url = url('tt/', array('absolute'=>TRUE)). $mid;  #@todo: Flowplayer doesn't like!
     #$html_id = $res->html_id ? "html_id:'$res->html_id',": '';
 
+    $height = 380;
     if (!isset($res->media)) {
+      $height = 330;
       if ('MALT.user.js'!=$res->client) {
       }
       #@todo: $this->_error(404);
     }
     $title = 'YouTube video';
-    if (isset($media)) {
+    if (isset($res->media)) {
       $media = $res->media;
       $title = $media->title;
     }
@@ -112,11 +117,21 @@ EOF;
     $html = $player->player($res, $res->html_id);*/
 
     $frame_url = $this->config->site_url().'frame/?url='.urlencode($res->url);
+    #http://intranation.com/test-cases/object-vs-iframe/
+    $this->load->library('user_agent');
+    $classid = '';
+    if ('Internet Explorer'==$this->agent->browser()) {
+      $classid = ' classid="clsid:25336920-03F9-11CF-8FD0-00AA00686F13"';
+    }
 
+    /*$html =<<<EOF
+<object $classid type="text/html" data="$frame_url" width="470" height="$height" style="border:1px solid #fff;">
+  <a href="{$res->url}">$title</a> </object>
+EOF;*/
     $html =<<<EOF
-<iframe title="$title" src="$frame_url" width="470" height="380" style="border:none;"><a href="{$res->url}">$title</a></frame>
+<iframe title="$title" src="$frame_url" width="470" height="$height" frameborder="0"><a href="{$res->url}">$title</a></frame>
 EOF;
-
+#@todo: IE script error ??
     $oembed = array(
       "version"=>"1.0",
       "type" =>"video",

@@ -14,9 +14,10 @@
     With captions:
 	<a rel="embed" href="http://youtube.com/watch?v=grqt3HoLOIA">Learn about Moodle</a>
 
-    <p>Alternative syntax [embed: http://youtube.com/watch?v=grqt3HoLOIA | Learn about Moodle]</p>
+    No captions:
+    <a rel="embed" href="http://youtube.com/watch?v=12PRkHz_irM">2008 Roadtrip Nation Movement</a>
 
-    <?php #@todo: ERROR. No captions: <a rel="embed" href="http://youtube.com/watch?v=12PRkHz_irM"> Test 2</a> ?>
+    <p>Alternative syntax [embed: http://youtube.com/watch?v=grqt3HoLOIA | Learn about Moodle]</p>
 
 
 	<h2>Slideshare</h2>
