@@ -72,7 +72,7 @@ document.write(unescape("%3Cscript src='$script_url' type="text/javascript'>%3C/
     <embed type="application/x-shockwave-flash"
      src="$swf" 
      bgcolor="#000000" quality="high" allowfullscreen="true" allowscriptaccess="always"
-     flashvars="enablejsapi=1" height="100%" width="100%" />
+     flashvars="enablejsapi=1" style="width:100%; height:100%" />
 EOF;
     return $player;
   }
@@ -146,7 +146,7 @@ EOF;
     $config = <<<EOF
 {
   //onLoad: function() { alert( 'HI' ); },
-  onError:function(code, message) { alert( 'Error '+code+': '+message ); },
+  //onError:function(code, message) { alert( 'Error '+code+': '+message ); },
   debug:function() { return window.console },
   log:  function() { return (window.console ? "debug" : false) },
   clip:{ url:"$file", captionUrl:"$captions", autoPlay:false },

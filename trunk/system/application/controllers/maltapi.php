@@ -25,7 +25,9 @@ class MaltApi extends Controller {
 
   function frame($mid=NULL) {
     $res = $this->_init($mid);
-    $media = $res->media;
+    if (isset($res->media)) {
+      $media = $res->media;
+    }
 
     if (isset($media->file)) {
       if (false!==strpos($media->file, 'localhost')) {
@@ -49,10 +51,11 @@ class MaltApi extends Controller {
       $js_controls= MaltPlayer::url('js_controls');
     }
     $style_url  = MaltPlayer::url('css');
+    $title = isset($media->title) ? $media->title : 'Video';
 
     $frame =  $this->doctype($html5=TRUE); #@todo: Meta-data, <link>...!
     $frame .= <<<EOF
-<title>{$media->title} - MALT player</title>
+<title>$title - MALT media player</title>
 
   <link type="text/css" href="$style_url" rel="stylesheet" />
 
@@ -232,7 +235,10 @@ function _init_lang() {
     }
   }
   # 2. Then override if required.
-  $_lang = $this->_get('lang', $_lang);
+  $lang_2 = $this->_get('lang', $_lang);
+  if (in_array($lang_2, $available)) {
+    $_lang = $lang_2;
+  }
   @header('Content-Language: '.$_lang);
   $this->request->lang = $_lang;
   $this->config->set_item('_lang', $_lang);  #@todo: Remove?!
@@ -281,9 +287,9 @@ function _init($mid) {
       $others .= "<a href='{$meta['url']}' title='{$meta['title']}'>&bull; $count</a> ";
     }
   }
-#var_dump($res->media);
+
   if (!$res->url || !isset($res->media)) {
-    $this->_error(404);
+    ##$this->_error(404);
   }
   return $res; 
 }
