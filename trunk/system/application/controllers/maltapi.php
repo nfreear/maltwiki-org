@@ -11,13 +11,12 @@
 
 class MaltApi extends Controller {
 
+  protected $request = null; #@todo: Finish!
+
   function __construct() {
     parent::__construct();
-
-    $this->load->library('user_agent');
-    if ($this->agent->accept_lang('en-GB')) {
-      #echo 'Your browser accepts English! ';
-    }
+    $this->request = new StdClass;
+    $this->_init_lang();
   }
 
   function index() {
@@ -28,22 +27,27 @@ class MaltApi extends Controller {
     $res = $this->_init($mid);
     $media = $res->media;
 
-    if (false!==strpos($media->file, 'localhost')) {
-      $p = parse_url($media->file);
-      $media->file = $this->url($p['path']); #url(drupal_get_path('module', 'malt_api'). $p['path'], array('absolute'=>TRUE));
-      $p = parse_url($media->image);
-      $media->image = $this->url($p['path']);
+    if (isset($media->file)) {
+      if (false!==strpos($media->file, 'localhost')) {
+        $p = parse_url($media->file);
+        $media->file = $this->url($p['path']); #url(drupal_get_path('module', 'malt_api'). $p['path'], array('absolute'=>TRUE));
+        $p = parse_url($media->image);
+        $media->image = $this->url($p['path']);
+      }
+      $p = parse_url($media->captions);
+      $media->captions = $tt_url = $this->url($p['path']); #@todo: /tt?url=http://youtube interface.
+      #}
     }
-    $p = parse_url($media->captions);
-    $media->captions = $tt_url = $this->url($p['path']);
-    #}
 
-    $this->load->library('MaltPlayer');
+    $this->load->library('MaltPlayer', $this->request);
     $player = $this->maltplayer; #new MaltPlayer();
     $html   = $player->player($res, $res->html_id);
-    $script = $player->flow_script($media, $res->html_id);
-    $js_flow    = MaltPlayer::url('js');
-    $js_controls= MaltPlayer::url('js_controls');
+    $script=$js_flow=$js_controls=$style_url=NULL;
+    if (isset($media->captions)) {
+      $script = $player->flow_script($media, $res->html_id);
+      $js_flow    = MaltPlayer::url('js');
+      $js_controls= MaltPlayer::url('js_controls');
+    }
     $style_url  = MaltPlayer::url('css');
 
     $frame =  $this->doctype($html5=TRUE); #@todo: Meta-data, <link>...!
@@ -103,7 +107,7 @@ EOF;
     $frame_url = $this->config->site_url().'frame/?url='.urlencode($res->url);
 
     $html =<<<EOF
-<iframe title="{$media->title}" src="$frame_url" width="470" height="380" style="border:1px solid #ddd;"><a href="{$res->url}">{$media->title}</a></frame>
+<iframe title="{$media->title}" src="$frame_url" width="470" height="380" style="border:none;"><a href="{$res->url}">{$media->title}</a></frame>
 EOF;
 
     $oembed = array(
@@ -217,12 +221,29 @@ protected function load_data() {
   return Malt_data::load();
 }
 
+function _init_lang() {
+  # 1. Content negotiation, using 'Accept-Language' header.
+  $this->load->library('user_agent');
+  $_lang = str_replace('english', 'en', $this->config->item('language'));
+  $available = array('fr', 'en');
+  foreach ($available as $lang) {
+    if ($this->agent->accept_lang($lang)) {
+      $_lang = $lang; break;
+    }
+  }
+  # 2. Then override if required.
+  $_lang = $this->_get('lang', $_lang);
+  @header('Content-Language: '.$_lang);
+  $this->request->lang = $_lang;
+  $this->config->set_item('_lang', $_lang);  #@todo: Remove?!
+  $_lang = str_replace('en', 'english', $_lang);
+  $this->config->set_item('language', $_lang);
+}
+
 function _init($mid) {
   header('Content-Type: text/html; charset='.$this->config->item('charset'));
-  @header('Content-Language: en-GB');   #@todo.
   @header('X-Powered-By:');
   if(function_exists('header_remove'))header_remove('X-Powered-By');
-
 
   $res = (object) array('mid'=>$mid);
   $metas = $this->load_data();
@@ -236,10 +257,14 @@ function _init($mid) {
       if (!isset($p['query'])) {
         $this->_error(500);
       }
-      $res->mid = 'yt:'.urldecode($p['query']);
+      $res->mid = 'yt:'.urldecode(str_replace('v=','', $p['query'])); #@todo Need to loop.
     }
     else var_dump(' ERROR ');
   }
+
+  $this->request->client = $this->_get('client');
+  $this->request->theme  = $this->_get('theme', 'riz');
+  $this->request->html_id= $this->_get('hid', 'malt-0');
 
   $res->client = $this->_get('client');
   $res->lang   = $this->_get('lang', 'en');
@@ -264,15 +289,16 @@ function _init($mid) {
 }
 
   public function doctype($html5=TRUE) {
+    $_lang = $this->request->lang; #$this->config->item('_lang');
     if ($html5) {
       return <<<EOF
-<!DOCTYPE html><html lang="en"><head><meta charset=utf-8 /> 
+<!DOCTYPE html><html lang="$_lang"><head><meta charset=utf-8 /> 
 EOF;
     }
     return <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$_lang" lang="$_lang">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 

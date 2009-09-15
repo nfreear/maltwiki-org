@@ -1,7 +1,4 @@
 /**
- Maltplayer controls for flowplayer. */
-
-/**
  * flowplayer.controls.js 3.0.2. Flowplayer JavaScript plugin.
  * 
  * This file is part of Flowplayer, http://flowplayer.org
@@ -15,7 +12,8 @@
  * Version: 3.0.2 - Wed Apr 15 2009 08:36:14 GMT-0000 (GMT+00:00)
  */
 $f.addPlugin("controls", function(wrap, options) {
-
+	
+		
 //{{{ private functions
 		
 	function fixE(e) {
@@ -134,7 +132,7 @@ $f.addPlugin("controls", function(wrap, options) {
 		
 		return pad(min) + ":" + pad(sec);
 	}
-
+	
 	function getTime(time, duration) {
 		return "<span>" + toTime(time) + "</span> <strong>" + toTime(duration) + "</strong>";	
 	}
@@ -155,16 +153,9 @@ $f.addPlugin("controls", function(wrap, options) {
 		timeClass: 'time',
 		muteClass: 'mute',
 		unmuteClass: 'unmute',
-		duration: 0,
+		duration: 0,		
 		
-//ou-specific
-		stopClass:  'stop',
-		repeatClass:'repeat',
-		louderClass:'louder',
-		quieterClass:'quieter',
-        volumeChange:10,
-
-		template: '<a class="play">play</a>' + //@todo: NDF. 
+		template: '<a class="play">play</a>' + 
 					 '<div class="track">' +
 					 	'<div class="buffer"></div>' +
 					 	'<div class="progress"></div>' +
@@ -233,35 +224,6 @@ $f.addPlugin("controls", function(wrap, options) {
 		}
 	};
 
-//ou-specific
-  var pause= byClass(opts.pauseClass);
-  var stop = byClass(opts.stopClass);
-  var repeat=byClass(opts.repeatClass);
-  var louder=byClass(opts.louderClass);
-  var quieter=byClass(opts.quieterClass);
-
-  pause.onclick= function() { self.pause(); }
-  stop.onclick = function() { self.stop();  }
-  repeat.onclick = function() {
-    if (self.isLoaded()) {
-      self.stop();
-      self.play();
-    }
-  }
-  louder.onclick = function() {
-    var v = self.getVolume();
-    if (v <= (100-opts.volumeChange)) {
-      self.setVolume(v + opts.volumeChange);
-    }
-  }
-  quieter.onclick= function() {
-    var v = self.getVolume();
-    if (v > (0+opts.volumeChange)) {
-      self.setVolume(v - opts.volumeChange);
-    }
-  };
-//ou-specific ends.
-
 	// setup timer
 	var timer = null;
 	
@@ -308,13 +270,12 @@ $f.addPlugin("controls", function(wrap, options) {
 		}, 500);
 	});
 	
-/*ou-specific
-    self.onBegin(function() {
+	self.onBegin(function() {
 		play.className = opts.pauseClass;		
 	});
 
 	
-	// pause / resume states
+	// pause / resume states	
 	self.onPause(function() {
 		play.className = opts.playClass;
 	});
@@ -332,18 +293,18 @@ $f.addPlugin("controls", function(wrap, options) {
 	self.onUnmute(function() {
 		mute.className = opts.muteClass;
 	});
-*/
-
+	
+	
 	// clear timer when clip ends	
 	self.onFinish(function(clip) {		
 		clearInterval(timer);	
 	}); 
-
+	
 	self.onUnload(function() {
 		time.innerHTML = getTime(0, opts.duration);
 	});
-
-
+	
+	
 	ball.onDragEnd = function(x) {
 		var to = parseInt(x / trackWidth  * 100, 10) + "%";
 		progressBar.style.width = x + "px";
@@ -351,13 +312,17 @@ $f.addPlugin("controls", function(wrap, options) {
 			self.seek(to);		
 		} 
 	};
-
+	
 	ball.onDrag = function(x) {
 		progressBar.style.width = x + "px";	
 	};
 
-
+	
 	// return player instance to enable plugin chaining
 	return self;
 	
 });
+		
+			
+			
+

@@ -1,5 +1,7 @@
 <?php
 /**
+ * MALT player library, incorporating Flow player and YouTube functionality.
+ *
  * @author N.D.Freear, 9 September 2009.
  *
  * ( flowplayer.js 3.1.4. The Flowplayer API
@@ -13,34 +15,44 @@
  * @package MALT
  */
 
-class Maltplayer { #WAS: Flowplayer.
+class Maltplayer extends Controller { #CI_Base { #WAS: Flowplayer.
 
   protected $js_controls=FALSE;
-  protected $lang  ='en';
+  protected $_lang;  #='en';
   protected $prefix='malt'; #'eytp'
   protected $theme ='riz';  #'easy'...?
   protected $size  ='small';
 
   public function __construct($js_controls=TRUE) {
+    parent::__construct();
     $this->js_controls = $js_controls;
+    $this->lang =& load_class('Language');
+    $this->lang->load('malt', $this->config->item('language'));
+    $this->_lang = $this->config->item('_lang');
   }
 
   public function player($data, $html_id='malt-0') {
     $CI =& get_instance();
     $media_id = $data->mid;
 
+    $embed = '';
+    if (!isset($data->media->file)) {
+      $this->js_controls = false;
+      $embed = $this->youtube($data);
+    }
+
     $prefix = $this->prefix;
     $theme  = $this->theme;
     $size   = $this->size;
-    $lang   = $this->lang;
+    $_lang   = $this->_lang;
     $controls  = $this->js_controls ? $this->controls() : '';
     #$style_url = self::url('css');
     #$script_url= $CI->config->site_url()."js/$media_id?hid=$html_id&lang=".$this->lang;
 
     $player = <<<EOF
 
-<div id="$html_id-controls" class="$prefix-c $theme" lang="$lang">
-  <div id="$html_id" class="$prefix-player"></div>
+<div id="$html_id-controls" class="$prefix-c $theme" lang="$_lang">
+  <div id="$html_id" class="$prefix-player">$embed</div>
 $controls
 </div>
 
@@ -53,25 +65,28 @@ document.write(unescape("%3Cscript src='$script_url' type="text/javascript'>%3C/
     return $player;
   }
 
+  protected function youtube($data) {
+    $media = str_replace('yt:', '', $data->mid);
+    $swf = "http://www.youtube.com/v/$media.swf";
+    $player =<<<EOF
+    <embed type="application/x-shockwave-flash"
+     src="$swf" 
+     bgcolor="#000000" quality="high" allowfullscreen="true" allowscriptaccess="always"
+     flashvars="enablejsapi=1" height="100%" width="100%" />
+EOF;
+    return $player;
+  }
+
   protected function controls() {
     $prefix= $this->prefix;
-    $image = self::url('0.gif'); #'http://zander.open.ac.uk:8080/access/swf';
+    $image = self::url('0.gif');
 
-    $CI =& get_instance();
-    $CI->lang->load('malt', 'english');
-    $tx_buttons = $CI->lang->line('malt_buttons');
-    $tx_controls= $CI->lang->line('malt_controls');
-    $tx_volume  = $CI->lang->line('malt_volume');
+    #$CI->lang->load('malt', 'english');
+    $tx_buttons = $this->lang->line('malt_buttons');
+    $tx_controls= $this->lang->line('malt_controls');
+    $tx_volume  = $this->lang->line('malt_volume');
 
     $button = "<li><input type='image' src='$image' width='60' height='60' border='1' "; #@todo: No border, width ? Disappears.
-    /*$texts = (object)array( #@todo: English, EN.
-      'title'  =>'Player controls', 'volume' =>'Volume',
-      'captions'=>'Captions', 'progress'=>'Progress', #More ?
-      'buttons'=>array(
-        'play'=>'Play', 'repeat'=>'Repeat', 'pause'=>'Pause', 'stop'=>'Stop',
-        'louder'=>'Louder', 'quieter'=>'Quieter', 'mute'=>'Mute',
-      ),
-    );*/
     $controls=NULL;
     foreach ($tx_buttons as $class => $text) {
       $controls .="$button class='$class' alt='$text' title='$text' /></li>".PHP_EOL;
@@ -99,7 +114,7 @@ EOF;
     $js_libs = '';  #self::url('js', FALSE, $return=TRUE);
     #$js_libs .=PHP_EOL.PHP_EOL;
     #$js_libs .=self::url('js_controls', FALSE, $return);
-    
+
     $controls = $this->js_controls ? ".controls(\"$html_id-controls\", {duration:$seconds});" : '';
     $js =<<<EOF
 $js_libs
@@ -109,9 +124,7 @@ window.onload = function() {
 };
 EOF;
 /* try {
-
   colours[2] = "red";
-
 } catch (e) {
   alert("An exception occurred in the script. Error name: "+e.name+". Error message: "+e.message);
 }
@@ -125,29 +138,52 @@ EOF;
     $swf_captions= self::url('captions');
     $swf_content = self::url('content');
 
-    $controls = ($this->js_controls) ? 'controls:null' : '';
+    $controls = ($this->js_controls) ? 'controls:null,' : '';
+    $co_bottom= $this->js_controls ? 0 : 25;
     $file = $media->file;
+    $image= $media->image;
+    $captions = $media->captions;
     $config = <<<EOF
 {
   //onLoad: function() { alert( 'HI' ); },
-  onError:function(errorCode, errorMessage) { alert( 'Error '+errorCode+': '+errorMessage ); },
+  onError:function(code, message) { alert( 'Error '+code+': '+message ); },
   debug:function() { return window.console },
   log:  function() { return (window.console ? "debug" : false) },
-  clip:{url:"$file", autoPlay:false},
-  plugins:{ $controls }
+  clip:{ url:"$file", captionUrl:"$captions", autoPlay:false },
+  //playlist:[ url:"$image" ],
+  plugins: {
+    $controls
+    captions:{ url:'$swf_captions', captionTarget:'content' }, 
+    content: {
+      url:'$swf_content',
+      bottom: $co_bottom,
+      width: '80%', height:50, //40,
+      backgroundColor: '#000', //'transparent'
+      backgroundGradient: 'low',
+      border: 0, borderRadius: 8, //4,
+      textDecoration: 'outline',
+      style: { 'body': {
+        fontFamily: 'Arial', fontWeight: 'bold', fontSize: '16', //'14'  
+        textAlign: 'center', color: '#ffffff' //'#000000' 
+      }
+      }
+    }
+  }
 }
 EOF;
+# , html: '<p><a style="font-size:small" href="$stub_url/">About MALT Wiki.</a></p>'
     return $config;
   }
 
   public static function url($component='player', $include=FALSE, $return=FALSE) {
     $files = array(
-      'player' => 'swf/flowplayer-3.1.3.swf', #@todo: 3.1.2, 3.1.3.
+      'player' => 'swf/flowplayer-3.1.3.swf',
       'controls'=>'swf/flowplayer.controls-3.1.3.swf',
-      'captions'=>'swf/flowplayer.captions-3.1.3.swf',
+  #@todo cap 3.1.3: [ERROR] time 00:57:43.539 :: org.flowplayer.captions::Caption : Error #1009
+      'captions'=>'swf/flowplayer.captions-3.1.2.swf', #See http://flowplayer.org/forum/5/26498
       'content'=> 'swf/flowplayer.content-3.1.0.swf',
       'js'     => 'swf/flowplayer-3.1.4.min.js',
-      #'js_debug'=>'swfflowplayer-3.1.4.js',
+      #'js_debug'=>'swf/flowplayer-3.1.4.js',
 
       'js_controls'=>'player/flowplayer.controls-MA.js',
       'css'   => 'player/maltplayer.css',
@@ -170,7 +206,7 @@ EOF;
     }
     $CI =& get_instance();
     return $CI->config->site_url().'assets/'.$files[$component];
-    #return $CI->config->system_url().'application/libraries/swf/'.$files[$component];
+    #return $CI->config->system_url().'application/assets/'.$files[$component];
   }
 
 };
