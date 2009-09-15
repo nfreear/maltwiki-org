@@ -69,8 +69,8 @@ $metas['podcast-t206'] = array( #'oupod'
 );
 $metas['yt-ou-susan'] = array( #http://kej.tw/flvretriever/
   'url'   =>'http://youtube.com/watch?v=HsXo4-dE9pA',
-  'file'  =>'http://youtube.com/get_video?video_id=HsXo4-dE9pA&t=OEgsToPDskInduWgbWT6uO2yZyeEmnY5',
-  #'image' =>null,
+  #'file'  =>'http://youtube.com/get_video?video_id=HsXo4-dE9pA&t=OEgsToPDskInduWgbWT6uO2yZyeEmnY5',
+  'image' =>'http://i1.ytimg.com/vi/HsXo4-dE9pA/default.jpg',
   'lang'  =>'en',
   'title' =>'Susan Baxter, Open University',
   'description'=>'Susan Baxter, Open University student tells her story',
@@ -89,6 +89,7 @@ EOT;
 $metas['yt-ou-AA100'] = array(
   'url'   => 'http://youtube.com/watch?v=eIupVqDWoFM',
   #<!--Views: 1931-->
+  'image' => 'http://i2.ytimg.com/vi/eIupVqDWoFM/default.jpg',
   'lang'  => 'en',
   'title' => 'The Arts Past &amp; Present (AA100)', #- A brief introduction',
   'duration'   => '05:58',
@@ -123,10 +124,11 @@ EOT;
 
 $metas['yt-mlk-dream'] = array(
   'url'   =>'http://youtube.com/watch?v=PbUtL_0vAJk',
-  'file'  =>'http://youtube.com/get_video?video_id=PbUtL_0vAJk',
+  #'file'  =>'http://youtube.com/get_video?video_id=PbUtL_0vAJk',
   'transcript_ALT'   =>'http://www.americanrhetoric.com/speeches/mlkihaveadream.htm',
   'transcript_rights'=>'Copyright status: Text, Audio = Restricted, seek permission. Images & Video = Uncertain. &#169; Estate of Dr. Martin Luther King, Jr; Intellectual Properties Management; One Freedom Plaza; 449 Auburn Avenue NE; Atlanta, GA 30312',
   'audio_url' =>'http://174.132.193.190/~eiden/mp3clips/politicalspeeches/mlkingihaveadream1234xx.mp3',
+  'image' =>'http://i4.ytimg.com/vi/gZLvSnr6s50/default.jpg',
   'lang'  =>'en-US',
   'title' =>'Martin Luther King "I have a dream"',
   'description'=>'Delivered 28 August 1963, at the Lincoln Memorial, Washington D.C.',

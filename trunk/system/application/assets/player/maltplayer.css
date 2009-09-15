@@ -9,12 +9,14 @@ body.malt-frame { margin:0; padding:0; }
 .malt-player { width:418px; height:300px; margin: 0 auto; }
 .malt-player object,embed { display:block; }
 .malt-c { width:442px; font-family:Arial,sans-serif; padding:4px; /*border:2px solid #bbb;*/ -moz-border-radius:5px; }
+.malt-c .transcript { font-size:1em; height:7em; overflow-y:scroll; border:1px solid #bbb; padding:0 .4em; }
 .malt-c ul { margin:0; padding:0; list-style:none; }
 .malt-c li { list-style:none; display:inline; }
 .malt-c li input { border:1px solid #ddd; margin:5px 1px 0 0; }
 .malt-c input:hover, .malt-controls input:focus, .malt-controls input:active {
     border:1px dotted red; }
 .malt-controlheading, .malt-volumecontrol, .track, ._time { position:absolute; top:-999em; }
+.malt-c h2 { font-size:1.1em; margin:0 .3em; }
 
 .malt-c.easy li input  { background:url(buttons-easy3.png) no-repeat top left; width:56px; height:56px; -moz-border-radius:9px; }
 .malt-c.easy li .play  { background-position:-1px 0; }

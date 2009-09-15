@@ -18,5 +18,6 @@
 <a rel="embed" href="http://youtube.com/watch?v=grqt3HoLOIA">Learn about Moodle</a>
 
 
-</body>
-</html>
+<?php $this->load->view('blocks/recent_media'); ?>
+
+<?php $this->load->view('layout/footer'); ?>

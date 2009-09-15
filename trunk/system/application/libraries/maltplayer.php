@@ -77,6 +77,13 @@ document.write(unescape("%3Cscript src='$script_url' type="text/javascript'>%3C/
      bgcolor="#000000" quality="high" allowfullscreen="true" allowscriptaccess="always"
      flashvars="enablejsapi=1" style="width:100%; height:100%" />
 EOF;
+    if ($data->media->transcript) {
+      $transcript = $data->media->transcript; #@todo: Translate heading...
+      $player .=<<<EOF
+    <div class="transcript"><h2>Transcript</h2>
+    $transcript</div>
+EOF;
+    }
     return $player;
   }
 

@@ -5,9 +5,8 @@ body {
   font-size: .9em;
   color: #3e4044;
 }
-abbr[title] {
-  cursor:help;
-}
+abbr[title] { cursor:help; }
+a img { border:none; }
 a {
   color: #003399;
   background-color: transparent;
@@ -16,7 +15,7 @@ a {
 a:focus {
   border: 1px dotted red;
 }
-p {
+p, li {
   line-height: 1.4em;
 }
 h1 {
@@ -61,6 +60,11 @@ code {
 #header #strap {
   letter-spacing:-0em;
 }
+#recent_media img {
+  width:120px; height:90px;
+}
+#recent_media a { text-decoration:none; }
+#recent_media a span { text-decoration:underline; }
 .cloudworks {
   padding-right: 25px;
   background: url(http://cloudworks.ac.uk/_design/icon-cloudscape.gif) no-repeat top right;   

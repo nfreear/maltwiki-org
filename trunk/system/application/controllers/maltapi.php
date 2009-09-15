@@ -71,13 +71,14 @@ class MaltApi extends Controller {
 
   $html
 
-  </body></html>
 EOF;
     echo $frame;
+    $this->load->view('layout/footer');
   }
 
   function url($path, $abs=NULL) {
-    return $this->config->system_url().'application/libraries'.$path;
+    return $this->config->site_url()."assets$path";
+    #return $this->config->system_url().'application/libraries'.$path;
   }
 
 
@@ -96,6 +97,10 @@ EOF;
       }
       #@todo: $this->_error(404);
     }
+    if (isset($res->media->transcript)) {
+      $height = 420;
+    }
+
     $title = 'YouTube video';
     if (isset($res->media)) {
       $media = $res->media;
@@ -215,7 +220,7 @@ EOF;
 exit;
 }
 
-function _json_encode($data) {
+protected function _json_encode($data) {
   $callback = $this->_get('callback');  #@todo: Security!
   $json = json_encode((object)$data);
   $json = str_replace(',"', "\r\n,\"", $json);
@@ -230,12 +235,12 @@ function _json_encode($data) {
 #exit;
 }
 
-function _get($name, $default=null) {
+public static function _get($name, $default=null) {
   return isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default; #@todo: _GET.
 }
 
 
-protected function load_data() {
+public function load_data() {
     #module_load_include('inc', 'malt_api', 'malt_api.data');
   #require_once drupal_get_path('module', 'malt_api')."/malt_api.data.inc";
   #require_once APPPATH.'/libraries/malt_data.php';
@@ -243,7 +248,7 @@ protected function load_data() {
   return Malt_data::load();
 }
 
-function _init_lang() {
+protected function _init_lang() {
   # 1. Content negotiation, using 'Accept-Language' header.
   $this->load->library('user_agent');
   $_lang = str_replace('english', 'en', $this->config->item('language'));
@@ -265,7 +270,7 @@ function _init_lang() {
   $this->config->set_item('language', $_lang);
 }
 
-function _init($mid) {
+protected function _init($mid) {
   header('Content-Type: text/html; charset='.$this->config->item('charset'));
   @header('X-Powered-By:');
   if(function_exists('header_remove'))header_remove('X-Powered-By');
@@ -315,7 +320,7 @@ function _init($mid) {
   return $res; 
 }
 
-  public function doctype($html5=TRUE) {
+  protected function doctype($html5=TRUE) {
     $_lang = $this->request->lang; #$this->config->item('_lang');
     if ($html5) {
       return <<<EOF
