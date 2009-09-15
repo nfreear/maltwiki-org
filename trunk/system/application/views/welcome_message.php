@@ -1,62 +1,22 @@
-<html>
-<head>
-<title>Welcome to CodeIgniter</title>
+<?php $this->load->view('layout/header'); ?>
 
-<style type="text/css">
+<h1>Welcome to <abbr >MALT</abbr> Wiki!</h1>
 
-body {
- background-color: #fff;
- margin: 40px;
- font-family: Lucida Grande, Verdana, Sans-serif;
- font-size: 14px;
- color: #4F5155;
-}
-
-a {
- color: #003399;
- background-color: transparent;
- font-weight: normal;
-}
-
-h1 {
- color: #444;
- background-color: transparent;
- border-bottom: 1px solid #D0D0D0;
- font-size: 16px;
- font-weight: bold;
- margin: 24px 0 2px 0;
- padding: 5px 0 6px 0;
-}
-
-code {
- font-family: Monaco, Verdana, Sans-serif;
- font-size: 12px;
- background-color: #f9f9f9;
- border: 1px solid #D0D0D0;
- color: #002166;
- display: block;
- margin: 14px 0 14px 0;
- padding: 12px 10px 12px 10px;
-}
-
-</style>
-</head>
-<body>
-
-<h1>Welcome to CodeIgniter!</h1>
-
-<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-<p>If you would like to edit this page you'll find it located at:</p>
-<code>system/application/views/welcome_message.php</code>
-
-<p>The corresponding controller for this page is found at:</p>
-<code>system/application/controllers/welcome.php</code>
-
-<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+<p> The <em>Multimedia Accessibility</em> project will provide a site for the
+ community co-creation, editing, storage and delivery of alternative formats,
+ and software services and components to improve multimedia players.
+</p>
+<p> This is an experimental site which provides an 
+ <a href="http://oembed.com/" title="oEmbed specification">oEmbed</a> compatible
+ <a href="oembed?url=http%3A//youtube.com%2Fwatch%3Fv%3Dgrqt3HoLOIA" title="Javascript Object Notation JSON format" type="application/json">web service</a>
+ for a media player with captions where available, and accessible controls.
+ It also demonstrates the web service <a href="#oembed-0">in use</a>.
+</p>
+<p>Join the <a class="cloudworks" href="http://cloudworks.ac.uk/cloudscape/view/1873">discussion on Cloudworks</a></p>
 
 
-<p><br />Page rendered in {elapsed_time} seconds</p>
+<a rel="embed" href="http://youtube.com/watch?v=grqt3HoLOIA">Learn about Moodle</a>
+
 
 </body>
 </html>
