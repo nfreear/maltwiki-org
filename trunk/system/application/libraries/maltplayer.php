@@ -67,6 +67,9 @@ document.write(unescape("%3Cscript src='$script_url' type="text/javascript'>%3C/
 
   protected function youtube($data) {
     $media = str_replace('yt:', '', $data->mid);
+    if (!$media) {
+      die (' ERROR ');
+    }
     $swf = "http://www.youtube.com/v/$media.swf";
     $player =<<<EOF
     <embed type="application/x-shockwave-flash"

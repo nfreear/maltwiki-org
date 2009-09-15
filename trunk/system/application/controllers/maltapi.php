@@ -25,8 +25,10 @@ class MaltApi extends Controller {
 
   function frame($mid=NULL) {
     $res = $this->_init($mid);
+    $title = 'YouTube video';
     if (isset($res->media)) {
       $media = $res->media;
+      $title = $media->title;
     }
 
     if (isset($media->file)) {
@@ -51,7 +53,6 @@ class MaltApi extends Controller {
       $js_controls= MaltPlayer::url('js_controls');
     }
     $style_url  = MaltPlayer::url('css');
-    $title = isset($media->title) ? $media->title : 'Video';
 
     $frame =  $this->doctype($html5=TRUE); #@todo: Meta-data, <link>...!
     $frame .= <<<EOF
@@ -87,11 +88,14 @@ EOF;
 
     if (!isset($res->media)) {
       if ('MALT.user.js'!=$res->client) {
-        
       }
-      $this->_error(404);
+      #@todo: $this->_error(404);
     }
-    $media = $res->media;
+    $title = 'YouTube video';
+    if (isset($media)) {
+      $media = $res->media;
+      $title = $media->title;
+    }
 
     /*if (false!==strpos($media->file, 'localhost')) {
       $p = parse_url($media->file);
@@ -110,14 +114,14 @@ EOF;
     $frame_url = $this->config->site_url().'frame/?url='.urlencode($res->url);
 
     $html =<<<EOF
-<iframe title="{$media->title}" src="$frame_url" width="470" height="380" style="border:none;"><a href="{$res->url}">{$media->title}</a></frame>
+<iframe title="$title" src="$frame_url" width="470" height="380" style="border:none;"><a href="{$res->url}">$title</a></frame>
 EOF;
 
     $oembed = array(
       "version"=>"1.0",
       "type" =>"video",
       "lang" =>$res->lang,
-      "title"=>$res->media->title,
+      "title"=>$title,
       'html' =>$html,
     );
     echo $this->_json_encode($oembed);
@@ -258,14 +262,17 @@ function _init($mid) {
     $res->url = 'http://youtube.com/watch?v='.$matches[1];
   } else {
     $res->url = str_replace('www.', '', $this->_get('url'));
-    if ($res->url) {
+    if ($res->url && preg_match('#youtube.com\/watch\?.*v=.+#', $res->url)) {
       $p = parse_url($res->url);
       if (!isset($p['query'])) {
         $this->_error(500);
       }
-      $res->mid = 'yt:'.urldecode(str_replace('v=','', $p['query'])); #@todo Need to loop.
+      $res->mid = 'yt:'.str_replace('v=','', urldecode($p['query'])); #@todo Need to loop.
+      if ('yt:'==$res->mid) {
+        $this->_error(500);
+      }
     }
-    else var_dump(' ERROR ');
+    else $this->_error(404);
   }
 
   $this->request->client = $this->_get('client');
@@ -275,7 +282,6 @@ function _init($mid) {
   $res->client = $this->_get('client');
   $res->lang   = $this->_get('lang', 'en');
   $res->html_id= $this->_get('hid', 'malt-0');
-#echo $res->url;
 
   $media  = $count = $others = null;
   foreach ($metas as $key => $meta) {
