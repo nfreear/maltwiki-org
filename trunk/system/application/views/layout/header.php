@@ -16,7 +16,7 @@
  type="application/rss+xml" title="Multimedia accessibility clouds on Cloudworks" />
 
 <link rel="stylesheet" href="assets/site/maltwiki.css" type="text/css" />
-<link rel="shortcut icon" href="assets/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="<?php echo MALT_FAVICON ?>" type="image/png" />
 </head>
 <body>
 <div id="header">

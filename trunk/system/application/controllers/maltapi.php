@@ -93,9 +93,9 @@ EOF;
     $height = 380;
     if (!isset($res->media)) {
       $height = 330;
-      if ('MALT.user.js'!=$res->client) {
+      if (basename(MALT_USER_SCRIPT) == $res->client) {
+        $this->_error(404, 'Sorry, I can\'t find any alternatives');  #@todo.
       }
-      #@todo: $this->_error(404);
     }
     if (isset($res->media->transcript)) {
       $height = 420;
@@ -179,11 +179,11 @@ EOF;
     $url = url('oembed/', array('absolute'=>TRUE)); #.'oembed/?url=';
     $style_url  = url(drupal_get_path('module','malt_api').'/malt.user.css', array('absolute'=>TRUE));
 
-    require_once './malt.user.js';
+    require_once basename(MALT_USER_SCRIPT);
   }
 
 function _user_js_link($text='MALT YouTube user Javascript') {
-  l($text, 'MALT.user.js');
+  l($text, MALT_USER_SCRIPT);
 }
 
 
@@ -192,8 +192,10 @@ function _error($code=500, $message='Woops, there\'s been a problem') {
   $metas = $this->load_data();
 
   $std_attrs = 'lang="en" id="malt-0" style="font-size:medium"';
-  $try_link  = $metas['yt-olnet-brian']['url'];
-  $about_link= $this->config->site_url(); #base_path(); #localhost('oembed/');
+  $try_url= $metas['yt-olnet-brian']['url'];
+  $url    = $this->config->site_url();
+  $icon    = $url.MALT_FAVICON;
+  $about_link = "<a href='$url'>About MALT Wiki <img alt='' src='$icon' /></a>";
   $errors = array(
     404 => 'Not Found', 500 => 'Internal Server Error', );
   $http_text = $errors[$code];
@@ -201,7 +203,7 @@ function _error($code=500, $message='Woops, there\'s been a problem') {
   @header("HTTP/1.1 $code $http_text");  #Error.
   $res = new StdClass;
   $res->http_status = $code;
-  $res->html = "<p $std_attrs class='ma-error'>$message - <a href='$try_link'>try me</a>. <a href='$about_link'>About</a>.</p>";
+  $res->html = "<p $std_attrs class='ma-error'>$message &ndash; <a href='$try_url'>try me</a> | $about_link";
 
   if ('oembed' == $this->uri->segment(1)) {
 
@@ -297,13 +299,13 @@ protected function _init($mid) {
     else $this->_error(404);
   }
 
-  $this->request->client = $this->_get('client');
-  $this->request->theme  = $this->_get('theme', 'riz');
-  $this->request->html_id= $this->_get('hid', 'malt-0');
-
   $res->client = $this->_get('client');
   $res->lang   = $this->_get('lang', 'en');
+  $res->theme  = $this->_get('theme', 'riz');
   $res->html_id= $this->_get('hid', 'malt-0');
+
+  $this->request = $res;
+  $this->config->set_item('malt_client', $this->request->client);
 
   $media  = $count = $others = null;
   foreach ($metas as $key => $meta) {

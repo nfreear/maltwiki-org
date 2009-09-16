@@ -77,10 +77,11 @@ document.write(unescape("%3Cscript src='$script_url' type="text/javascript'>%3C/
      bgcolor="#000000" quality="high" allowfullscreen="true" allowscriptaccess="always"
      flashvars="enablejsapi=1" style="width:100%; height:100%" />
 EOF;
-    if ($data->media->transcript) {
+    if (isset($data->media->transcript)) {
       $transcript = $data->media->transcript; #@todo: Translate heading...
       $base = $this->config->site_url();
-      $link = "<a class='about' href='$base' title='About MALT Wiki'><img alt='About MALT Wiki' src='{$base}assets/favicon.png' /></a>";
+      $icon = $base.MALT_FAVICON;
+      $link = "<a class='about' href='$base' title='About MALT Wiki'><img alt='About MALT Wiki' src='$icon' /></a>";
       $player .=<<<EOF
     <div class="transcript"><h2>Transcript</h2>$link
     $transcript</div>
