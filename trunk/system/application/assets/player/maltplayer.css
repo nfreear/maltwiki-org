@@ -16,7 +16,7 @@ body.malt-frame { margin:0; padding:0; }
 .malt-c input:hover, .malt-controls input:focus, .malt-controls input:active {
     border:1px dotted red; }
 .malt-controlheading, .malt-volumecontrol, .track, ._time { position:absolute; top:-999em; }
-.malt-c h2 { font-size:1.1em; margin:0 .3em; }
+.malt-c h2 { font-size:1.1em; margin:.3em 0; }
 
 .malt-c.easy li input  { background:url(buttons-easy3.png) no-repeat top left; width:56px; height:56px; -moz-border-radius:9px; }
 .malt-c.easy li .play  { background-position:-1px 0; }

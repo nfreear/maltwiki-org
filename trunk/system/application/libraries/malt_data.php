@@ -4,6 +4,11 @@
   @copyright 2009 The Open University.
   @author N.D.Freear@open.ac.uk, 5 February 2009.
   @package Maltwiki
+
+ @todo: dotSUB fixes:
+  1. Namespaces should be, xmlns="http://www.w3.org/2006/10/ttaf1"..  NOT  "..2006/04/ttaf1" <http://w3.org/TR/2009/WD-ttaf1-dfxp-20090602/#vocabulary-namespaces>
+  2. Font size, <!--style id="4" style="3" tts:fontSize="+2" .../> - Comment out.
+  3. First timing, prefer <p begin='0:00:00.500'..  NOT  <p begin='0:00:00.000'..
 */
 
 class Malt_Data {
@@ -20,13 +25,17 @@ $metas['xmoodle'] = array(
   'image'=>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7_0.jpg',
   'captions'=>'http://localhost/upload/xmoodle.dfxp.xml',
   'captions_ALT'=>'http://dotsub.com/media/e475f673-9ba7-4013-b896-2e3884694445/c/eng/tt',
-  'lang' =>'en',
+  'lang' =>'en', #GB
   'title'=>'Learn about Moodle',
   'description'  =>'An elevator pitch for the online learning environment, Moodle.',
   'duration'     =>'01:40',  #'00:51',
+  'date' => '23-Apr-2009',
+  'contributor'=>array('director'=>'Nick Freear'),
   'provider_name'=>'dotSUB', #'Xtranormal',
   'provider_url' =>'http://dotsub.com/', #'http://xtranormal.com/',
-  'author_name'  =>'nickfreear',
+  'license_url'  =>'http://creativecommons.org/licenses/by-nc-sa/3.0/',
+  'genre_url'  =>'http://dotsub.com/view/genre/genre.instructional',  
+  'author_url'  =>'http://dotsub.com/view/user/nfreear',
   'height'=> '347',
   'width' => '420',
 );
@@ -147,14 +156,14 @@ Source: <a href="http://www.americanrhetoric.com/speeches/mlkihaveadream.htm">Am
 </cite></p>
 EOT;
 
-$metas['dot-blogs'] = array(
-  'url'   =>'http://dotsub.com/view/dc75c2e2-ef81-4851-8353-a877aac9fe3c#videoTranscription',
+$metas['dot-craft-blogs'] = array(
+  'url'=>'http://youtube.com/watch?v=NN2I1pWXjXI',  
+  'alt_url'   =>'http://dotsub.com/view/dc75c2e2-ef81-4851-8353-a877aac9fe3c#videoTranscription',
   'file'  =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/em/flv/en',
   'image' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/p',
   'captions_ALT' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/c/eng/tt',
   'captions' =>'http://localhost/upload/dot_dc75c2e2-ef81-4851-8353-a877aac9fe3c_c_eng_tt.xml',
-  'alt_url'=>'http://youtube.com/watch?v=NN2I1pWXjXI',
-  'license'=>'http://creativecommons.org/licenses/by-nc/2.5/',
+  'license_url'=>'http://creativecommons.org/licenses/by-nc/2.5/',
   'lang'  =>'en-US',
   'title' =>'Blogs in Plain English: Commoncraft',
   'description'=>
@@ -166,12 +175,19 @@ $metas['dot-blogs'] = array(
   'width' => '420',
 );
 $metas['dot-craft-social'] = array(
-  'url'   => 'http://youtube__.com/watch?v=6a_KF7TYKVc',
+  'url'   => 'http://youtube.com/watch?v=6a_KF7TYKVc',
   'url_ALT'=>'http://dotsub.com/view/3d2a8e25-fca0-465d-83e0-3c2ceca3e6a9',
-  'captions' => 'http://dotsub.com/media/3d2a8e25-fca0-465d-83e0-3c2ceca3e6a9/c/eng/tt',
+  'file'  => 'http://dotsub.com/media/3d2a8e25-fca0-465d-83e0-3c2ceca3e6a9/em/flv/en',
+  'image' => 'http://dotsub.com/media/3d2a8e25-fca0-465d-83e0-3c2ceca3e6a9/p',  
+  'captions' => 'http://localhost/upload/dot_3d2a8e25-fca0-465d-83e0-3c2ceca3e6a9_c_eng_tt.xml',
   'lang'  => 'en-US',
   'title' => 'Social Networking in Plain English',
   'duration' => '01:48',
+  'date'  =>'28-Jun-2007',
+  'contributor'=>array('Producer'=>'Common Craft'),
+  'license_url'=>'http://creativecommons.org/licenses/by-nc/2.5/',
+  'genre_url' =>'http://dotsub.com/view/genre/genre.instructional',
+  'author_url'=>'http://dotsub.com/view/user/leelefever',
 );
 
 $metas['yt-crotchet'] = array(
@@ -206,14 +222,76 @@ $metas['yt-olnet-brian'] = array(
   'title' =>'Brian Mcallister, Roadtrip Nation (OLnet)',
   'lang'  =>'en',
   'duration'=>'1:40',
+  'date'  =>'08-May-2009',
+  'captions'=>'http://localhost/upload/dot_olnet_brian_c_eng_tt.xml',
   'captions_ALT'=>'http://dotsub.com/media/86a1190e-dd05-49a1-b0a8-c5d2b92094dd/c/eng/tt',
-  'captions'=>'http://localhost/upload/dot_86a1190e-dd05-49a1-b0a8-c5d2b92094dd_c_eng_tt.xml',
   'provider_name'=>'dotSUB',
+  'license_url'=>'http://creativecommons.org/licenses/by-nc-sa/3.0/',
   'author_url'=>'http://dotsub.com/view/user/olnetchannel',
   'height'=> 347,
   'width' => 420,
 );
+
+$metas['yt-obama'] = array(
+  'url'  =>'http://youtube.com/watch?v=3PuHGKnboNY',  #21:20, 'whitehouse'.
+  'url_alt'=>'http://dotsub.com/view/5e45f7af-fa74-42fc-8aaf-f78cf9277511',
+  'file'  =>'http://dotsub.com/media/5e45f7af-fa74-42fc-8aaf-f78cf9277511/em/flv/en',  
+  'image' =>'http://dotsub.com/media/5e45f7af-fa74-42fc-8aaf-f78cf9277511/p',
+  'captions'=>'http://localhost/upload/dot_obama_inauguration_c_eng_tt.xml',
+  'title' =>'President Barack Obama\'s Complete Inaugural Speech',
+  'lang'  =>'en-US',
+  'duration'=>'18:47',
+  'author_url'=>'http://dotsub.com/view/user/zad',
+  'license_url'=>'http://creativecommons.org/licenses/by-nc-nd/3.0/',
+);
+$metas['yt-craft-twitter'] = array(
+  'url'  =>'http://youtube.com/watch?v=ddO9idmax0o',
+  'file' =>'http://dotsub.com/media/665bd0d5-a9f4-4a07-9d9e-b31ba926ca78/em/flv/en',
+  'image'=>'http://dotsub.com/media/665bd0d5-a9f4-4a07-9d9e-b31ba926ca78/p',
+  'captions'=>'http://localhost/upload/dot_craft_twitter_c_eng_tt.xml',
+  'title'=>'Twitter in Plain English',
+  'lang' =>'en-US',
+  'duration'=>'2:25',
+  'date' =>'05-Mar-2008',
+  'count_trans'=>69,
+  'contributor'=>array('producer'=>'Common Craft'),
+  'statistics' =>'8,772,110 (8,628,884 embedded)', #http://dotsub.com/view/665bd0d5-a9f4-4a07-9d9e-b31ba926ca78/statistics
+  'license_url'=>'http://creativecommons.org/licenses/by-nc/2.5/',
+  'genre_url'=>'http://dotsub.com/view/genre/genre.instructional',
+  'author_url'=>'http://dotsub.com/view/user/leelefever',
+);
+$metas['yt-networked-student'] = array(
+  'url'  =>'http://youtube.com/watch?v=XwM4ieFOotA',
+  'file' =>'http://dotsub.com/media/41f08de7-68dc-4365-af4c-5733f565b9e1/em/flv/en',
+  'image'=>'http://dotsub.com/media/41f08de7-68dc-4365-af4c-5733f565b9e1/p',
+  'captions'=>'http://localhost/upload/dot_networked_student_c_eng_tt.xml',
+  'title'=>'Networked Student', #Collection: e-learning.
+  'description'=>
+'The Networked Student was inspired by CCK08, a Connectivism course offered by George Siemens and Stephen Downes during fall 2008. It depicts an actual project completed by Wendy Drexler\'s high school students. The Networked Student concept map was inspired by Alec Couros\' Networked Teacher. I hope that teachers will use it to help their colleagues, parents, and students understand networked learning in the 21st century. Anyone is free to use this video for educational purposes. You may download, translate, or use as part of another presentation. Please share.',
+  'lang' =>'en',
+  'duration'=>'5:09',
+  'date' =>'09-Dec-2008',
+  'contributor'=>array('producer'=>'Wendy Drexler'),
+  'license_url'=>'http://creativecommons.org/licenses/by-sa/3.0/',
+  'author_url'=>'http://dotsub.com/view/user/qadmon',
+);
+
+
+
+$metas['__TEMPLATE__'] = array(
+  'url'  =>'http://youtube__.com/watch?v=--',
+  'file' =>'http://dotsub.com/media/--/em/flv/en',
+  'image'=>'http://dotsub.com/media/--/p',
+  'captions'=>'http://localhost/upload/dot_--_c_eng_tt.xml',
+  'title'=>'',
+  'description'=>'',
+  'lang' =>'en',
+  'duration'=>'0:00',
+  'date' => '',
+  'license_url'=>'http://creativecommons.org/licenses/--',
+  'genre_url'=>'http://dotsub.com/view/genre/genre.--',
+  'author_url'=>'http://dotsub.com/view/user/--',
+);
     return $metas;
   }
-  
 };

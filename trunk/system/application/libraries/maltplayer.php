@@ -150,16 +150,18 @@ EOF;
 
     $controls = ($this->js_controls) ? 'controls:null,' : '';
     $co_bottom= $this->js_controls ? 0 : 25;
+    $debug = isset($debug) ? 'debug:true, log:"debug",'.PHP_EOL.'  ':'';
     $file = $media->file;
     $image= $media->image;
     $captions = $media->captions;
+
+  /*//onLoad: function() { alert( 'HI' ); },
+    //onError:function(code, message) { alert( 'Error '+code+': '+message ); },
+    debug:function() { return window.console },
+    log:  function() { return (window.console ? "debug" : false) }, */
     $config = <<<EOF
 {
-  //onLoad: function() { alert( 'HI' ); },
-  //onError:function(code, message) { alert( 'Error '+code+': '+message ); },
-  debug:function() { return window.console },
-  log:  function() { return (window.console ? "debug" : false) },
-  clip:{ url:"$file", captionUrl:"$captions", autoPlay:false },
+  {$debug}clip:{ url:"$file", captionUrl:"$captions", autoPlay:false },
   //playlist:[ url:"$image" ],
   plugins: {
     $controls
@@ -167,12 +169,12 @@ EOF;
     content: {
       url:'$swf_content',
       bottom: $co_bottom,
-      width: '80%', height:50, //40,
+      width: '87%', height:55, //40,
       backgroundColor: '#000', //'transparent'
       backgroundGradient: 'low',
       border: 0, borderRadius: 8, //4,
       textDecoration: 'outline',
-      style: { 'body': {
+      style:{ 'body':{
         fontFamily: 'Arial', fontWeight: 'bold', fontSize: '16', //'14'  
         textAlign: 'center', color: '#ffffff' //'#000000' 
       }

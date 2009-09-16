@@ -61,7 +61,7 @@ code {
   letter-spacing:-0em;
 }
 #recent_media img {
-  width:120px; height:90px;
+  width:120px; height:90px; border:1px solid silver; padding:1px;
 }
 #recent_media a { text-decoration:none; }
 #recent_media a span { text-decoration:underline; }
