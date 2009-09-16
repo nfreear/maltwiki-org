@@ -6,15 +6,17 @@
  */
 body.malt-frame { margin:0; padding:0; }
 
-.malt-player { width:418px; height:300px; margin: 0 auto; }
+.malt-player { width:100%;/*418*/ height:300px; margin: 0 auto; }
 .malt-player object,embed { display:block; }
-.malt-c { width:442px; font-family:Arial,sans-serif; padding:4px; /*border:2px solid #bbb;*/ -moz-border-radius:5px; }
-.malt-c .transcript { font-size:1em; height:7em; overflow-y:scroll; border:1px solid #bbb; padding:0 .4em; }
+.malt-c { width:442px; font-size:.9em; font-family:Arial,sans-serif; padding:4px; /*border:2px solid #bbb; -moz-border-radius:5px;*/ }
+.malt-c .transcript { font-size:1em; height:7em; overflow-y:scroll; border:1px solid #a99; padding:0 .4em; -moz-border-radius:3px; }
+.malt-c a img { border:none; }
 .malt-c ul { margin:0; padding:0; list-style:none; }
 .malt-c li { list-style:none; display:inline; }
-.malt-c li input { border:1px solid #ddd; margin:5px 1px 0 0; }
-.malt-c input:hover, .malt-controls input:focus, .malt-controls input:active {
-    border:1px dotted red; }
+.malt-c li input, .malt-c li button { border:1px solid #ddd; margin:5px 1px 0 0; }
+.malt-c a.about { float:right; position:relative; top:-50px; border:2px solid #aaa; padding:4px 3px 2px; -moz-border-radius:4px; }
+.malt-c .transcript .about { top:-25px; /*@todo: IE7 bug.*/ }
+.malt-c input:hover, .malt-controls input:focus, .malt-controls input:active { border:1px dotted red; }
 .malt-controlheading, .malt-volumecontrol, .track, ._time { position:absolute; top:-999em; }
 .malt-c h2 { font-size:1.1em; margin:.3em 0; }
 
@@ -28,7 +30,7 @@ body.malt-frame { margin:0; padding:0; }
 .malt-c.easy li .mute  { background-position:-1px -596px; } /*55px/ 399px*/
 
 /* 'riz' audio-player-icons-rizwanashrafcom.jpg */
-.malt-c.riz input  { background:url(buttons-riz.jpg) no-repeat top left; width:39px; height:38px;
+.malt-c.riz input { background:url(buttons-riz.jpg) no-repeat top left; width:39px; height:38px;
     border:3px solid #aaa; -moz-border-radius:7px; -webkit-border-radius:7px; }
 .malt-c.riz .play  { background-position: -14px -203px; } /*-26px*/
 .malt-c.riz .repeat{ background-position:-209px -203px; }
@@ -44,7 +46,8 @@ body.malt-frame { margin:0; padding:0; }
 .malt-c.riz .stop:hover, .malt-c.riz .stop:focus, .malt-c.riz .stop:active { border-color: red;  }
 .malt-c.riz .louder:hover, .malt-c.riz .louder:focus, .malt-c.riz .louder:active,
 .malt-c.riz .quieter:hover, .malt-c.riz .quieter:focus, .malt-c.riz .quieter:active,
-.malt-c.riz .mute:hover, .malt-c.riz .mute:focus, .malt-c.riz .mute:active { border-color:#555; }
+.malt-c.riz .mute:hover, .malt-c.riz .mute:focus, .malt-c.riz .mute:active,
+.malt-c.riz .about:hover, .malt-c.riz .about:focus, .malt-c.riz .about:active { border-color:#555; }
 
 /*.malt-controls li input  { background:url(swf/buttons.png) no-repeat top left; width:60px; border:none; }
 .malt-controls li .repeat{ background-position:0 -901px; }

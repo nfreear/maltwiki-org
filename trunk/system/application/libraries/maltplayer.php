@@ -79,8 +79,10 @@ document.write(unescape("%3Cscript src='$script_url' type="text/javascript'>%3C/
 EOF;
     if ($data->media->transcript) {
       $transcript = $data->media->transcript; #@todo: Translate heading...
+      $base = $this->config->site_url();
+      $link = "<a class='about' href='$base' title='About MALT Wiki'><img alt='About MALT Wiki' src='{$base}assets/favicon.png' /></a>";
       $player .=<<<EOF
-    <div class="transcript"><h2>Transcript</h2>
+    <div class="transcript"><h2>Transcript</h2>$link
     $transcript</div>
 EOF;
     }
@@ -101,6 +103,8 @@ EOF;
     foreach ($tx_buttons as $class => $text) {
       $controls .="$button class='$class' alt='$text' title='$text' /></li>".PHP_EOL;
     }
+    $base = $this->config->site_url();
+    $link = "<a class='about' href='$base' title='About MALT Wiki'><img alt='About MALT Wiki' src='{$base}assets/favicon.png' /></a>";
     $controls =<<<EOF
     <h2 class="$prefix-controlheading">{$tx_controls}</h2><ul>
   $controls<li class="track">
@@ -112,6 +116,7 @@ EOF;
   <p class="$prefix-volumecontrol">
   <label for="$prefix-volume">{$tx_volume} </label><input id="$prefix-volume" readonly="readonly" />
   </p>
+  $link
 EOF;
     return $controls;
   }
@@ -175,7 +180,7 @@ EOF;
       border: 0, borderRadius: 8, //4,
       textDecoration: 'outline',
       style:{ 'body':{
-        fontFamily: 'Arial', fontWeight: 'bold', fontSize: '16', //'14'  
+        fontFamily: 'Arial', fontWeight: 'bold', fontSize: '15', //'14'  
         textAlign: 'center', color: '#ffffff' //'#000000' 
       }
       }

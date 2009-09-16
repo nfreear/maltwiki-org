@@ -143,7 +143,9 @@ EOF;
       "lang" =>$res->lang,
       "title"=>$title,
       'html' =>$html,
+      'replace_player'=>TRUE,
     );
+    header('X-Replace-Player: 1');  #@todo!
     echo $this->_json_encode($oembed);
   }
 
