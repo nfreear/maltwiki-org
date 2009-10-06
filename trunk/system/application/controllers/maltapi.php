@@ -256,7 +256,8 @@ protected function _init_lang() {
   # 1. Content negotiation, using 'Accept-Language' header.
   $this->load->library('user_agent');
   $_lang = str_replace('english', 'en', $this->config->item('language'));
-  $available = array('fr', 'en');
+
+  $available = array('cmn-hans', 'fr', 'en');
   foreach ($available as $lang) {
     if ($this->agent->accept_lang($lang)) {
       $_lang = $lang; break;
@@ -264,7 +265,7 @@ protected function _init_lang() {
   }
   # 2. Then override if required.
   $lang_2 = $this->_get('lang', $_lang);
-  if (in_array($lang_2, $available)) {
+  if (in_array(strtolower($lang_2), $available)) {
     $_lang = $lang_2;
   }
   @header('Content-Language: '.$_lang);

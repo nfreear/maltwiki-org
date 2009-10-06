@@ -30,13 +30,16 @@
  * @lang    en-GB (English, Great Britain)
  * @package MALT
  */
- 
 
-$lang['malt_controls'] = "Player controls";
-$lang['malt_volume']   = "Volume";
-$lang['malt_buttons']  = array(
-  'play'   => "Play",
-  'repeat' => "Repeat",
+$lang['malt_player']  = "Malt Wiki player";
+$lang['malt_about']   = "About Malt Wiki";
+$lang['malt_help']    = "Help with the Malt Wiki player";
+$lang['malt_video_title'] = "The video %s";  #As in, "The video 'Learn About Moodle'"
+$lang['malt_controls']= "Player controls";
+$lang['malt_volume']  = "Volume";
+$lang['malt_buttons'] = array(
+  'play'   => "Play",   #Play video.
+  'repeat' => "Repeat", #Replay video.
   'pause'  => "Pause",
   'stop'   => "Stop",
   'louder' => "Louder",
@@ -45,7 +48,11 @@ $lang['malt_buttons']  = array(
 );
 $lang['malt_unmute'] = "Unmute";
  
-/*$lang['malt_captions']    = "Captions";     # More?
+/*
+$lang['malt_multimedia_alt']    = "Multimedia alternatives";
+$lang['malt_co_creating_access']= "Co-creating accessible video &amp; multimedia";
+
+$lang['malt_captions']    = "Captions";     # More?
 $lang['malt_select_theme']= "Select theme"; #Also known as a 'style'.
 $lang['malt_load']     = "Load";
 $lang['malt_video_size']  = "Video size";
