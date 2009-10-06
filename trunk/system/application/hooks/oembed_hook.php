@@ -64,13 +64,15 @@ class oembed { #extends CI_Base {
         $text= isset($matches[3][$ci]) ? trim($matches[3][$ci],' |') : 'Alternative to embedded content '.($ci+1);
         $embed ='';
         if ($ci < 1) {
+          ##$js_jquery = 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js';
+          $js_jquery = $CI->config->system_url().'application/hooks/jquery.min.js';
           #$js_oembed = 'http://jquery-oembed.googlecode.com/files/jquery.oembed.min.js';
           $js_oembed = $CI->config->system_url().'application/hooks/jquery.oembed.js';
           #$js_malt = $CI->config->site_url()."js?url=".urlencode($url);
 
           $embed = <<<EOF
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>  
+  <script type="text/javascript" src="$js_jquery"></script>  
   <script type="text/javascript" src="$js_oembed"></script>
 EOF;
         }

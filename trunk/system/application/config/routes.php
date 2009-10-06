@@ -56,6 +56,7 @@ $route['oembed.json']= 'maltapi/oembed';
 $route['frame']     = 'maltapi/frame';
 $route['frame/:any']= 'maltapi/frame';
 $route['view']      = 'maltapi/view';
+$route['media/rss'] = 'welcome/rss_media';
 
 
 /* End of file routes.php */

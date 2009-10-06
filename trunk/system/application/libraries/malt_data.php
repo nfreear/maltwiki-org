@@ -21,8 +21,10 @@ $metas['xmoodle'] = array(
   'url_alt'  =>'http://dotsub.com/view/e475f673-9ba7-4013-b896-2e3884694445',
   'url_ALT_2'=>'http://xtranormal.com/watch?e=20090124001058490',
   'file' =>'http://dotsub.com/media/e475f673-9ba7-4013-b896-2e3884694445/em/flv/en',
+  'file_LOCAL'=>'video/yt_moodle_video.flv',
   'file_ALT' =>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7.flv', #video.
-  'image'=>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7_0.jpg',
+  'image' =>'http://i4.ytimg.com/vi/grqt3HoLOIA/default.jpg',
+  'image_ALT'=>'http://video.xtranormal.com/highres/aacd0182-e274-11dd-9b38-001b210ae39a_7_0.jpg',
   'captions'=>'http://localhost/upload/xmoodle.dfxp.xml',
   'captions_ALT'=>'http://dotsub.com/media/e475f673-9ba7-4013-b896-2e3884694445/c/eng/tt',
   'lang' =>'en', #GB
@@ -97,6 +99,7 @@ EOT;
 
 $metas['yt-ou-AA100'] = array(
   'url'   => 'http://youtube.com/watch?v=eIupVqDWoFM',
+  'file_LOCAL'=>'video/yt_ou_aa100_video.flv',
   #<!--Views: 1931-->
   'image' => 'http://i2.ytimg.com/vi/eIupVqDWoFM/default.jpg',
   'lang'  => 'en',
@@ -160,7 +163,8 @@ $metas['dot-craft-blogs'] = array(
   'url'=>'http://youtube.com/watch?v=NN2I1pWXjXI',  
   'alt_url'   =>'http://dotsub.com/view/dc75c2e2-ef81-4851-8353-a877aac9fe3c#videoTranscription',
   'file'  =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/em/flv/en',
-  'image' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/p',
+  'file_LOCAL'=>'video/yt_craft_blogs_video.flv',
+  'image' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/p', #480x360.
   'captions_ALT' =>'http://dotsub.com/media/dc75c2e2-ef81-4851-8353-a877aac9fe3c/c/eng/tt',
   'captions' =>'http://localhost/upload/dot_dc75c2e2-ef81-4851-8353-a877aac9fe3c_c_eng_tt.xml',
   'license_url'=>'http://creativecommons.org/licenses/by-nc/2.5/',
@@ -218,6 +222,7 @@ $metas['yt-olnet-brian'] = array(
   'url'   =>'http://youtube.com/watch?v=VesKht_8HCo',
   'url_alt'=>'http://dotsub.com/view/86a1190e-dd05-49a1-b0a8-c5d2b92094dd',
   'file'  =>'http://dotsub.com/media/86a1190e-dd05-49a1-b0a8-c5d2b92094dd/em/flv/en',
+  'file_LOCAL'=>'video/yt_olnet_brian_video.flv',
   'image' =>'http://dotsub.com/media/86a1190e-dd05-49a1-b0a8-c5d2b92094dd/p',
   'title' =>'Brian Mcallister, Roadtrip Nation (OLnet)',
   'lang'  =>'en',
@@ -292,6 +297,20 @@ $metas['__TEMPLATE__'] = array(
   'genre_url'=>'http://dotsub.com/view/genre/genre.--',
   'author_url'=>'http://dotsub.com/view/user/--',
 );
+
+#@todo.
+    if (defined('MALT_LOCAL')) {
+      $CI =& get_instance();
+      $base = $CI->config->site_url().'assets/';
+      $base_2 = 'http://localhost/';
+      foreach ($metas as $key => $item) {
+        if (isset($item['file_LOCAL'])) {
+          $metas[$key]['file'] = $base_2.$item['file_LOCAL'];
+          $metas[$key]['image']= $base.str_replace('_video.flv', '_default.jpg', $item['file_LOCAL']);
+        }
+      }
+    }
+
     return $metas;
   }
 };
