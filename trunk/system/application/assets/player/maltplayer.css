@@ -4,13 +4,23 @@
  * @file MALT player stylesheet.
  * @author N.D.Freear, 9 September 2009.
  */
-body.malt-frame { margin:0; padding:0; }
+body.malt-frame { margin:0; padding:0; font-size:.9em; font-family:Arial,sans-serif; width:442px; }
+abbr { cursor:help; border-bottom:1px dotted gray; }
+.malt-frame a img { border:none; }
+.malt-frame a:link { border:1px solid transparent; }
+.malt-frame a:hover, a:focus, a:active { border:1px dotted #00d; }
+
+.malt-vmeta { border:1px solid #bbb; -moz-border-radius:4px; padding:3px; }
+.malt-vmeta h1, h2, h3, ul, dl { font-size:.95em; list-style:none; margin:3px 0 0; padding:0; }
+.malt-vmeta button { float:right; }
+.malt-vmeta dl, ul, h3, .clear { clear:both; }
+.malt-vmeta dt { float:left; width:8em; }
+.malt-vmeta dt, dd, li { line-height:1.3em; }
 
 .malt-player { width:100%;/*418*/ height:300px; margin: 0 auto; }
 .malt-player object,embed { display:block; }
-.malt-c { width:442px; font-size:.9em; font-family:Arial,sans-serif; padding:4px; /*border:2px solid #bbb; -moz-border-radius:5px;*/ }
+.malt-c { padding:3px; /*border:2px solid #bbb; -moz-border-radius:5px;*/ }
 .malt-c .transcript { font-size:1em; height:7em; overflow-y:scroll; border:1px solid #a99; padding:0 .4em; -moz-border-radius:3px; }
-.malt-c a img { border:none; }
 .malt-c ul { margin:0; padding:0; list-style:none; }
 .malt-c li { list-style:none; display:inline; }
 .malt-c li input, .malt-c li button { border:1px solid #ddd; margin:5px 1px 0 0; }

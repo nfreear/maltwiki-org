@@ -4,7 +4,7 @@
  */
 ?>
 <!DOCTYPE html><html lang="en"><head><meta charset=utf-8 />
-<title>MALT Wiki &ndash; Co-creating accessible video and multimedia</title>
+<title>MALT Wiki &ndash; Co-creating accessible video and multimedia (Alpha)</title>
 
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

@@ -3,6 +3,7 @@
  * The MALT Wiki API controller.
  *
  * @author N.D.Freear, 8 September 2009.
+ * @package MALT
  *
  * http://maltwiki.org/oembed?url=http%3A//youtube.com/v/VesKht_8HCo&format=json&callback=function
  * http://localhost:8888/ws/ci/oembed?url=oembed?url=http%3A%2F%2Fyoutube.com/watch%3Fv%3DVesKht_8HCo
@@ -56,7 +57,7 @@ class MaltApi extends Controller {
 
     $frame =  $this->doctype($html5=TRUE); #@todo: Meta-data, <link>...!
     $frame .= <<<EOF
-<title>$title - MALT media player</title>
+<title>$title - MALT media player (Alpha)</title>
 
   <link type="text/css" href="$style_url" rel="stylesheet" />
 
@@ -73,6 +74,7 @@ class MaltApi extends Controller {
 
 EOF;
     echo $frame;
+    $this->load->view('player/video_meta', $res);
     $this->load->view('layout/footer');
   }
 
@@ -325,22 +327,24 @@ protected function _init($mid) {
   return $res; 
 }
 
-  protected function doctype($html5=TRUE) {
+  protected function doctype($html5=TRUE) { #@todo: View!
     $_lang = $this->request->lang; #$this->config->item('_lang');
+    $head = '';
     if ($html5) {
-      return <<<EOF
-<!DOCTYPE html><html lang="$_lang"><head><meta charset=utf-8 /> 
+      $head = <<<EOF
+<!DOCTYPE html><html lang="$_lang"><head><meta charset=utf-8 />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 EOF;
-    }
-    return <<<EOF
+    } else {
+      $head = <<<EOF
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$_lang" lang="$_lang">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 EOF;
-    
+    }
+    return $head;
   }
 
 } /*class*/

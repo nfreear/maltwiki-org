@@ -1,5 +1,11 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+#ou-specific
+  define('MALT_FAVICON', 'assets/favicon.png');
+  define('MALT_ANALYTICS_ID', 'UA-10681794-1');
+  //define('MALT_LOCAL', TRUE);
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -12,9 +18,9 @@
 |
 */
 #ou-specific
-#$config['base_url'] = 'http://maltwiki.org/';
-#$config['base_url'] = 'http://zander.open.ac.uk:8080/maltwiki/';
-#$config['base_url'] = 'http://localhost:8888/ws/malt/';
+  //$config['base_url'] = 'http://maltwiki.org/';
+  //$config['base_url'] = 'http://zander.open.ac.uk:8080/maltwiki/';
+  //$config['base_url'] = 'http://localhost:8888/ws/malt/';
 
 $config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/';
 
