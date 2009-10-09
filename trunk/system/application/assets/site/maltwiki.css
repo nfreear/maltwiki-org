@@ -1,9 +1,9 @@
 body {
   background-color: #fff;
+  color: #3e4044;
   margin: 15px 50px;
   font-family: Lucida Grande, Verdana, Sans-serif;
   font-size: .9em;
-  color: #3e4044;
 }
 abbr[title] { cursor:help; }
 a img { border:none; }
@@ -60,11 +60,24 @@ code {
 #header #strap {
   letter-spacing:-0em;
 }
-#recent_media img {
-  width:120px; height:90px; border:1px solid silver; padding:1px;
+#recent_media li {
+  width:500px;
+  border-top:1px solid #ccc;
+  padding:2px 0 0;
+  margin:3px 0 0;
+  clear:both;
 }
-#recent_media a { text-decoration:none; }
-#recent_media a span { text-decoration:underline; }
+#recent_media img.thumb {
+  width:120px;
+  height:90px;
+  border:1px solid #ccc;
+  padding:1px;
+  margin:3px 6px 4px 0;
+  float:left;
+}
+#recent_media [rel=license]  { float:right; }
+#recent_media a     { text-decoration:none; }
+#recent_media a span{ text-decoration:underline; }
 .cloudworks {
   padding-right: 25px;
   background: url(http://cloudworks.ac.uk/_design/icon-cloudscape.gif) no-repeat top right;   

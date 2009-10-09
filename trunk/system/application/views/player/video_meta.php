@@ -10,14 +10,6 @@ if (!isset($_REQUEST['demo'])) return;
 
 $this->load->library('Mutil');
 
-function contribs($contributors) {
-  $out='';
-  foreach ($contributors as $role => $name) {
-    $out .= ucfirst($role)." - $name, ";
-  }
-  return $out;
-}
-
 $f_langs = array('en' =>'English', 'fr'=>'Francais', 'cmn-Hans'=>'Chinese, Simplified', );
 $f_themes= array('riz'=>'Standard', 'easy'=>'Easy', 'text'=>'Text only', '.'=>' &hellip; ', );
 $f_alt   = array('cc' =>'Captions', 'tr'=>'A transcript', 'ad'=>'Audio description');
@@ -32,7 +24,7 @@ $f_alt   = array('cc' =>'Captions', 'tr'=>'A transcript', 'ad'=>'Audio descripti
 &bull; <a href="#request" title="Vote, to help drive our next contributions">Request alternatives</a>
 &bull; <a href="#view-comments">View comments</a>
 <img title="Useful? 3 out of 5" alt="Useful? 3 out of 5 stars" src="http://upload.wikimedia.org/wikipedia/commons/8/8c/3of5.png" /> </dd>
-<dt>Contributors</dt> <dd><?php echo isset($media->contributor) ? contribs($media->contributor) :''; ?> Captions - J.Bloggs&hellip;</dd>
+<dt>Contributors</dt> <dd><?php echo contributors($media); ?></dd>
 <dt>Copyright</dt> <dd>Video - &copy; 2009 John Doe. Some rights reserved.</dd>
 <dt>Terms</dt> <dd><?php echo isset($media->license_url) ? license_parse($media->license_url, $xml=FALSE) :''; ?>
  <em>[ Disclaimer: The Open University is not responsible for video, captions&hellip; except where attributed. ]</em></dd>

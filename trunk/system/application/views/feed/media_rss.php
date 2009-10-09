@@ -22,7 +22,7 @@
   $feed_url = $this->config->site_url().'media/rss';
   $page_language=$this->config->item('_lang');
   $page_description=NULL;
-  $creator_email='N.D.Freear@open.ac.uk';
+  $creator_email = MALT_EMAIL;
   $base_path = $this->config->site_url().'frame?url='; #@todo.
 
 

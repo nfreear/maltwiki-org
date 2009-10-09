@@ -7,6 +7,32 @@
 class Mutil {};
 
 /**
+ * Individuals, organizations and sites that contribute video, captions, tools etc.
+ */
+function contributors($media) {
+  #@todo: Links etc. 'producer'=='video producer'...
+  $out='';
+  $cc = FALSE;
+  if (isset($media->author_name)) {
+    $out .= "Producer - ".$media->author_name."; ";
+  }
+  if (isset($media->contributor)) {
+    $contributors = $media->contributor;
+    foreach ($contributors as $role => $name) {
+      if ('captions'==$role || 'transcript'==$role) $cc = TRUE;
+      $out .= ucfirst($role)." - $name; ";
+    }
+  }
+  if (isset($media->provider_name)) {
+    $out .= '<abbr title="Caption editing software">Editor</abbr> - '.$media->provider_name;
+  }
+  if (!$cc) {
+    $out .= "<em>Captions - J.Bloggs&hellip;</em>";
+  }
+  return $out;
+}
+
+/**
  * http://creativecommons.org/licenses/by/2.0/uk/
  * http://i.creativecommons.org/l/by/2.0/uk/80x15.png
  */

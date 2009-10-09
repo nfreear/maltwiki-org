@@ -5,7 +5,7 @@
  * @author N.D.Freear, 9 September 2009.
  */
 body.malt-frame { margin:0; padding:0; font-size:.9em; font-family:Arial,sans-serif; width:442px; }
-abbr { cursor:help; border-bottom:1px dotted gray; }
+abbr[title] { cursor:help; border-bottom:1px dotted gray; }
 .malt-frame a img { border:none; }
 .malt-frame a:link { border:1px solid transparent; }
 .malt-frame a:hover, a:focus, a:active { border:1px dotted #00d; }
@@ -14,7 +14,7 @@ abbr { cursor:help; border-bottom:1px dotted gray; }
 .malt-vmeta h1, h2, h3, ul, dl { font-size:.95em; list-style:none; margin:3px 0 0; padding:0; }
 .malt-vmeta button { float:right; }
 .malt-vmeta dl, ul, h3, .clear { clear:both; }
-.malt-vmeta dt { float:left; width:8em; }
+.malt-vmeta dt { float:left; width:7.5em; }
 .malt-vmeta dt, dd, li { line-height:1.3em; }
 
 .malt-player { width:100%;/*418*/ height:300px; margin: 0 auto; }
@@ -23,10 +23,10 @@ abbr { cursor:help; border-bottom:1px dotted gray; }
 .malt-c .transcript { font-size:1em; height:7em; overflow-y:scroll; border:1px solid #a99; padding:0 .4em; -moz-border-radius:3px; }
 .malt-c ul { margin:0; padding:0; list-style:none; }
 .malt-c li { list-style:none; display:inline; }
-.malt-c li input, .malt-c li button { border:1px solid #ddd; margin:5px 1px 0 0; }
+.malt-c li input, .malt-c li button { border:1px solid #ccc; margin:5px 1px 0 0; }
 .malt-c a.about { float:right; position:relative; top:-50px; border:2px solid #aaa; padding:4px 3px 2px; -moz-border-radius:4px; }
 .malt-c .transcript .about { top:-25px; /*@todo: IE7 bug.*/ }
-.malt-c input:hover, .malt-controls input:focus, .malt-controls input:active { border:1px dotted red; }
+.malt-c input:hover, .malt-c input:focus, .malt-c input:active { border:1px dotted red; }
 .malt-controlheading, .malt-volumecontrol, .track, ._time { position:absolute; top:-999em; }
 .malt-c h2 { font-size:1.1em; margin:.3em 0; }
 

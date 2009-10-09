@@ -45,9 +45,6 @@ $route['scaffolding_trigger'] = "";
 
 
 #ou-specific.
-define('MALT_USER_SCRIPT', 'scripts/MALT.user.js');
-define('MALT_FAVICON',     'assets/favicon.png');
-
 
 $route['oembed']     = 'maltapi/oembed';
 $route['oembed.json']= 'maltapi/oembed';

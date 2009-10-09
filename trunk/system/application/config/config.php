@@ -1,7 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 #ou-specific
-  define('MALT_FAVICON', 'assets/favicon.png');
+  define('MALT_USER_SCRIPT', 'scripts/MALT.user.js');
+  define('MALT_FAVICON',     'assets/favicon.png');
+  #@todo: 'maltwiki-project@open.ac.uk' / 'info@maltwiki.org'?
+  define('MALT_EMAIL', 'iet-it@open.ac.uk');
   define('MALT_ANALYTICS_ID', 'UA-10681794-1');
   //define('MALT_LOCAL', TRUE);
 
