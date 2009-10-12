@@ -64,9 +64,9 @@ class MaltApi extends Controller {
   <script type="text/javascript" src="$js_flow"></script>
   <script type="text/javascript" src="$js_controls"></script>
   <script type="text/javascript">$script
-  </script>
+  </script><!--@todo: Accessibility - can't have overflow:visible; -->
   <!--[if IE]>
-    <style type="text/css">html, body {border:0;overflow:visible;}</style>
+    <style type="text/css">html, body {border:0;}</style>
   <![endif]-->
   </head><body class="malt-frame">
 

@@ -4,7 +4,7 @@
  * @file MALT player stylesheet.
  * @author N.D.Freear, 9 September 2009.
  */
-body.malt-frame { margin:0; padding:0; font-size:.9em; font-family:Arial,sans-serif; width:442px; }
+body.malt-frame { margin:0; padding:0; font-size:.9em; font-family:Arial,sans-serif; width:469px; }
 abbr[title] { cursor:help; border-bottom:1px dotted gray; }
 .malt-frame a img { border:none; }
 .malt-frame a:link { border:1px solid transparent; }
@@ -17,17 +17,18 @@ abbr[title] { cursor:help; border-bottom:1px dotted gray; }
 .malt-vmeta dt { float:left; width:7.5em; }
 .malt-vmeta dt, dd, li { line-height:1.3em; }
 
-.malt-player { width:100%;/*418*/ height:300px; margin: 0 auto; }
+.malt-player { width:100%;/*418*/ height:315px; margin: 0 auto; }
 .malt-player object,embed { display:block; }
 .malt-c { padding:3px; /*border:2px solid #bbb; -moz-border-radius:5px;*/ }
 .malt-c .transcript { font-size:1em; height:7em; overflow-y:scroll; border:1px solid #a99; padding:0 .4em; -moz-border-radius:3px; }
 .malt-c ul { margin:0; padding:0; list-style:none; }
 .malt-c li { list-style:none; display:inline; }
 .malt-c li input, .malt-c li button { border:1px solid #ccc; margin:5px 1px 0 0; }
-.malt-c a.about { float:right; position:relative; top:-50px; border:2px solid #aaa; padding:4px 3px 2px; -moz-border-radius:4px; }
+.malt-c a.about { float:right; position:relative; top:-50px; margin:0 0 -50px; border:2px solid #aaa; padding:4px 3px 2px; -moz-border-radius:4px; }
 .malt-c .transcript .about { top:-25px; /*@todo: IE7 bug.*/ }
 .malt-c input:hover, .malt-c input:focus, .malt-c input:active { border:1px dotted red; }
-.malt-controlheading, .malt-volumecontrol, .track, ._time { position:absolute; top:-999em; }
+/*@todo: MSIE6 bug - removed "._time" */
+.malt-controlheading, .malt-volumecontrol, .track { position:absolute; top:-999px; }
 .malt-c h2 { font-size:1.1em; margin:.3em 0; }
 
 .malt-c.easy li input  { background:url(buttons-easy3.png) no-repeat top left; width:56px; height:56px; -moz-border-radius:9px; }
@@ -40,7 +41,7 @@ abbr[title] { cursor:help; border-bottom:1px dotted gray; }
 .malt-c.easy li .mute  { background-position:-1px -596px; } /*55px/ 399px*/
 
 /* 'riz' audio-player-icons-rizwanashrafcom.jpg */
-.malt-c.riz input { background:url(buttons-riz.jpg) no-repeat top left; width:39px; height:38px;
+.malt-c.riz li input { background:url(buttons-riz.jpg) no-repeat top left; width:39px; height:38px;
     border:3px solid #aaa; -moz-border-radius:7px; -webkit-border-radius:7px; }
 .malt-c.riz .play  { background-position: -14px -203px; } /*-26px*/
 .malt-c.riz .repeat{ background-position:-209px -203px; }

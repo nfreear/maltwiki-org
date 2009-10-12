@@ -106,7 +106,8 @@ EOF;
       $controls .="$button class='$class' alt='$text' title='$text' /></li>".PHP_EOL;
     }
     $base = $this->config->site_url();
-    $link = "<a class='about' href='$base' title='About MALT Wiki'><img alt='About MALT Wiki' src='{$base}assets/favicon.png' /></a>";
+    #@todo: target OK in HTML5!
+    $link = "<a target='_top' class='about' href='$base' title='About MALT Wiki'><img alt='About MALT Wiki' src='{$base}assets/favicon.png' /></a>";
     $controls =<<<EOF
     <h2 class="$prefix-controlheading">{$tx_controls}</h2><ul>
   $controls<li class="track">
@@ -120,6 +121,7 @@ EOF;
   </p>
   $link
 EOF;
+#@todo: <!--div class="clear"></div-->.
     return $controls;
   }
 
