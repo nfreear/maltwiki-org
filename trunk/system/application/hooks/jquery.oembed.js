@@ -1,5 +1,7 @@
 /**
  oEmbed Javascript, with MALT Wiki integration.
+
+ @link http://maltwiki.org/developer
  @link http://code.google.com/p/jquery-oembed/
 */
 (function($) {
@@ -36,9 +38,9 @@
     $.fn.oembed.getPhotoCode = function(url, data) {
 //ou-specific
         var alt = data.title ? data.title : 'Photo';
-        alt += data.author_name ? ' by '+data.author_name :'';
-        alt += data.provider_name ? ', on '+data.provider_name :'';
-        var code= '<a class="photo" href="'+ url +'"><img src="'+ data.url +'" alt="'+ alt +'"/></a>';
+        alt += data.author_name ? ', by '+data.author_name :'';
+        alt += data.provider_name ? ' on '+data.provider_name :'';
+        var code= '<a class="photo" href="'+ url +'"><img src="'+ data.url +'" alt="'+ alt +'" /></a>';
 //ou-specific ends.
         if (data.html)
             code += "<div>" + data.html + "</div>";
@@ -93,9 +95,10 @@
         new OEmbedProvider("vimeo", "vimeo.com", "http://vimeo.com/api/oembed.json"),
         new OEmbedProvider("wikipedia", "wikipedia.org"),
         new OEmbedProvider("wordpress", "wordpress.com"),
-//ou-specific, @todo Experimental.
-        new OEmbedProvider("youtube", "youtube.com", "http://localhost:8888/ws/malt/oembed")
+//ou-specific,  @todo Experimental.
+        new OEmbedProvider("youtube", "youtube.com", "http://iet-access.open.ac.uk/malt/oembed")
         //new OEmbedProvider("youtube", "youtube.com")
+//ou-specific ends.
     ];
 
     function OEmbedProvider(name, urlPattern, oEmbedUrl, callbackparameter) {
@@ -119,10 +122,15 @@
                 url = url + "?";
 
             url += "maxwidth=" + this.maxWidth + 
-						"&maxHeight=" + this.maxHeight + 
-						"&format=json" + 
-						"&url=" + escape(externalUrl) + 
-						"&" + this.callbackparameter + "=?";						
+//ou-specific
+                "&maxheight=" + this.maxHeight +
+                //@todo Bug "&maxHeight=" + this.maxHeight + 
+                "&client=" + "org.maltwiki:jquery.oembed.js" +
+                "&ref=" + escape(location) +
+//ou-specific ends.
+                "&format=json" + 
+                "&url=" + escape(externalUrl) + 
+                "&" + this.callbackparameter + "=?";
             return url;
         }
 
