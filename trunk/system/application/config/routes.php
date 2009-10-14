@@ -52,9 +52,15 @@ $route['oembed.json']= 'maltapi/oembed';
 #$route['js/:any']  = 'maltapi/javascript';
 $route['frame']     = 'maltapi/frame';
 $route['frame/:any']= 'maltapi/frame';
-$route['view']      = 'maltapi/view';
-$route['media/rss'] = 'welcome/rss_media';
 
+$route['view']      = 'maltapi/view';
+$route['media/rss'] = 'welcome/media_feed';
+$route['discuss']   = 'welcome/discuss';
+$route['developer'] = 'welcome/developer';
+$route['embedtest'] = 'welcome/embedtest';
+
+$route[MALT_USER_SCRIPT]      = 'maltapi/user_script';
+$route['scripts/MALT.test.js']= 'maltapi/user_script';
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

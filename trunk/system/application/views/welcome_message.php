@@ -1,8 +1,17 @@
 <?php
-/** @author NDF, updated 8 October 2009.
+/** @author N.D.Freear, updated 8 October 2009.
  */
 $this->load->view('layout/header');
+
+if (!malt_is_live()) {
 ?>
+<p class="warning" style="border:1px solid gray; background:#fbb; text-align:center; padding:1em; margin:2em; font-size:1.2em; ">
+ The LIVE web site has moved to
+ <a rel="bookmark" href="http://maltwiki.org/" style="font-weight:bold">Maltwiki.org</a> - please update your bookmarks.
+ <br />iet-access.open.ac.uk/malt may be shut down in the near future.
+</p>
+<?php } ?>
+
 
 <h1>Welcome to <abbr >MALT</abbr> Wiki!</h1>
 
@@ -13,15 +22,15 @@ $this->load->view('layout/header');
 </p>
 <p> This is an experimental site which provides an 
  <a href="http://oembed.com/" title="oEmbed specification">oEmbed</a> compatible
- <a href="oembed?url=http%3A//youtube.com%2Fwatch%3Fv%3Dgrqt3HoLOIA" title="Javascript Object Notation JSON format" type="application/json">web service</a>
+ <a href="oembed?url=<?php echo urlencode(MALT_YOUTUBE_MOODLE) ?>" title="Javascript Object Notation JSON format" type="application/json">web service</a>
  for a video player with captions where available, and accessible controls.
  It also demonstrates the web service <a href="#oembed-0">in use</a>.
  We are experimenting with player personalization, and browser and software plugins.
 </p>
-<p>Find out more and join the <a class="cloudworks" href="http://cloudworks.ac.uk/cloudscape/view/1873">discussion on Cloudworks</a></p>
+<p>Find out more and join the <a class="cloudworks" href="discuss">discussion on Cloudworks</a></p>
 
 
-<a rel="embed" href="http://youtube.com/watch?v=grqt3HoLOIA">Learn about Moodle</a>
+<a rel="embed" href="<?php echo MALT_YOUTUBE_MOODLE ?>">Learn about Moodle</a>
 
 
 <?php $this->load->view('blocks/recent_media'); ?>

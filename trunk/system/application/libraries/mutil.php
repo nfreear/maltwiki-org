@@ -6,6 +6,55 @@
  */
 class Mutil {};
 
+
+function malt_is_live() {
+  return ('maltwiki.org' == $_SERVER['HTTP_HOST']);
+}
+
+/**
+ * json_encode - Compatability: PHP < 5.2.0.
+ * @todo: Native json_encode '<', this one '\x3c' ?
+ * http://api.drupal.org/api/function/drupal_json/6
+ */
+if (!function_exists('json_encode')) {
+  function json_encode($var) { __json_encode($var); }
+  function __json_encode($var) {
+    switch (gettype($var)) {
+      case 'boolean':
+        return $var ? 'true' : 'false'; // Lowercase necessary!
+      case 'integer':
+      case 'double':
+        return $var;
+      case 'resource':
+      case 'string':
+        return '"'. str_replace(array("\r", "\n", "<", ">", "&"),
+                                array('\r', '\n', '\x3c', '\x3e', '\x26'),
+                                addslashes($var)) .'"';
+      case 'array':
+        // Arrays in JSON can't be associative. If the array is empty or if it
+        // has sequential whole number keys starting with 0, it's not associative
+        // so we can go ahead and convert it as an array.
+        if (empty ($var) || array_keys($var) === range(0, sizeof($var) - 1)) {
+          $output = array();
+          foreach ($var as $v) {
+            $output[] = __json_encode($v);
+          }
+          return '['. implode(',', $output) .']';  #@todo: Removed whitespace.
+        }
+        // Otherwise, fall through to convert the array as an object.
+      case 'object':
+        $output = array();
+        foreach ($var as $k => $v) {
+          $output[] = __json_encode(strval($k)) .':'. __json_encode($v);
+        }
+        return '{'. implode(',', $output) .'}';
+      default:
+        return 'null';
+    }
+  }
+}
+
+
 /**
  * Individuals, organizations and sites that contribute video, captions, tools etc.
  */
@@ -24,12 +73,12 @@ function contributors($media) {
     }
   }
   if (isset($media->provider_name)) {
-    $out .= '<abbr title="Caption editing software">Editor</abbr> - '.$media->provider_name;
+    $out .= '<abbr title="Caption editing software">Editor</abbr> - '.$media->provider_name.'; ';
   }
   if (!$cc) {
     $out .= "<em>Captions - J.Bloggs&hellip;</em>";
   }
-  return $out;
+  return trim($out, " ;");
 }
 
 /**

@@ -2,8 +2,7 @@
 /** 15 September 2009
  */
 
-$host = $_SERVER['HTTP_HOST'];
-if ('maltwiki.org'!=$host || 'iet-access.open.ac.uk'!=$host) {
+if (!malt_is_live()) {
   ?>
 </body></html>
   <?php

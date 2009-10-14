@@ -16,7 +16,11 @@
  We already provide software services to improve Flash video and multimedia players." />
 <meta name="copyright" content="&copy; 2009 The Open University" />
 
-<link rel="alternate" href="http://cloudworks.ac.uk/cloudscape/rss/1873"
+<?php if (!malt_is_live()) { ?>
+  <meta name="robots" content="NOINDEX,NOFOLLOW" />
+<?php } ?>
+
+<link rel="alternate" href="<?php echo MALT_CLOUDWORKS_FEED ?>"
  type="application/rss+xml" title="Related acessibility clouds on Cloudworks" />
 <link rel="alternate" href="media/rss"
  type="application/rss+xml" title="Recent contributions to MALT Wiki" />

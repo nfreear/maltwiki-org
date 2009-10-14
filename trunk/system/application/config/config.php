@@ -6,6 +6,9 @@
   #@todo: 'maltwiki-project@open.ac.uk' / 'info@maltwiki.org'?
   define('MALT_EMAIL', 'iet-it@open.ac.uk');
   define('MALT_ANALYTICS_ID', 'UA-10681794-1');
+  define('MALT_CLOUDWORKS_FEED','http://cloudworks.ac.uk/cloudscape/rss/1873');
+  define('MALT_CLOUDWORKS_WEB', 'http://cloudworks.ac.uk/cloudscape/view/1873');
+  define('MALT_YOUTUBE_MOODLE', 'http://youtube.com/watch?v=grqt3HoLOIA');
   //define('MALT_LOCAL', TRUE);
 
 

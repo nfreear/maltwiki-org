@@ -4,7 +4,9 @@ class Welcome extends Controller {
 
 	function Welcome()
 	{
-		parent::Controller();	
+		parent::Controller();
+        $this->load->helper('url');
+        $this->load->library('Mutil');	
 	}
 
 	function index()
@@ -12,8 +14,20 @@ class Welcome extends Controller {
 		$this->load->view('welcome_message');
 	}
 
-    function rss_media() {
+    function embedtest() {
+        $this->load->view('embedtestview');
+    }
+
+    function media_feed() {
         $this->load->view('feed/media_rss');
+    }
+
+    function discuss() {
+        redirect(MALT_CLOUDWORKS_WEB);
+    }
+
+    function developer() { #@todo A cloud!
+        redirect(MALT_CLOUDWORKS_WEB);
     }
 }
 

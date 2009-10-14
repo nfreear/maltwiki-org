@@ -96,7 +96,7 @@
         new OEmbedProvider("wikipedia", "wikipedia.org"),
         new OEmbedProvider("wordpress", "wordpress.com"),
 //ou-specific,  @todo Experimental.
-        new OEmbedProvider("youtube", "youtube.com", "http://iet-access.open.ac.uk/malt/oembed")
+        new OEmbedProvider("youtube", "youtube.com", "http://maltwiki.org/oembed")
         //new OEmbedProvider("youtube", "youtube.com")
 //ou-specific ends.
     ];

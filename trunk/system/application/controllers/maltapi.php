@@ -16,12 +16,14 @@ class MaltApi extends Controller {
 
   function __construct() {
     parent::__construct();
+    $this->load->library('Mutil');
     $this->request = new StdClass;
     $this->_init_lang();
+    @header('X-Powered-By:');
   }
 
   function index() {
-    $this->load->view('embedtestview');
+    #$this->load->view('embedtestview');
   }
 
   function frame($mid=NULL) {
@@ -64,7 +66,7 @@ class MaltApi extends Controller {
   <script type="text/javascript" src="$js_flow"></script>
   <script type="text/javascript" src="$js_controls"></script>
   <script type="text/javascript">$script
-  </script><!--@todo: Accessibility - can't have overflow:visible; -->
+  </script><!--@todo: Accessibility - cannot have overflow:visible; -->
   <!--[if IE]>
     <style type="text/css">html, body {border:0;}</style>
   <![endif]-->
@@ -92,7 +94,8 @@ EOF;
     #$tt_url = url('tt/', array('absolute'=>TRUE)). $mid;  #@todo: Flowplayer doesn't like!
     #$html_id = $res->html_id ? "html_id:'$res->html_id',": '';
 
-    $height = 380;
+    $width = 470;
+    $height= 380;
     if (!isset($res->media)) {
       $height = 330;
       if (basename(MALT_USER_SCRIPT) == $res->client) {
@@ -136,7 +139,7 @@ EOF;
   <a href="{$res->url}">$title</a> </object>
 EOF;*/
     $html =<<<EOF
-<iframe title="$title" src="$frame_url" width="470" height="$height" frameborder="0"><a href="{$res->url}">$title</a></frame>
+<iframe title="$title" src="$frame_url" width="$width" height="$height" frameborder="0"><a href="{$res->url}">$title</a></frame>
 EOF;
 #@todo: IE script error ??
     $oembed = array(
@@ -144,6 +147,7 @@ EOF;
       "type" =>"video",
       "lang" =>$res->lang,
       "title"=>$title,
+      'width'=>$width, 'height'=>$height,
       'html' =>$html,
       'replace_player'=>TRUE,
     );
@@ -176,16 +180,29 @@ EOF;
     echo $script;
   }
 
-  function _user_js() {
+  function user_script() {
     header('Content-Type: application/javascript; charset=UTF-8');
-    $url = url('oembed/', array('absolute'=>TRUE)); #.'oembed/?url=';
-    $style_url  = url(drupal_get_path('module','malt_api').'/malt.user.css', array('absolute'=>TRUE));
+    #header('Content-Disposition: attachment; filename=MALT.user.js');
+    $host = 'maltwiki.org'==$_SERVER['HTTP_HOST'] ? '' : '['.str_replace(':8080', '', $_SERVER['HTTP_HOST']).']';
 
-    require_once basename(MALT_USER_SCRIPT);
+    $this->load->helper('url');
+    $oembed_url = site_url('oembed').'?url=';
+    #$style_url = $this->config->site_url().'assets/MALT.user.css';
+/* Line-break is important!
+// @resource style <?php echo $style_url ?>
+
+// ==/UserScript==
+*/
+    require_once APPPATH.'assets/client/'.basename(MALT_USER_SCRIPT);
   }
 
-function _user_js_link($text='MALT YouTube user Javascript') {
-  l($text, MALT_USER_SCRIPT);
+  function _user_script_link($text='MALT Wiki User Script, for YouTube') {
+    $js  = $this->config->site_url().MALT_USER_SCRIPT;
+    $out = <<<EOF
+  <a href="$js">$text</a>
+  <a href="http://greasespot.net/" title="Requires Greasemonkey"><img src="http://youngpup.net/z_dropbox/greasespot_favicon.ico" alt="Requires Greasemonkey"/></a>
+EOF;
+    return $out;
 }
 
 
@@ -227,13 +244,18 @@ exit;
 }
 
 protected function _json_encode($data) {
+  $this->load->library('Mutil');
   $callback = $this->_get('callback');  #@todo: Security!
+  $debug    = $this->_get('debug', TRUE);
   $json = json_encode((object)$data);
-  $json = str_replace(',"', "\r\n,\"", $json);
-
-  header('Content-Type: text/javascript; charset=UTF-8'); #application/json.
+  if ($debug) { #|| $demo.
+    # Pretty print.
+    $json = str_replace(array(',"', ', "'), "\r\n,\"", $json);
+    header('Content-Type: text/javascript; charset=UTF-8');
+  } else {
+    header('Content-Type: application/json+oembed; charset=UTF-8');
+  }
   @header('Content-Language: '. $data->lang);
-  @header('X-Powered-By:');
   if ($callback) {
     return "$callback($json);";
   }
@@ -333,8 +355,7 @@ protected function _init($mid) {
     if ($html5) {
       $head = <<<EOF
 <!DOCTYPE html><html lang="$_lang"><head><meta charset=utf-8 />
-
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="NOINDEX,NOFOLLOW" />
 EOF;
     } else {
       $head = <<<EOF
@@ -342,6 +363,8 @@ EOF;
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$_lang" lang="$_lang">
 <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="NOINDEX,NOFOLLOW" />
 EOF;
     }
     return $head;

@@ -1,5 +1,7 @@
 /**
- Maltplayer controls for flowplayer. */
+ Maltplayer controls for flowplayer.
+*/
+
 
 /**
  * flowplayer.controls.js 3.0.2. Flowplayer JavaScript plugin.
@@ -163,6 +165,7 @@ $f.addPlugin("controls", function(wrap, options) {
 		louderClass:'louder',
 		quieterClass:'quieter',
         volumeChange:10,
+//ou-specific ends.
 
 		template: '<a class="play">play</a>' + //@todo: NDF. 
 					 '<div class="track">' +
@@ -233,7 +236,7 @@ $f.addPlugin("controls", function(wrap, options) {
 		}
 	};
 
-//ou-specific
+//ou-specific begins
   var pause= byClass(opts.pauseClass);
   var stop = byClass(opts.stopClass);
   var repeat=byClass(opts.repeatClass);
