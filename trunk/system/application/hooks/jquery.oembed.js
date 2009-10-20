@@ -124,7 +124,7 @@
             url += "maxwidth=" + this.maxWidth + 
 //ou-specific
                 "&maxheight=" + this.maxHeight +
-                //@todo Bug "&maxHeight=" + this.maxHeight + 
+                //--@todo Bug "&maxHeight=" + this.maxHeight + 
                 "&client=" + "org.maltwiki:jquery.oembed.js" +
                 "&ref=" + escape(location) +
 //ou-specific ends.

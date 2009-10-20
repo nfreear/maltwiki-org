@@ -25,10 +25,12 @@
 */
 #ou-specific
   //$config['base_url'] = 'http://maltwiki.org/';
-  //$config['base_url'] = 'http://zander.open.ac.uk:8080/maltwiki/';
-  //$config['base_url'] = 'http://localhost:8888/ws/malt/';
-
-$config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']).'/';
+  //$config['base_url'] = 'http://zander.open.ac.uk:8080/malt/';
+$__dir = dirname($_SERVER['SCRIPT_NAME']);
+$config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].$__dir;
+if ('/'!=$__dir) {
+  $config['base_url'] .= '/';
+}
 
 /*
 |--------------------------------------------------------------------------

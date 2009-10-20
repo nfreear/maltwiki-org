@@ -17,7 +17,7 @@ function malt_is_live() {
  * http://api.drupal.org/api/function/drupal_json/6
  */
 if (!function_exists('json_encode')) {
-  function json_encode($var) { __json_encode($var); }
+  function json_encode($var) { return __json_encode($var); }
   function __json_encode($var) {
     switch (gettype($var)) {
       case 'boolean':
