@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        MALT Wiki plugin <?php echo $host ?>
+// @name        MALT Wiki plugin<?php echo $host ?>
 
 // @namespace   http://maltwiki.org
 // @author      N.D.Freear[AT]open.ac.uk

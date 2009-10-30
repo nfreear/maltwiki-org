@@ -28,3 +28,4 @@ $this->load->library('malt_data');
   </li>
   <?php endforeach; ?>
 </ul>
+<div class="clear"></div>

@@ -7,7 +7,7 @@ if (!malt_is_live()) {
 ?>
 <p class="warning" style="border:1px solid gray; background:#fbb; text-align:center; padding:1em; margin:2em; font-size:1.2em; ">
  The LIVE web site has moved to
- <a rel="bookmark" href="http://maltwiki.org/" style="font-weight:bold">Maltwiki.org</a> - please update your bookmarks.
+ <a rel="bookmark follow" href="http://maltwiki.org/" style="font-weight:bold">Maltwiki.org</a> - please update your bookmarks.
  <br />iet-access.open.ac.uk/malt may be shut down in the near future.
 </p>
 <?php } ?>
@@ -34,5 +34,7 @@ if (!malt_is_live()) {
 
 
 <?php $this->load->view('blocks/recent_media'); ?>
+
+<?php #$this->load->view('blocks/twitter', array('user'=>'nfreear')); ?>
 
 <?php $this->load->view('layout/footer'); ?>

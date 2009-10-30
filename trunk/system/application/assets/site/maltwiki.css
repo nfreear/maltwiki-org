@@ -36,6 +36,7 @@ code {
   margin: 14px 0 14px 0;
   padding:12px 10px 12px 10px;
 }
+.clear { clear:both; }
 #header {
   font-size: medium;
 /* http://lh6.ggpht.com/_jU8d1WdVVKA/SqE6t7bdrmI/AAAAAAAAAyI/KR2DPuYdCS0/MALTWI_5.png */
@@ -87,7 +88,7 @@ code {
   position: absolute;
   top: -999em;
 }
-.oembed iframe {
+.__oembed iframe, [rel=embed] iframe {
  display:block;
  margin:0 auto;
  border:1px solid #bbb !important;

@@ -1,10 +1,11 @@
 <?php
 /**
  * @author N.D.Freear, 15 September 2009.
+ * <title>..(alpha)?
  */
 ?>
 <!DOCTYPE html><html lang="en"><head><meta charset=utf-8 />
-<title>MALT Wiki &ndash; Co-creating accessible video and multimedia (alpha)</title>
+<title>MALT Wiki &ndash; Co-creating accessible video and multimedia</title>
 
 <!--[if IE]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -17,7 +18,7 @@
 <meta name="copyright" content="&copy; 2009 The Open University" />
 
 <?php if (!malt_is_live()) { ?>
-  <meta name="robots" content="NOINDEX,NOFOLLOW" />
+  <meta name="robots" content="noindex,follow" />
 <?php } ?>
 
 <link rel="alternate" href="<?php echo MALT_CLOUDWORKS_FEED ?>"

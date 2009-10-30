@@ -40,7 +40,7 @@
         var alt = data.title ? data.title : 'Photo';
         alt += data.author_name ? ', by '+data.author_name :'';
         alt += data.provider_name ? ' on '+data.provider_name :'';
-        var code= '<a class="photo" href="'+ url +'"><img src="'+ data.url +'" alt="'+ alt +'" /></a>';
+        var code= '<a class="photo" href="'+ url +'"><img src="'+ data.url +'" alt="'+ alt +'" title="'+ alt +'" /></a>';
 //ou-specific ends.
         if (data.html)
             code += "<div>" + data.html + "</div>";
@@ -82,7 +82,7 @@
     var providers = [
         new OEmbedProvider("fivemin", "5min.com"),
         new OEmbedProvider("amazon", "amazon.com"),
-        new OEmbedProvider("flickr", "flickr", "http://flickr.com/services/oembed", "jsoncallback"),
+        new OEmbedProvider("flickr", "flickr", "http://www.flickr.com/services/oembed", "jsoncallback"),
         new OEmbedProvider("googlevideo", "video.google."),
         new OEmbedProvider("hulu", "hulu.com"),
         new OEmbedProvider("imdb", "imdb.com"),
@@ -96,6 +96,7 @@
         new OEmbedProvider("wikipedia", "wikipedia.org"),
         new OEmbedProvider("wordpress", "wordpress.com"),
 //ou-specific,  @todo Experimental.
+        new OEmbedProvider("cohere", "cohere.open.ac.uk", "http://olnet.org/oembed"),
         new OEmbedProvider("youtube", "youtube.com", "http://maltwiki.org/oembed")
         //new OEmbedProvider("youtube", "youtube.com")
 //ou-specific ends.
@@ -126,7 +127,7 @@
                 "&maxheight=" + this.maxHeight +
                 //--@todo Bug "&maxHeight=" + this.maxHeight + 
                 "&client=" + "org.maltwiki:jquery.oembed.js" +
-                "&ref=" + escape(location) +
+                "&ref=" + escape(location) +  //Comment for DEV. servers.
 //ou-specific ends.
                 "&format=json" + 
                 "&url=" + escape(externalUrl) + 

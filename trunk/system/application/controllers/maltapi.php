@@ -89,8 +89,6 @@ EOF;
   function oembed($mid=NULL) {  #$a, $b) {
     $res = $this->_init($mid);
 
-    header('Content-Type: text/javascript; charset=UTF-8');
-
     #$tt_url = url('tt/', array('absolute'=>TRUE)). $mid;  #@todo: Flowplayer doesn't like!
     #$html_id = $res->html_id ? "html_id:'$res->html_id',": '';
 
@@ -181,9 +179,9 @@ EOF;
   }
 
   function user_script() {
-    header('Content-Type: application/javascript; charset=UTF-8');
-    #header('Content-Disposition: attachment; filename=MALT.user.js');
-    $host = 'maltwiki.org'==$_SERVER['HTTP_HOST'] ? '' : '['.str_replace(':8080', '', $_SERVER['HTTP_HOST']).']';
+    header('Content-Type: text/javascript; charset=UTF-8');
+    #@header('Content-Disposition: inline; filename=MALT.user.js.txt');
+    $host = malt_is_live() ? '' : ' ['.str_replace(':8080', '', $_SERVER['HTTP_HOST']).']';
 
     $this->load->helper('url');
     $oembed_url = site_url('oembed').'?url=';
@@ -216,7 +214,7 @@ function _error($code=500, $message='Woops, there\'s been a problem') {
   $icon    = $url.MALT_FAVICON;
   $about_link = "<a href='$url'>About MALT Wiki <img alt='' src='$icon' /></a>";
   $errors = array(
-    404 => 'Not Found', 500 => 'Internal Server Error', );
+    400=>'Bad Request', 404=>'Not Found', 500=>'Internal Server Error', 503=>'Service Unavailable');
   $http_text = $errors[$code];
   
   @header("HTTP/1.1 $code $http_text");  #Error.
@@ -226,8 +224,7 @@ function _error($code=500, $message='Woops, there\'s been a problem') {
 
   if ('oembed' == $this->uri->segment(1)) {
 
-    header('Content-Type: text/javascript; charset=utf-8');
-    echo $this->_json_encode($res);
+    echo $this->_json_encode($res, $debug_override=TRUE);
   } else {
     header('Content-Type: text/html; charset=utf-8');
     
@@ -243,12 +240,16 @@ EOF;
 exit;
 }
 
-protected function _json_encode($data) {
+protected function _json_encode($data, $debug_override=FALSE) {
   $this->load->library('Mutil');
   $callback = $this->_get('callback');  #@todo: Security!
-  $debug    = $this->_get('debug', TRUE);
-  $json = json_encode((object)$data);
+  $debug    = $this->_get('debug', $debug_override);
+  $json= json_encode((object)$data);
+  $ext = 'js';
+  $disposition = 'attachment';
   if ($debug) { #|| $demo.
+    $ext = 'txt';
+    $disposition = 'inline';
     # Pretty print.
     $json = str_replace(array(',"', ', "'), "\r\n,\"", $json);
     header('Content-Type: text/javascript; charset=UTF-8');
@@ -257,8 +258,10 @@ protected function _json_encode($data) {
   }
   @header('Content-Language: '. $data->lang);
   if ($callback) {
-    return "$callback($json);";
+    $json = "$callback($json);";
   }
+  $octets = strlen($json);
+  @header("Content-Disposition: $disposition; filename=maltwiki-oembed-json.$ext size=$octets"); #MSIE (& Firefox).
   return $json;
 #exit;
 }
@@ -321,7 +324,7 @@ protected function _init($mid) {
         $this->_error(500);
       }
     }
-    else $this->_error(404);
+    #else $this->_error(404);
   }
 
   $res->client = $this->_get('client');
@@ -343,8 +346,8 @@ protected function _init($mid) {
     }
   }
 
-  if (!$res->url || !isset($res->media)) {
-    ##$this->_error(404);
+  if (!$res->url) {  #|| !isset($res->media)) {
+    $this->_error(400, 'Woops, I think there was a mistake in the request!'); #400.
   }
   return $res; 
 }
@@ -355,7 +358,7 @@ protected function _init($mid) {
     if ($html5) {
       $head = <<<EOF
 <!DOCTYPE html><html lang="$_lang"><head><meta charset=utf-8 />
-  <meta name="robots" content="NOINDEX,NOFOLLOW" />
+  <meta name="robots" content="noindex,follow" />
 EOF;
     } else {
       $head = <<<EOF
@@ -364,7 +367,7 @@ EOF;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$_lang" lang="$_lang">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="robots" content="NOINDEX,NOFOLLOW" />
+  <meta name="robots" content="noindex,follow" />
 EOF;
     }
     return $head;
