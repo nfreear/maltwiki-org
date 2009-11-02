@@ -21,6 +21,7 @@
   <meta name="robots" content="noindex,follow" />
 <?php } ?>
 
+<link rev="made" href="mailto:<?php echo MALT_EMAIL ?>?subject=MALT Wiki" />
 <link rel="alternate" href="<?php echo MALT_CLOUDWORKS_FEED ?>"
  type="application/rss+xml" title="Related acessibility clouds on Cloudworks" />
 <link rel="alternate" href="media/rss"

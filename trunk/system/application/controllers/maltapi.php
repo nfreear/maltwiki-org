@@ -358,7 +358,6 @@ protected function _init($mid) {
     if ($html5) {
       $head = <<<EOF
 <!DOCTYPE html><html lang="$_lang"><head><meta charset=utf-8 />
-  <meta name="robots" content="noindex,follow" />
 EOF;
     } else {
       $head = <<<EOF
@@ -367,9 +366,13 @@ EOF;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$_lang" lang="$_lang">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="robots" content="noindex,follow" />
 EOF;
     }
+    $mail = MALT_EMAIL;
+    $head .= <<<EOF
+  <meta name="robots" content="noindex,follow" />
+  <link rev="made" href="mailto:$mail?subject=MALT Wiki" />
+EOF;
     return $head;
   }
 
