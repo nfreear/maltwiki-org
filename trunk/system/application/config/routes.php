@@ -53,8 +53,11 @@ $route['oembed.json']= 'maltapi/oembed';
 $route['frame']     = 'maltapi/frame';
 $route['frame/:any']= 'maltapi/frame';
 
-$route['view']      = 'maltapi/view';
+#$route['view']      = 'maltapi/view';
 $route['media/rss'] = 'welcome/media_feed';
+$route['about']     = 'welcome/about';
+$route['about/notifications'] = 'welcome/notifications';
+#$route['about/contact'] = 'welcome/contact';
 $route['discuss']   = 'welcome/discuss';
 $route['developer'] = 'welcome/developer';
 $route['embedtest'] = 'welcome/embedtest';

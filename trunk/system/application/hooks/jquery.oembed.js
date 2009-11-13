@@ -1,8 +1,8 @@
 /**
  oEmbed Javascript, with MALT Wiki integration.
 
- @link http://maltwiki.org/developer
- @link http://code.google.com/p/jquery-oembed/
+ #link http://maltwiki.org/developer
+ #link http://code.google.com/p/jquery-oembed/
 */
 (function($) {
     $.fn.oembed = function(url, options) {		
@@ -88,14 +88,16 @@
         new OEmbedProvider("imdb", "imdb.com"),
         new OEmbedProvider("metacafe", "metacafe.com"),
         new OEmbedProvider("qik", "qik.com"),
-        new OEmbedProvider("revision3", "slideshare"),
-        new OEmbedProvider("slideshare", "5min.com"),
+        new OEmbedProvider("revision3", "revision3.com"), //"http://revision3.com/api/oembed" - No callback param.
+        new OEmbedProvider("slideshare", "slideshare.net"),
         new OEmbedProvider("twitpic", "twitpic.com"),
         new OEmbedProvider("viddler", "viddler.com"),
         new OEmbedProvider("vimeo", "vimeo.com", "http://vimeo.com/api/oembed.json"),
         new OEmbedProvider("wikipedia", "wikipedia.org"),
         new OEmbedProvider("wordpress", "wordpress.com"),
-//ou-specific,  @todo Experimental.
+//ou-specific,  #todo Experimental.
+        new OEmbedProvider("NFB", "nfb.ca"),
+        new OEmbedProvider("blip","blip.tv"),
         new OEmbedProvider("cohere", "cohere.open.ac.uk", "http://olnet.org/oembed"),
         new OEmbedProvider("youtube", "youtube.com", "http://maltwiki.org/oembed")
         //new OEmbedProvider("youtube", "youtube.com")
@@ -125,7 +127,7 @@
             url += "maxwidth=" + this.maxWidth + 
 //ou-specific
                 "&maxheight=" + this.maxHeight +
-                //--@todo Bug "&maxHeight=" + this.maxHeight + 
+                //#todo Bug "&maxHeight=" + this.maxHeight + 
                 "&client=" + "org.maltwiki:jquery.oembed.js" +
                 "&ref=" + escape(location) +  //Comment for DEV. servers.
 //ou-specific ends.

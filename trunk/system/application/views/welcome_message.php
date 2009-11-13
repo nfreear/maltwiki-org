@@ -1,7 +1,7 @@
 <?php
 /** @author N.D.Freear, updated 8 October 2009.
  */
-$this->load->view('layout/header');
+#$this->load->view('layout/header');
 
 if (!malt_is_live()) {
 ?>
@@ -22,7 +22,7 @@ if (!malt_is_live()) {
 </p>
 <p> This is an experimental site which provides an 
  <a href="http://oembed.com/" title="oEmbed specification">oEmbed</a> compatible
- <a href="oembed?url=<?php echo urlencode(MALT_YOUTUBE_MOODLE) ?>" title="Javascript Object Notation JSON format" type="application/json">web service</a>
+ <a href="oembed?debug=1&amp;url=<?php echo urlencode(MALT_YOUTUBE_MOODLE) ?>" title="Javascript Object Notation JSON format" type="application/json">web service</a>
  for a video player with captions where available, and accessible controls.
  It also demonstrates the web service <a href="#oembed-0">in use</a>.
  We are experimenting with player personalization, and browser and software plugins.
@@ -37,4 +37,4 @@ if (!malt_is_live()) {
 
 <?php #$this->load->view('blocks/twitter', array('user'=>'nfreear')); ?>
 
-<?php $this->load->view('layout/footer'); ?>
+<?php #$this->load->view('layout/footer'); ?>
