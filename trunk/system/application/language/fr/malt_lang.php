@@ -8,7 +8,7 @@
  * @see     http://maltwiki.org/translation
  * @license To be confirmed (an open source license).
  * @charset UTF-8
- * @lang    fr-Fr
+ * @lang    fr-Fr (Français)
  */
 
 $lang['malt_controls'] = "Commandes de joueur";

@@ -5,8 +5,7 @@
  * @author N.D.Freear, 8 September 2009.
  * @package MALT
  *
- * http://maltwiki.org/oembed?url=http%3A//youtube.com/v/VesKht_8HCo&format=json&callback=function
- * http://localhost:8888/ws/ci/oembed?url=oembed?url=http%3A%2F%2Fyoutube.com/watch%3Fv%3DVesKht_8HCo
+ * http://maltwiki.org/oembed?url=http%3A//youtube.com/v/VesKht_8HCo&debug=1&format=json&callback=function
  * http://localhost:8888/ws/ci/js/yt:VesKht_8HCo
  */
 
@@ -284,22 +283,28 @@ protected function _init_lang() {
   $this->load->library('user_agent');
   $_lang = str_replace('english', 'en', $this->config->item('language'));
 
-  $available = array('cmn-hans', 'fr', 'en');
-  foreach ($available as $lang) {
+  #@todo: Order matters :(
+  $available = array('zh-cn'=>'cmn-hans', 'zh'=>'cmn-hans', 'cmn-hans'=>null,
+                     'fr'=>null, 'es-la'=>'es', 'es'=>null, 'en'=>null);
+  foreach ($available as $lang => $parent) {
     if ($this->agent->accept_lang($lang)) {
-      $_lang = $lang; break;
+      $_lang = $lang;
+      $_lang_pack = $parent ? $parent : $lang; #Redundant?
+      break;
     }
   }
   # 2. Then override if required.
-  $lang_2 = $this->_get('lang', $_lang);
-  if (in_array(strtolower($lang_2), $available)) {
+  $lang_2 = strtolower($this->_get('lang', $_lang));
+  if (array_key_exists($lang_2, $available)) { #(in_array(strtolower($lang_2), $available)) {
     $_lang = $lang_2;
+    $_lang_pack = $available[$lang_2] ? $available[$lang_2] : $lang_2;
   }
   @header('Content-Language: '.$_lang);
   $this->request->lang = $_lang;
   $this->config->set_item('_lang', $_lang);  #@todo: Remove?!
-  $_lang = str_replace('en', 'english', $_lang);
-  $this->config->set_item('language', $_lang);
+  $this->config->set_item('_lang_pack', str_replace('en', 'english', $_lang_pack));
+  #$_lang = str_replace('en', 'english', $_lang);
+  #$this->config->set_item('language', $_lang);
 }
 
 protected function _init($mid) {

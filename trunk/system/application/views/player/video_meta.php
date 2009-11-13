@@ -10,7 +10,7 @@ if (!isset($_REQUEST['demo'])) return;
 
 $this->load->library('Mutil');
 
-$f_langs = array('en' =>'English', 'fr'=>'Francais', 'cmn-Hans'=>'Chinese, Simplified', );
+$f_langs = array('en' =>'English', 'es'=>'Español', 'fr'=>'Français', 'cmn-Hans'=>'Chinese, Simplified', );
 $f_themes= array('riz'=>'Standard', 'easy'=>'Easy', 'text'=>'Text only', '.'=>' &hellip; ', );
 $f_alt   = array('cc' =>'Captions', 'tr'=>'A transcript', 'ad'=>'Audio description');
 #var_dump($media);
