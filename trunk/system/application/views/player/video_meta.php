@@ -9,17 +9,20 @@
 if (!isset($_REQUEST['demo'])) return;
 
 $this->load->library('Mutil');
+$lang_ui = $this->config->item('_lang_pack');
 
-$f_langs = array('en' =>'English', 'es'=>'Español', 'fr'=>'Français', 'cmn-Hans'=>'Chinese, Simplified', );
+$f_langs = $this->lang->select_names();
 $f_themes= array('riz'=>'Standard', 'easy'=>'Easy', 'text'=>'Text only', '.'=>' &hellip; ', );
-$f_alt   = array('cc' =>'Captions', 'tr'=>'A transcript', 'ad'=>'Audio description');
-#var_dump($media);
+$f_alt   = array('cc'=>$this->lang->line('malt_captions'), 'tr'=>$this->lang->line('malt_transcript'),
+    'ad'=>$this->lang->line('malt_audio_desc'), 'an'=>$this->lang->line('malt_annotations'));
 ?>
 <div class="malt-vmeta" lang="en">
   <button class="showhide" onclick="alert('Not yet operational!');">Show/ hide panel</button>
-<h2>About <em><?php echo $media->title ?></em></h2>
+  <?php #echo $this->lang->line('malt_help') ?>
+<h2><?php echo $this->lang->span('malt_about_video', $media->title, $media->lang) ?></h2>
 <dl class="info">
-<dt>Contribute</dt><dd><a href="#give-feedback" title="Let our contributors know what you think of the captions/audio description">Give feedback</a>
+<dt><?php echo $this->lang->span('malt_contribute') ?></dt><dd><a href="#give-feedback"
+ title="Let our contributors know what you think of the captions/audio description"><?php echo $this->lang->span('malt_give_feedback') ?></a>
 &bull; <a href="#create" >Create/edit alternative content</a>
 &bull; <a href="#request" title="Vote, to help drive our next contributions">Request alternatives</a>
 &bull; <a href="#view-comments">View comments</a>
@@ -34,13 +37,14 @@ $f_alt   = array('cc' =>'Captions', 'tr'=>'A transcript', 'ad'=>'Audio descripti
 <dt>Description&hellip;</dt>
 </dl>
 
-<h3>Personalize</h3>
-<form>
+<form lang="<?php echo $lang_ui ?>">
+<h3><?php echo $this->lang->line('malt_personalize') ?></h3>
+
 <input type="hidden" name="url" value="<?php echo $media->url ?>" />
 <input type="hidden" name="demo" value="1" />
 <ul class="personal">
 
-<li class="f-alt"><fieldset><legend>I prefer </legend>
+<li class="f-alt"><fieldset><legend><?php echo $this->lang->line('malt_i_prefer') ?></legend>
 <?php $out=''; foreach ($f_alt as $key => $name) {
   $checked = 'cc'==$key ? 'checked="checked"' :'';
   $out .=<<<EOF
@@ -51,22 +55,24 @@ EOF;
 ?>
 </fieldset></li>
 
-<li><label for="f-theme">Theme (controls) </label>
+<li><label for="f-theme"><?php echo $this->lang->line('malt_theme') #(controls) ?> </label>
 <select id="f-theme" name="theme">
 <?php foreach ($f_themes as $code => $name): ?>
   <option value="<?php echo $code ?>"><?php echo $name ?></option>
 <?php endforeach; ?>
 </select></li>
 
-<li><label for="f-lang">Preferred language </label>
+<li><label for="f-lang"><?php echo $this->lang->line('malt_prefer_lang') ?> </label>
 <select id="f-lang" name="lang">
-<?php foreach ($f_langs as $code => $name): ?>
-  <option value="<?php echo $code ?>"><?php echo $name ?></option>
+<?php foreach ($f_langs as $key => $name):
+  $checked = $lang_ui==$key ? 'selected="selected"' :''; ?>
+  <option value="<?php echo $key.'" '.$checked ?>><?php echo $name ?></option>
 <?php endforeach; ?>
 </select></li>
 
 </ul>
-  <button type="submit" onclick="alert('Partially operational!');">Personalize</button>
+  <button type="submit"><?php echo $this->lang->line('malt_personalize') #onclick="alert('Partially operational!');"
+   ?></button>
 </form>
 <div class="clear"></div>
 </div>

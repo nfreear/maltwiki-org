@@ -33,16 +33,17 @@
 
 # 2.
 #$lang['malt_player'] = "MALT Wiki player";
-$lang['malt_about']= "About MALT Wiki"; #You can also use En relación a.
+$lang['malt_about']= "About MALT Wiki";
 $lang['malt_help'] = "Help with the video player";
 #$lang['malt_video_title'] = "The video %s"; #As in, "The video 'Learn About Moodle'"
 $lang['malt_about_video']= "About %s";
 $lang['malt_contribute'] = "Contribute";
-$lang['malt_give_feedback'] = "Give feedback (in English please)";
+$lang['malt_give_feedback'] = "Give feedback"; #(in English please)
 
 # 1.
 $lang['malt_controls']= "Player controls";
 $lang['malt_volume']  = "Volume";
+#volume [0-100] percent/% ;
 $lang['malt_buttons'] = array(
   'play'   => "Play",   #Play video.
   'repeat' => "Repeat", #Replay video.
@@ -61,15 +62,18 @@ $lang['malt_i_prefer'] = "I prefer";
 $lang['malt_captions'] = "Captions/sub-titles";
 $lang['malt_transcript'] = "A transcript";
 $lang['malt_audio_desc'] = "Audio description";
+$lang['malt_annotations']= "Annotations";
 $lang['malt_theme'] = "Theme/style";
 $lang['malt_prefer_lang'] = "Preferred language";
 $lang['malt_reload'] = "Re-load";
- 
-/*
+
 $lang['malt_multimedia_alt']    = "Multimedia alternatives";
 $lang['malt_co_creating_access']= "Co-creating accessible video &amp; multimedia";
+$lang['malt_co_creating_long']=
+"For disabled people to use video on the Internet, by co-creating captions and audio description.";
 
-$lang['malt_load']     = "Load";
+
+/*$lang['malt_load']     = "Load";
 $lang['malt_video_size']  = "Video size";
 $lang['malt_small']    = "Small";
 $lang['malt_medium']   = "Medium";

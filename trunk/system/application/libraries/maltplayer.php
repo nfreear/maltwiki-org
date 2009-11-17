@@ -27,8 +27,8 @@ class Maltplayer extends Controller { #CI_Base { #WAS: Flowplayer.
     parent::__construct();
     $this->js_controls = $js_controls;
     $this->lang =& load_class('Language');
-    # Files/Directories are lower-case.
-$lang_r = $this->lang->load('malt', 'english'); #, $ret=FALSE);  #@todo: TEST!
+    # Language fles/directories are lower-case.
+    $default = $this->lang->load('malt', $this->config->item('language'), $ret=FALSE); #@todo: TEST!
     $this->lang->load('malt', strtolower($this->config->item('_lang_pack')));
 
     $this->_lang = $this->config->item('_lang');

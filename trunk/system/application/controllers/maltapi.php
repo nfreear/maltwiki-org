@@ -18,6 +18,10 @@ class MaltApi extends Controller {
     $this->load->library('Mutil');
     $this->request = new StdClass;
     $this->_init_lang();
+    # Language fles/directories are lower-case.
+    $default = $this->lang->load('malt', $this->config->item('language'), $ret=FALSE); #@todo: TEST!
+    $this->lang->load('malt', strtolower($this->config->item('_lang_pack')));
+    
     @header('X-Powered-By:');
   }
 
@@ -278,14 +282,17 @@ public function load_data() {
   return Malt_data::load();
 }
 
+public function localize() { #@todo: Check, valid language?
+  echo $this->lang->text_file();
+}
+
 protected function _init_lang() {
   # 1. Content negotiation, using 'Accept-Language' header.
   $this->load->library('user_agent');
   $_lang = str_replace('english', 'en', $this->config->item('language'));
 
   #@todo: Order matters :(
-  $available = array('zh-cn'=>'cmn-hans', 'zh'=>'cmn-hans', 'cmn-hans'=>null,
-                     'fr'=>null, 'es-la'=>'es', 'es'=>null, 'en'=>null);
+  $available = $this->lang->available();
   foreach ($available as $lang => $parent) {
     if ($this->agent->accept_lang($lang)) {
       $_lang = $lang;

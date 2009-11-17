@@ -53,6 +53,8 @@ $route['oembed.json']= 'maltapi/oembed';
 $route['frame']     = 'maltapi/frame';
 $route['frame/:any']= 'maltapi/frame';
 
+$route['localize'] = 'maltapi/localize';
+
 #$route['view']      = 'maltapi/view';
 $route['media/rss'] = 'welcome/media_feed';
 $route['about']     = 'welcome/about';

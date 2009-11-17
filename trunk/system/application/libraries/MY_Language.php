@@ -1,17 +1,17 @@
 <?php
 /**ou-specific
  *
+ * Overriding Language Class to allow the parent/default language to be loaded first.
+ * Plus, functions to list available languages, and to facilitate translation.
+ *
 config.php
 if (defined('E_DEPRECATED')) {
   error_reporting(E_ALL ^ E_DEPRECATED);
 }
 
 maltplayer.php
-$lang_r = $this->lang->load('malt', 'english', $ret=FALSE);  #@todo: TEST!
+    $lang_r = $this->lang->load('malt', 'english', $ret=FALSE);
     $this->lang->load('malt', strtolower($this->config->item('language')));
-
- * Overriding Language Class to allow the parent/default language to be loaded first.
- * (Parses URIs and determines routing.)
  *
  * @author N.D.Freear, 25 October 2009.
  * @category	Language
@@ -21,6 +21,7 @@ class MY_Language extends CI_Language {
 
 	#var $language	= array();
 	#var $is_loaded	= array();
+    var $last_lang = NULL;
 
 
 	/**
@@ -46,6 +47,7 @@ class MY_Language extends CI_Language {
 			$deft_lang = $CI->config->item('language');
 			$idiom = ($deft_lang == '') ? 'english' : $deft_lang;
 		}
+        $this->last_lang = $idiom;
 
 $langfile = $idiom.'/'.str_replace(EXT, '', str_replace('_lang.', '', $langfile)).'_lang'.EXT; #@todo.
 $idiom='';
@@ -88,6 +90,47 @@ $idiom='';
 		log_message('debug', 'Language file loaded: language/'.$idiom.'/'.$langfile);
 		return TRUE;
 	}
+
+    function span($line='', $args=NULL, $lang=NULL, $tags=TRUE) {
+        $line = $this->line($line);
+        if ($tags) {
+          $line = str_replace('%s', "<em lang=\"$lang\">%s</em>", $line);
+        }
+        $line = sprintf($line, $args);
+        if ($tags) {
+            return $line;
+        }
+        $lang_ui = $this->last_lang;
+        return "<span lang=\"$lang_ui\">$line</span>";
+    }
+
+    function available() { #@todo: Order matters :(
+      $available = array('zh-cn'=>'cmn-hans', 'zh'=>'cmn-hans', 'cmn-hans'=>null,
+                         'fr'=>null, 'es-la'=>'es', 'es'=>null, 'en'=>null);
+      return $available;
+    }
+
+    function select_names() {
+      return array('en' =>'English', 'es'=>'Español', 'fr'=>'Français', 'cmn-Hans'=>'简体中文 Simplified Chinese', ); 
+    }
+
+    function text_file($lang=NULL) {
+      if (!$lang) $lang = $this->last_lang;
+      @header('Content-Type: text/plain; charset=UTF-8');
+      @header("Content-Disposition: inline; filename=maltwiki-lang-$lang.txt"); #size=$octets");
+      $out = "@link http://maltwiki.org/about#translate\r\n@lang $lang".PHP_EOL; #base_url().
+      $out.= "@count ".count($this->language).PHP_EOL.PHP_EOL;
+      foreach ($this->language as $key => $value) {
+        $out .= "[$key] = ";
+        if (is_array($value)) {
+          $out .= var_export($value, TRUE);
+        } else {
+          $out .= "\"$value\"";
+        }
+        $out .= ";".PHP_EOL;
+      }
+      return $out;
+    }
 
 }
 // END Language Class
