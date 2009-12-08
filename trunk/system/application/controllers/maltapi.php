@@ -140,7 +140,7 @@ EOF;
   <a href="{$res->url}">$title</a> </object>
 EOF;*/
     $html =<<<EOF
-<iframe title="$title" src="$frame_url" width="$width" height="$height" frameborder="0"><a href="{$res->url}">$title</a></frame>
+<iframe title="$title" src="$frame_url" width="$width" height="$height" frameborder="0"><a href="{$res->url}">$title</a></iframe>
 EOF;
 #@todo: IE script error ??
     $oembed = array(
