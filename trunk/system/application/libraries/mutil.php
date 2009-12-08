@@ -13,7 +13,7 @@ function malt_is_live() {
 
 /**
  * json_encode - Compatability: PHP < 5.2.0.
- * @todo: Native json_encode '<', this one '\x3c' ?
+ * @todo: Native json_encode '<', this one '\x3c' - Wordpress doesn't like \x3c.
  * http://api.drupal.org/api/function/drupal_json/6
  */
 if (!function_exists('json_encode')) {
@@ -27,9 +27,9 @@ if (!function_exists('json_encode')) {
         return $var;
       case 'resource':
       case 'string':
-        return '"'. str_replace(array("\r", "\n", "<", ">", "&"),
-                                array('\r', '\n', '\x3c', '\x3e', '\x26'),
-                                addslashes($var)) .'"';
+        return '"'. /*str_replace(array("\r", "\n", "<", ">", "&"),
+                                array('\r', '\n', '\x3c', '\x3e', '\x26'),*/
+                                addslashes($var)/*)*/ .'"';
       case 'array':
         // Arrays in JSON can't be associative. If the array is empty or if it
         // has sequential whole number keys starting with 0, it's not associative
