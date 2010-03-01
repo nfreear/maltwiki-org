@@ -14,8 +14,8 @@
   With captions:
   <a rel="embed" href="http://youtube.com/watch?v=grqt3HoLOIA">Learn about Moodle</a>
 
-  No captions:
-  <a rel="embed" href="http://youtube.com/watch?v=12PRkHz_irM">2008 Roadtrip Nation Movement</a>
+  <p>No captions:
+  <a rel="embed" href="http://youtube.com/watch?v=12PRkHz_irM">2008 Roadtrip Nation Movement</a></p>
 
   <p>Alternative syntax [embed: http://youtube.com/watch?v=grqt3HoLOIA | Learn about Moodle]</p>
 

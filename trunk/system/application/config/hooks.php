@@ -21,11 +21,11 @@ $hook['pre_system'] = array(
 );
 
 $hook['display_override'] = array(
-      'class'    => 'oembed',
+      'class'    => 'Oembed_Hook',
       'function' => 'filter',
       'filename' => 'oembed_hook.php',
       'filepath' => 'hooks',
-      'params'   => ($mode = 'link')  #OR 'braces'.
+      'params'   => array('localPath'=>'scripts', ),
     );
 
 

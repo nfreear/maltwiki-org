@@ -30,7 +30,7 @@ if (!malt_is_live()) {
 <p>Find out more and join the <a class="cloudworks" href="discuss">discussion on Cloudworks</a></p>
 
 
-<a rel="embed" href="<?php echo MALT_YOUTUBE_MOODLE ?>">Learn about Moodle</a>
+<a class="embed" href="<?php echo MALT_YOUTUBE_MOODLE ?>">Learn about Moodle</a>
 
 
 <?php $this->load->view('blocks/recent_media'); ?>
